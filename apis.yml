@@ -1,0 +1,18 @@
+aid: infor
+url: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/apis.yml
+apis:
+- aid: infor:infor-api
+  name: Infor LN / CloudSuite Industrial API
+  tags:
+  - ERP
+  - Manufacturing
+  - Supply Chain
+  - Cloud
+  image: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
+  humanURL: https://www.infor.com/
+  baseURL: https://api.infor.example.com
+  properties:
+  - url: https://www.infor.com/
+    type: Documentation
+  description: >-
+    Infor provides industry-specific ERP platforms including LN (for discrete manufacturing) and CloudSuite Industrial. APIs enable access to production orders, inventory management, supply chain planning, and financial data for manufacturing enterprises.
