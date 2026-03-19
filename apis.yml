@@ -21,6 +21,10 @@ apis:
     type: Getting Started
   - url: https://github.com/infor-cloud/ion-api-sdk
     type: Authentication
+  - url: openapi/infor-ion-api-gateway-openapi.yml
+    type: OpenAPI
+  - url: asyncapi/infor-ion-events-asyncapi.yml
+    type: AsyncAPI
   description: >-
     The Infor ION API Gateway provides a managed OAuth 2.0 API layer for integrating Infor CloudSuite applications with third-party systems. The gateway supports Authorization Code, Client Credentials, and SAML Bearer grant types with SDKs available for Java, .NET, and Go.
 
@@ -113,6 +117,14 @@ common:
     type: GitHub Organization
   - url: https://github.com/infor-cloud/ion-api-sdk
     type: SDKs
+  - url: openapi/infor-ion-api-gateway-openapi.yml
+    type: OpenAPI
+  - url: json-schema/infor-m3-customer-schema.json
+    type: JSONSchema
+  - url: json-ld/infor-context.jsonld
+    type: JSONLDContext
+  - url: asyncapi/infor-ion-events-asyncapi.yml
+    type: AsyncAPI
 maintainer:
   name: Kin Lane
   email: kin@apievangelist.com

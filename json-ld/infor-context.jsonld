@@ -1,0 +1,60 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dct": "http://purl.org/dc/terms/",
+    "gr": "http://purl.org/goodrelations/v1#",
+
+    "Customer": {
+      "@id": "schema:Organization",
+      "@type": "@id"
+    },
+    "Order": {
+      "@id": "schema:Order",
+      "@type": "@id"
+    },
+    "Product": {
+      "@id": "schema:Product",
+      "@type": "@id"
+    },
+    "Document": {
+      "@id": "schema:DigitalDocument",
+      "@type": "@id"
+    },
+
+    "CUNO": "schema:identifier",
+    "CUNM": "schema:name",
+    "CUA1": "schema:streetAddress",
+    "CUA3": "schema:addressLocality",
+    "PONO": "schema:postalCode",
+    "CSCD": "schema:addressCountry",
+    "PHNO": "schema:telephone",
+    "EMAL": "schema:email",
+    "CUCD": "schema:currency",
+    "STAT": "schema:itemCondition",
+    "LNCD": "schema:inLanguage",
+
+    "documentId": "schema:identifier",
+    "documentType": "schema:additionalType",
+    "status": "schema:actionStatus",
+    "sender": "schema:sender",
+    "receiver": "schema:recipient",
+    "createdAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "processedAt": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+
+    "Program": "schema:identifier",
+    "Transaction": "schema:name",
+    "company": "schema:identifier",
+
+    "NameValue": "schema:PropertyValue",
+    "Name": "schema:name",
+    "Value": "schema:value"
+  }
+}

@@ -1,0 +1,280 @@
+asyncapi: 2.6.0
+info:
+  title: Infor ION Events
+  version: 1.0.0
+  description: >-
+    Infor ION event framework AsyncAPI specification for event-driven integrations
+    with Infor CloudSuite applications. The ION Event Hub publishes business events
+    when transactions occur in Infor applications (M3, LN, SunSystems, etc.), enabling
+    real-time integration with third-party systems and custom applications via
+    webhooks and event subscriptions.
+  contact:
+    name: Infor ION Support
+    url: https://github.com/infor-cloud/ion-api-sdk
+  license:
+    name: Infor License
+    url: https://www.infor.com/en/about/legal
+
+servers:
+  production:
+    url: https://{os}/{tenant}/ion-api/events
+    protocol: https
+    description: Infor ION Event Hub
+    variables:
+      os:
+        description: ION API gateway hostname
+      tenant:
+        description: Infor tenant identifier
+
+defaultContentType: application/json
+
+channels:
+  customer/synced:
+    description: Published when a customer master record is created or updated in M3
+    subscribe:
+      operationId: onCustomerSynced
+      summary: Customer master sync event
+      description: >-
+        Published when a customer party master record is created or updated in
+        Infor M3. Contains BOD (Business Object Document) SyncCustomerPartyMaster payload.
+      tags:
+        - name: Customer
+        - name: M3
+      message:
+        $ref: '#/components/messages/SyncCustomerPartyMasterEvent'
+
+  customer/deleted:
+    description: Published when a customer record is deleted or deactivated in M3
+    subscribe:
+      operationId: onCustomerDeleted
+      summary: Customer record deleted event
+      description: Published when a customer is deleted or set to inactive status in Infor M3.
+      tags:
+        - name: Customer
+        - name: M3
+      message:
+        $ref: '#/components/messages/DeleteCustomerPartyMasterEvent'
+
+  order/synced:
+    description: Published when a sales order is created or updated in M3
+    subscribe:
+      operationId: onSalesOrderSynced
+      summary: Sales order sync event
+      description: Published when a sales order is created, changed, or processed in Infor M3. Contains the SyncSalesOrder BOD payload.
+      tags:
+        - name: Sales Order
+        - name: M3
+      message:
+        $ref: '#/components/messages/SyncSalesOrderEvent'
+
+  invoice/synced:
+    description: Published when an invoice is created in M3
+    subscribe:
+      operationId: onInvoiceSynced
+      summary: Invoice sync event
+      description: Published when a customer invoice is posted in Infor M3 financial modules.
+      tags:
+        - name: Invoice
+        - name: Finance
+      message:
+        $ref: '#/components/messages/SyncInvoiceEvent'
+
+  inventory/synced:
+    description: Published when inventory balance changes occur
+    subscribe:
+      operationId: onInventorySynced
+      summary: Inventory balance sync event
+      description: Published when inventory on-hand balances change in Infor M3 due to receipts, issues, or adjustments.
+      tags:
+        - name: Inventory
+        - name: M3
+      message:
+        $ref: '#/components/messages/SyncInventoryEvent'
+
+components:
+  messages:
+    SyncCustomerPartyMasterEvent:
+      name: SyncCustomerPartyMaster
+      title: Customer Party Master Synced
+      contentType: application/json
+      payload:
+        type: object
+        required: [eventId, documentType, tenantId, timestamp, data]
+        properties:
+          eventId:
+            type: string
+          documentType:
+            type: string
+            enum: [SyncCustomerPartyMaster]
+          tenantId:
+            type: string
+          timestamp:
+            type: string
+            format: date-time
+          logicalId:
+            type: string
+            description: ION logical ID of the source application
+          data:
+            type: object
+            properties:
+              customerNumber:
+                type: string
+              customerName:
+                type: string
+              status:
+                type: string
+              currency:
+                type: string
+              country:
+                type: string
+              addressLine1:
+                type: string
+              city:
+                type: string
+              postalCode:
+                type: string
+              email:
+                type: string
+              phone:
+                type: string
+              lastModified:
+                type: string
+                format: date-time
+
+    DeleteCustomerPartyMasterEvent:
+      name: DeleteCustomerPartyMaster
+      title: Customer Party Master Deleted
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          eventId:
+            type: string
+          documentType:
+            type: string
+            enum: [DeleteCustomerPartyMaster]
+          tenantId:
+            type: string
+          timestamp:
+            type: string
+            format: date-time
+          data:
+            type: object
+            properties:
+              customerNumber:
+                type: string
+              deletionDate:
+                type: string
+                format: date-time
+
+    SyncSalesOrderEvent:
+      name: SyncSalesOrder
+      title: Sales Order Synced
+      contentType: application/json
+      payload:
+        type: object
+        required: [eventId, documentType, timestamp, data]
+        properties:
+          eventId:
+            type: string
+          documentType:
+            type: string
+            enum: [SyncSalesOrder]
+          tenantId:
+            type: string
+          timestamp:
+            type: string
+            format: date-time
+          data:
+            type: object
+            properties:
+              orderNumber:
+                type: string
+              customerNumber:
+                type: string
+              orderDate:
+                type: string
+                format: date
+              orderStatus:
+                type: string
+              totalAmount:
+                type: number
+              currency:
+                type: string
+              lineCount:
+                type: integer
+
+    SyncInvoiceEvent:
+      name: SyncInvoice
+      title: Invoice Synced
+      contentType: application/json
+      payload:
+        type: object
+        required: [eventId, documentType, timestamp, data]
+        properties:
+          eventId:
+            type: string
+          documentType:
+            type: string
+            enum: [SyncInvoice]
+          tenantId:
+            type: string
+          timestamp:
+            type: string
+            format: date-time
+          data:
+            type: object
+            properties:
+              invoiceNumber:
+                type: string
+              customerNumber:
+                type: string
+              invoiceDate:
+                type: string
+                format: date
+              dueDate:
+                type: string
+                format: date
+              amount:
+                type: number
+              currency:
+                type: string
+              status:
+                type: string
+
+    SyncInventoryEvent:
+      name: SyncInventory
+      title: Inventory Balance Synced
+      contentType: application/json
+      payload:
+        type: object
+        required: [eventId, documentType, timestamp, data]
+        properties:
+          eventId:
+            type: string
+          documentType:
+            type: string
+            enum: [SyncInventory]
+          tenantId:
+            type: string
+          timestamp:
+            type: string
+            format: date-time
+          data:
+            type: object
+            properties:
+              partNumber:
+                type: string
+              warehouse:
+                type: string
+              onHand:
+                type: number
+              allocated:
+                type: number
+              available:
+                type: number
+              unitOfMeasure:
+                type: string
+              lastTransactionDate:
+                type: string
+                format: date-time

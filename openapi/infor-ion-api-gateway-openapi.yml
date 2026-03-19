@@ -1,0 +1,337 @@
+openapi: 3.1.0
+info:
+  title: Infor ION API Gateway
+  description: >-
+    The Infor ION API Gateway provides a managed OAuth 2.0 API layer for integrating
+    Infor CloudSuite applications (M3, LN, Baan, SunSystems, etc.) with third-party
+    systems. The gateway exposes REST endpoints for ION Documents, ION Events,
+    and ION API services with support for Authorization Code, Client Credentials,
+    and SAML Bearer grant types.
+  version: 1.0.0
+  contact:
+    name: Infor Support
+    url: https://www.infor.com/support
+  license:
+    name: Infor License
+    url: https://www.infor.com/en/about/legal
+externalDocs:
+  description: Infor ION API SDK GitHub
+  url: https://github.com/infor-cloud/ion-api-sdk
+
+servers:
+  - url: https://{os}/{tenant}/{product}
+    description: Infor ION API Gateway
+    variables:
+      os:
+        default: mingledev01-ionapi.mingle.infor.com
+        description: ION API gateway hostname
+      tenant:
+        default: INFOR_DEV
+        description: Tenant ID
+      product:
+        default: M3
+        description: Infor product code
+
+security:
+  - OAuth2ClientCredentials: []
+  - OAuth2AuthorizationCode: []
+
+tags:
+  - name: ION API
+    description: REST API proxy through the ION API Gateway
+  - name: ION Documents
+    description: ION document routing and processing
+  - name: M3 API
+    description: Infor M3 business API programs
+
+paths:
+  /api/{apiVersion}/{programId}:
+    get:
+      operationId: callM3ApiGet
+      summary: Call M3 MI program (GET)
+      description: >-
+        Executes an Infor M3 MI (Management Interface) program transaction via the
+        ION API Gateway. GET requests retrieve data from M3. The programId follows
+        the pattern {ProgramName}/{TransactionName} (e.g., CRS610MI/GetBasicData).
+      tags: [M3 API]
+      parameters:
+        - name: apiVersion
+          in: path
+          required: true
+          schema:
+            type: string
+            default: latest
+          description: API version (e.g., "latest" or specific version number)
+        - name: programId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: M3 MI program and transaction (e.g., "CRS610MI/GetBasicData")
+        - name: CUNO
+          in: query
+          schema:
+            type: string
+          description: Customer number (example M3 input field)
+        - name: maxrecs
+          in: query
+          schema:
+            type: integer
+            default: 10
+          description: Maximum records to return
+        - name: returncols
+          in: query
+          schema:
+            type: string
+          description: Comma-separated column names to return
+      responses:
+        '200':
+          description: M3 API response returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/M3ApiResponse'
+        '400':
+          description: Invalid request or M3 error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/M3Error'
+        '401':
+          description: Unauthorized
+        '404':
+          description: M3 program not found
+
+    post:
+      operationId: callM3ApiPost
+      summary: Call M3 MI program (POST)
+      description: Executes an Infor M3 MI program transaction via POST. Used for write operations (Add, Change, Delete transactions).
+      tags: [M3 API]
+      parameters:
+        - name: apiVersion
+          in: path
+          required: true
+          schema:
+            type: string
+            default: latest
+        - name: programId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: M3 MI program and transaction (e.g., "CRS610MI/AddBasicData")
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/M3ApiRequest'
+      responses:
+        '200':
+          description: M3 API response returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/M3ApiResponse'
+        '400':
+          description: M3 error or validation failure
+
+  /ion-api/documents:
+    get:
+      operationId: listIonDocuments
+      summary: List ION documents
+      description: Returns ION business document routing records including status, sender, receiver, and document type.
+      tags: [ION Documents]
+      parameters:
+        - name: documentType
+          in: query
+          schema:
+            type: string
+          description: ION document type filter (e.g., "SyncSalesOrder")
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [Success, Error, Pending, Cancelled]
+        - name: from
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: to
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 25
+      responses:
+        '200':
+          description: Document list returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentList'
+
+  /ion-api/documents/{documentId}:
+    get:
+      operationId: getIonDocument
+      summary: Get ION document
+      description: Returns a specific ION document by its document ID including payload and routing history.
+      tags: [ION Documents]
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Document returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '404':
+          description: Document not found
+
+components:
+  securitySchemes:
+    OAuth2ClientCredentials:
+      type: oauth2
+      description: Infor ION API Client Credentials grant
+      flows:
+        clientCredentials:
+          tokenUrl: https://inforos.infor.com/INFOR_DEV/as/token.oauth2
+          scopes: {}
+    OAuth2AuthorizationCode:
+      type: oauth2
+      description: Infor ION API Authorization Code grant
+      flows:
+        authorizationCode:
+          authorizationUrl: https://inforos.infor.com/INFOR_DEV/as/authorization.oauth2
+          tokenUrl: https://inforos.infor.com/INFOR_DEV/as/token.oauth2
+          scopes: {}
+
+  schemas:
+    M3ApiRequest:
+      type: object
+      description: Request payload for an M3 MI program transaction
+      properties:
+        company:
+          type: string
+          description: M3 company (division) number
+        record:
+          type: object
+          description: Input field key-value pairs for the M3 transaction
+          additionalProperties:
+            type: string
+
+    M3ApiResponse:
+      type: object
+      description: Response from an M3 MI program transaction
+      properties:
+        Message:
+          $ref: '#/components/schemas/M3Message'
+        MIRecord:
+          type: array
+          items:
+            $ref: '#/components/schemas/M3Record'
+        Program:
+          type: string
+        Transaction:
+          type: string
+
+    M3Message:
+      type: object
+      properties:
+        id:
+          type: string
+        text:
+          type: string
+        type:
+          type: string
+          enum: [Info, Warning, Error]
+        field:
+          type: string
+          description: Field name in error, if applicable
+
+    M3Record:
+      type: object
+      description: A single data record returned from an M3 MI transaction
+      properties:
+        NameValue:
+          type: array
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+              Value:
+                type: string
+
+    M3Error:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        errorType:
+          type: string
+        program:
+          type: string
+        transaction:
+          type: string
+
+    Document:
+      type: object
+      properties:
+        documentId:
+          type: string
+        documentType:
+          type: string
+          description: ION document type (e.g., SyncCustomerPartyMaster)
+        status:
+          type: string
+          enum: [Success, Error, Pending, Cancelled]
+        sender:
+          type: string
+          description: ION connection point identifier
+        receiver:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        processedAt:
+          type: string
+          format: date-time
+        payload:
+          type: object
+          description: Document body (BOD payload)
+          additionalProperties: true
+        routingHistory:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              status:
+                type: string
+              message:
+                type: string
+
+    DocumentList:
+      type: object
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        total:
+          type: integer
+        pageSize:
+          type: integer

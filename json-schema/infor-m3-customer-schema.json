@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/infor/json-schema/infor-m3-customer-schema.json",
+  "title": "Infor M3 Customer",
+  "description": "JSON Schema for an Infor M3 (CloudSuite Industrial) customer record as returned by CRS610MI/GetBasicData and related transactions. Maps to CRS Customer file.",
+  "type": "object",
+  "properties": {
+    "CUNO": {
+      "type": "string",
+      "maxLength": 10,
+      "description": "Customer number"
+    },
+    "CUNM": {
+      "type": "string",
+      "maxLength": 36,
+      "description": "Customer name"
+    },
+    "CUA1": {
+      "type": "string",
+      "maxLength": 36,
+      "description": "Address line 1"
+    },
+    "CUA2": {
+      "type": "string",
+      "maxLength": 36,
+      "description": "Address line 2"
+    },
+    "CUA3": {
+      "type": "string",
+      "maxLength": 36,
+      "description": "Address line 3 / city"
+    },
+    "CUA4": {
+      "type": "string",
+      "maxLength": 36,
+      "description": "Address line 4"
+    },
+    "PONO": {
+      "type": "string",
+      "maxLength": 10,
+      "description": "Postal code"
+    },
+    "PHNO": {
+      "type": "string",
+      "maxLength": 16,
+      "description": "Telephone number 1"
+    },
+    "PHN2": {
+      "type": "string",
+      "maxLength": 16,
+      "description": "Telephone number 2"
+    },
+    "EMAL": {
+      "type": "string",
+      "maxLength": 80,
+      "format": "email",
+      "description": "Email address"
+    },
+    "CSCD": {
+      "type": "string",
+      "maxLength": 3,
+      "description": "Country code (ISO 3166-1 alpha-2 or alpha-3)"
+    },
+    "WHLO": {
+      "type": "string",
+      "maxLength": 3,
+      "description": "Warehouse (default delivery warehouse)"
+    },
+    "LNCD": {
+      "type": "string",
+      "maxLength": 2,
+      "description": "Language code"
+    },
+    "CUCD": {
+      "type": "string",
+      "maxLength": 3,
+      "description": "Currency code (ISO 4217)"
+    },
+    "STAT": {
+      "type": "string",
+      "enum": ["10", "20", "90"],
+      "description": "Customer status (10=Active, 20=Inactive, 90=Closed)"
+    },
+    "STDT": {
+      "type": "string",
+      "description": "Status date (YYYYMMDD format)"
+    },
+    "CUTP": {
+      "type": "integer",
+      "description": "Customer type (0=Standard, 1=Miscellaneous)"
+    },
+    "ALCU": {
+      "type": "string",
+      "maxLength": 10,
+      "description": "Search key (alias for customer number)"
+    },
+    "TEPY": {
+      "type": "string",
+      "maxLength": 3,
+      "description": "Payment terms code"
+    },
+    "TEDL": {
+      "type": "string",
+      "maxLength": 3,
+      "description": "Delivery terms code"
+    },
+    "MODL": {
+      "type": "string",
+      "maxLength": 3,
+      "description": "Delivery method code"
+    },
+    "CRTP": {
+      "type": "integer",
+      "description": "Exchange rate type"
+    }
+  },
+  "required": ["CUNO", "CUNM"]
+}
