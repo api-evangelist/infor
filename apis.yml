@@ -1,17 +1,15 @@
 aid: infor
-url: 
-  https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/apis.yml
 apis:
   - aid: infor:infor-ion-api-gateway
     name: Infor ION API Gateway
     tags:
+      - Cloud
       - ERP
       - Integration
       - Middleware
       - OAuth2
-      - Cloud
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
+    image: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
     humanURL: https://www.infor.com/products/ion
     baseURL: https://mingledev01-ionapi.mingle.infor.com
     properties:
@@ -36,13 +34,12 @@ apis:
   - aid: infor:infor-m3-api
     name: Infor M3 / LN CloudSuite Industrial API
     tags:
+      - Cloud
       - ERP
+      - M3
       - Manufacturing
       - Supply Chain
-      - Cloud
-      - M3
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
+    image: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
     humanURL: https://www.infor.com/
     baseURL: https://api.infor.com
     properties:
@@ -60,12 +57,11 @@ apis:
     name: Infor XtendM3 API
     tags:
       - ERP
-      - Manufacturing
       - Extension
       - Java
       - M3
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
+      - Manufacturing
+    image: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
     humanURL: https://www.infor.com/
     baseURL: https://api.infor.com
     properties:
@@ -83,12 +79,11 @@ apis:
   - aid: infor:infor-cloudsuite-financials-api
     name: Infor CloudSuite Financials API
     tags:
-      - ERP
-      - Financials
       - Accounting
       - Cloud
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
+      - ERP
+      - Financials
+    image: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
     humanURL: https://www.infor.com/
     baseURL: https://api.infor.com
     properties:
@@ -108,8 +103,7 @@ common:
     2.0-based integration across Infor applications and third-party systems. SDKs
     are available via the infor-cloud GitHub organization for Java, .NET, Go, and
     HTML5 development.
-  image: 
-    https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
+  image: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
   tags:
     - ERP
     - Manufacturing

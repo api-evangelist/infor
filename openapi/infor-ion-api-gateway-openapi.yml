@@ -37,8 +37,6 @@ security:
   - OAuth2AuthorizationCode: []
 
 tags:
-  - name: ION API
-    description: REST API proxy through the ION API Gateway
   - name: ION Documents
     description: ION document routing and processing
   - name: M3 API
