@@ -1,97 +1,45 @@
 specification: API Commons Rate Limits
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
-provider: infor
+provider: Infor
 providerId: infor
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
+  - ERP
+  - CloudSuite
+  - Industry Cloud
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the infor API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: Infor does not publish public per-second rate-limit numbers for its CloudSuite / ION API
+  surface. Throughput on a tenant is governed by the contracted environment sizing and Infor OS / ION
+  shared-services capacity, with customer-tunable concurrency on the integration adapters. Specific
+  TPS values must be obtained from Infor support.
+notes: No public Infor rate-limit page reachable. Customers should consult Infor Support / their account
+  team for tenant-specific limits and for raising temporary increases.
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
+  - name: Tenant API throughput
+    scope: tenant
+    metric: varies
+    limit: governed by contracted CloudSuite environment sizing and ION shared-services capacity
     applies:
-      - Infor ION API Gateway
-      - Infor M3 / LN CloudSuite Industrial API
-      - Infor XtendM3 API
-      - Infor CloudSuite Financials API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Infor ION API Gateway
-      - Infor M3 / LN CloudSuite Industrial API
-      - Infor XtendM3 API
-      - Infor CloudSuite Financials API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Infor ION API Gateway
-      - Infor M3 / LN CloudSuite Industrial API
-      - Infor XtendM3 API
-      - Infor CloudSuite Financials API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Infor ION API Gateway
-      - Infor M3 / LN CloudSuite Industrial API
-      - Infor XtendM3 API
-      - Infor CloudSuite Financials API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Infor ION API Gateway
-      - Infor M3 / LN CloudSuite Industrial API
-      - Infor XtendM3 API
-      - Infor CloudSuite Financials API
+      - Infor ION API
+      - Infor CloudSuite APIs
 policies:
   - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
+    description: Clients receiving 429 or 503 should implement exponential backoff with jitter and honor
+      Retry-After when present.
+  - name: ION Document Flow Throttling
+    description: Long-running document flows in Infor ION are queued; tune flow concurrency rather than
+      hammering synchronous endpoints.
+  - name: Capacity Sizing
+    description: Throughput is bounded by the contracted CloudSuite environment; raise capacity by working
+      with Infor Support rather than expecting automatic burst.
   - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
-maintainers: []
+    description: Infor reserves the right to throttle traffic that materially impacts shared infrastructure.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

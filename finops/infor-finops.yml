@@ -1,156 +1,122 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: infor
+provider: Infor
 providerId: infor
-publisherName: infor
-serviceCategory: API
+publisherName: Infor, Inc.
+serviceCategory: Enterprise Software
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
+  - ERP
+  - CloudSuite
+  - Industry Cloud
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the infor API surface. Provides a FOCUS-aligned mapping for
-  cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+description: FOCUS-aligned FinOps shape for Infor. Billing is enterprise subscription with negotiated
+  per-customer terms; APIs are bundled into Infor OS / ION rather than separately metered. FinOps practice
+  for Infor focuses on subscription accountability, environment / module right-sizing at renewal, and
+  named-user hygiene.
+notes: No public usage-based meters. Reconcile against the customer's own Infor invoice and Infor OS
+  utilization telemetry.
+sources:
+  - https://www.infor.com/products
+  - https://www.infor.com/contact-us
 principles:
   - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
+    description: Use Infor OS Homepages and ION monitoring to see API and document-flow utilization;
+      surface annual subscription costs in finance reporting.
   - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
+    description: Allocate the Infor subscription across business units by module entitlement, named-user
+      counts, and active environments (production / test / development).
   - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
+    description: Right-size named-user counts at renewal, retire unused environments and modules, consolidate
+      ION integrations to reduce shared-services pressure.
   - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
+    description: Designate an Infor application owner with a single annual budget line; review module
+      and user utilization quarterly with the Infor Customer Success Manager.
 domains:
   - name: Understand Usage and Cost
     capabilities:
       - Data Ingestion
       - Allocation
       - Reporting and Analytics
-      - Anomaly Management
   - name: Quantify Business Value
     capabilities:
       - Planning and Estimating
-      - Forecasting
       - Budgeting
       - Benchmarking
-      - Unit Economics
   - name: Optimize Usage and Cost
     capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
       - Workload Optimization
-      - Cloud Sustainability
       - Licensing and SaaS
   - name: Manage the FinOps Practice
     capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
       - Invoicing and Chargeback
       - Onboarding Workloads
-      - Intersecting Disciplines
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Enterprise Subscription
+  billingFrequency: Annual
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
     - Tax
-    - Credit
     - Adjustment
   chargeFrequency: Recurring
 focusColumns:
-  ServiceName: infor
-  ServiceCategory: Developer Tools / API
-  ProviderName: infor
-  PublisherName: infor
-  InvoiceIssuerName: infor
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceName: Infor CloudSuite
+  ServiceCategory: Enterprise Software
+  ProviderName: Infor
+  PublisherName: Infor, Inc.
+  InvoiceIssuerName: Infor, Inc.
+  PricingCategory: Subscription
+  PricingUnit: user-year
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
-    aggregation: sum
+  - name: named_users
+    description: Named users licensed per module
+    unit: user-month
+    aggregation: max
     dimensions:
-      - api
-      - endpoint
-      - tier
+      - module
+      - environment
+  - name: environments
+    description: Active CloudSuite environments (production, test, development)
+    unit: environment-month
+    aggregation: max
+    dimensions:
+      - environment_type
       - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+  - name: ion_documents
+    description: Document flows processed through Infor ION
+    unit: document
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
+      - flow
+      - source_app
+      - target_app
 apis:
-  - name: Infor ION API Gateway
-    baseURL: https://mingledev01-ionapi.mingle.infor.com
-    tags:
-      - Cloud
-      - ERP
-      - Integration
-      - Middleware
-      - OAuth2
-    serviceName: Infor ION API Gateway
+  - name: Infor ION API
+    baseURL: https://mingle-ionapi.{region}.inforcloudsuite.com
     serviceCategory: API
-  - name: Infor M3 / LN CloudSuite Industrial API
-    baseURL: https://api.infor.com
-    tags:
-      - Cloud
-      - ERP
-      - M3
-      - Manufacturing
-      - Supply Chain
-    serviceName: Infor M3 / LN CloudSuite Industrial API
-    serviceCategory: API
-  - name: Infor XtendM3 API
-    baseURL: https://api.infor.com
-    tags:
-      - ERP
-      - Extension
-      - Java
-      - M3
-      - Manufacturing
-    serviceName: Infor XtendM3 API
-    serviceCategory: API
-  - name: Infor CloudSuite Financials API
-    baseURL: https://api.infor.com
-    tags:
-      - Accounting
-      - Cloud
-      - ERP
-      - Financials
-    serviceName: Infor CloudSuite Financials API
+  - name: Infor CloudSuite APIs
+    baseURL: https://mingle-ionapi.{region}.inforcloudsuite.com
     serviceCategory: API
 unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
+  - name: Cost per Named User
+    metric: billed_cost / named_users
     target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
+  - name: Cost per Active Environment
+    metric: billed_cost / environments
     target: TBD
-maintainers: []
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

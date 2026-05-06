@@ -1,157 +1,50 @@
 specification: API Commons Plans
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: infor
+provider: Infor
 providerId: infor
 created: '2026-05-04'
-modified: '2026-05-04'
-tags: []
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+modified: '2026-05-05'
+reconciled: false
+tags:
+  - ERP
+  - CloudSuite
+  - Industry Cloud
+  - Enterprise Software
+description: Infor sells industry-specific CloudSuite ERP, SCM, HCM, and PLM products through a contact-sales
+  motion. Pricing is not published; quotes are negotiated per customer based on industry, modules, named
+  users, environment count, and term. APIs (Infor ION, M3, LN, CloudSuite Industrial APIs) are bundled
+  with the licensed product rather than offered as a separately metered API service.
+notes: All Infor pricing is contact-sales. Reconcile against an Infor sales quote.
+sources:
+  - https://www.infor.com/products
+  - https://www.infor.com/contact-us
 plans:
-  - id: infor-free
-    name: Free
-    type: freemium
-    description: Free entry tier for the infor API surface. Intended for evaluation, prototyping, and
-      low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://mingledev01-ionapi.mingle.infor.com
-          - https://api.infor.com
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://mingledev01-ionapi.mingle.infor.com
-          - https://api.infor.com
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Infor ION API Gateway
-      - name: Infor M3 / LN CloudSuite Industrial API
-      - name: Infor XtendM3 API
-      - name: Infor CloudSuite Financials API
-  - id: infor-pro
-    name: Professional
-    type: paid
-    description: Production tier for infor. Provides higher quotas, priority support, and access to the
-      broader API portfolio. Pricing placeholder; align with the provider's pricing page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://mingledev01-ionapi.mingle.infor.com
-          - https://api.infor.com
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://mingledev01-ionapi.mingle.infor.com
-          - https://api.infor.com
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: global
-        domains:
-          - https://mingledev01-ionapi.mingle.infor.com
-          - https://api.infor.com
-        unit: 1000
-        price: TBD
-        userMultiplied: false
-    elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Infor ION API Gateway
-      - name: Infor M3 / LN CloudSuite Industrial API
-      - name: Infor XtendM3 API
-      - name: Infor CloudSuite Financials API
-  - id: infor-enterprise
-    name: Enterprise
+  - id: infor-cloudsuite
+    name: Infor CloudSuite
     type: enterprise
-    description: Custom-negotiated tier for infor. Includes dedicated capacity, contractual SLAs, security
-      review, data residency options, and named technical account management.
+    description: Industry-specific cloud ERP suite (Manufacturing, Distribution, Healthcare, Public Sector,
+      etc.) with bundled APIs via Infor OS / ION. Pricing per customer.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: Subscription
+        description: Negotiated annual subscription covering modules and user count
+        name: subscription
+        type: subscription
+        metric: contract
         limit: -1
-        timeFrame: month
-        geo: configurable
+        timeFrame: year
+        geo: global
         domains:
-          - https://mingledev01-ionapi.mingle.infor.com
-          - https://api.infor.com
+          - https://mingle-ionapi.{region}.inforcloudsuite.com
         unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://mingledev01-ionapi.mingle.infor.com
-          - https://api.infor.com
-        unit: 1
-        price: custom
+        price: contact sales
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Infor ION API Gateway
-      - name: Infor M3 / LN CloudSuite Industrial API
-      - name: Infor XtendM3 API
-      - name: Infor CloudSuite Financials API
-maintainers: []
+      - name: Industry-specific data models
+      - name: Infor ION integration platform
+      - name: Infor OS
+      - name: APIs bundled with license
+      - name: Customer Success Manager
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
