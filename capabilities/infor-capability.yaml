@@ -1,0 +1,286 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Infor ION API Gateway
+  description: The Infor ION API Gateway provides a managed OAuth 2.0 API layer for integrating Infor CloudSuite applications
+    (M3, LN, Baan, SunSystems, etc.) with third-party systems. The gateway exposes REST endpoints for ION Documents, ION Events,
+    and ION API services with support for Authorization Code, Client Credentials, and SAML Bearer grant types.
+  tags:
+  - Infor
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: infor
+    baseUri: https://mingledev01-ionapi.mingle.infor.com/INFOR_DEV/M3
+    description: Infor ION API Gateway HTTP API.
+    authentication:
+      type: bearer
+      token: '{{INFOR_TOKEN}}'
+    resources:
+    - name: api-apiversion-programid
+      path: /api/{apiVersion}/{programId}
+      operations:
+      - name: callm3apiget
+        method: GET
+        description: Call M3 MI program (GET)
+        inputParameters:
+        - name: apiVersion
+          in: path
+          type: string
+          required: true
+          description: API version (e.g., "latest" or specific version number)
+        - name: programId
+          in: path
+          type: string
+          required: true
+          description: M3 MI program and transaction (e.g., "CRS610MI/GetBasicData")
+        - name: CUNO
+          in: query
+          type: string
+          description: Customer number (example M3 input field)
+        - name: maxrecs
+          in: query
+          type: integer
+          description: Maximum records to return
+        - name: returncols
+          in: query
+          type: string
+          description: Comma-separated column names to return
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: callm3apipost
+        method: POST
+        description: Call M3 MI program (POST)
+        inputParameters:
+        - name: apiVersion
+          in: path
+          type: string
+          required: true
+        - name: programId
+          in: path
+          type: string
+          required: true
+          description: M3 MI program and transaction (e.g., "CRS610MI/AddBasicData")
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ion-api-documents
+      path: /ion-api/documents
+      operations:
+      - name: listiondocuments
+        method: GET
+        description: List ION documents
+        inputParameters:
+        - name: documentType
+          in: query
+          type: string
+          description: ION document type filter (e.g., "SyncSalesOrder")
+        - name: status
+          in: query
+          type: string
+        - name: from
+          in: query
+          type: string
+        - name: to
+          in: query
+          type: string
+        - name: pageSize
+          in: query
+          type: integer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ion-api-documents-documentid
+      path: /ion-api/documents/{documentId}
+      operations:
+      - name: getiondocument
+        method: GET
+        description: Get ION document
+        inputParameters:
+        - name: documentId
+          in: path
+          type: string
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: infor-rest
+    description: REST adapter for Infor ION API Gateway.
+    resources:
+    - path: /api/{apiVersion}/{programId}
+      name: callm3apiget
+      operations:
+      - method: GET
+        name: callm3apiget
+        description: Call M3 MI program (GET)
+        call: infor.callm3apiget
+        with:
+          apiVersion: rest.apiVersion
+          programId: rest.programId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/{apiVersion}/{programId}
+      name: callm3apipost
+      operations:
+      - method: POST
+        name: callm3apipost
+        description: Call M3 MI program (POST)
+        call: infor.callm3apipost
+        with:
+          apiVersion: rest.apiVersion
+          programId: rest.programId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /ion-api/documents
+      name: listiondocuments
+      operations:
+      - method: GET
+        name: listiondocuments
+        description: List ION documents
+        call: infor.listiondocuments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /ion-api/documents/{documentId}
+      name: getiondocument
+      operations:
+      - method: GET
+        name: getiondocument
+        description: Get ION document
+        call: infor.getiondocument
+        with:
+          documentId: rest.documentId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: infor-mcp
+    transport: http
+    description: MCP adapter for Infor ION API Gateway for AI agent use.
+    tools:
+    - name: callm3apiget
+      description: Call M3 MI program (GET)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: infor.callm3apiget
+      with:
+        apiVersion: tools.apiVersion
+        programId: tools.programId
+        CUNO: tools.CUNO
+        maxrecs: tools.maxrecs
+        returncols: tools.returncols
+      inputParameters:
+      - name: apiVersion
+        type: string
+        description: API version (e.g., "latest" or specific version number)
+        required: true
+      - name: programId
+        type: string
+        description: M3 MI program and transaction (e.g., "CRS610MI/GetBasicData")
+        required: true
+      - name: CUNO
+        type: string
+        description: Customer number (example M3 input field)
+      - name: maxrecs
+        type: integer
+        description: Maximum records to return
+      - name: returncols
+        type: string
+        description: Comma-separated column names to return
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: callm3apipost
+      description: Call M3 MI program (POST)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: infor.callm3apipost
+      with:
+        apiVersion: tools.apiVersion
+        programId: tools.programId
+      inputParameters:
+      - name: apiVersion
+        type: string
+        description: apiVersion
+        required: true
+      - name: programId
+        type: string
+        description: M3 MI program and transaction (e.g., "CRS610MI/AddBasicData")
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listiondocuments
+      description: List ION documents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: infor.listiondocuments
+      with:
+        documentType: tools.documentType
+        status: tools.status
+        from: tools.from
+        to: tools.to
+        pageSize: tools.pageSize
+      inputParameters:
+      - name: documentType
+        type: string
+        description: ION document type filter (e.g., "SyncSalesOrder")
+      - name: status
+        type: string
+        description: status
+      - name: from
+        type: string
+        description: from
+      - name: to
+        type: string
+        description: to
+      - name: pageSize
+        type: integer
+        description: pageSize
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getiondocument
+      description: Get ION document
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: infor.getiondocument
+      with:
+        documentId: tools.documentId
+      inputParameters:
+      - name: documentId
+        type: string
+        description: documentId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    INFOR_TOKEN: INFOR_TOKEN
