@@ -147,3 +147,6 @@ description: >-
   Infor is a global enterprise software company that builds business cloud software
   specialized by industry, including ERP, supply chain, finance, human capital management,
   and customer experience applications.
+integrations:
+  - name: Meet the 2025 award winners
+  - name: Infor + AWS Partnership
