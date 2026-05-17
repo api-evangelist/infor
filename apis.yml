@@ -18,7 +18,7 @@ apis:
       - url: https://github.com/infor-cloud/ion-api-sdk
         type: SDKs
       - url: https://github.com/infor-cloud/ion-api-sdk
-        type: Getting Started
+        type: GettingStarted
       - url: https://github.com/infor-cloud/ion-api-sdk
         type: Authentication
       - url: openapi/infor-ion-api-gateway-openapi.yml
@@ -70,7 +70,7 @@ apis:
       - url: https://github.com/infor-cloud/xtendm3-sdk-java
         type: SDKs
       - url: https://github.com/infor-cloud/xtendm3-extension-examples
-        type: Getting Started
+        type: GettingStarted
     description: >-
       Infor XtendM3 provides a Java SDK for extending and customizing Infor M3 (CloudSuite
       Industrial) business logic without modifying core code. Extensions are deployed
@@ -116,19 +116,19 @@ common:
     - url: https://www.infor.com/
       type: Documentation
     - url: https://github.com/infor-cloud/ion-api-sdk
-      type: Getting Started
+      type: GettingStarted
     - url: https://github.com/infor-cloud/ion-api-sdk
       type: Authentication
     - url: https://www.infor.com/en/about/legal
-      type: Terms of Service
+      type: TermsOfService
     - url: https://www.infor.com/en/about/privacy
-      type: Privacy Policy
+      type: PrivacyPolicy
     - url: https://www.infor.com/blog
       type: Blog
     - url: https://www.infor.com/
       type: Website
     - url: https://github.com/infor-cloud
-      type: GitHub Organization
+      type: GitHubOrganization
     - url: https://github.com/infor-cloud/ion-api-sdk
       type: SDKs
     - url: openapi/infor-ion-api-gateway-openapi.yml
