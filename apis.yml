@@ -95,6 +95,8 @@ apis:
       finance operations.
 
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/infor
   aid: infor
   name: Infor
   description: >-

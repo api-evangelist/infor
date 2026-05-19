@@ -1,0 +1,153 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Infor ION API Gateway — M3 API
+  description: 'Infor ION API Gateway — M3 API. 2 operations. Lead operation: Call M3 MI program (GET). Self-contained Naftiko
+    capability covering one Infor business surface.'
+  tags:
+  - Infor
+  - M3 API
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    INFOR_API_KEY: INFOR_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ion-api-gateway-m3-api
+    baseUri: https://{os}/{tenant}/{product}
+    description: Infor ION API Gateway — M3 API business capability. Self-contained, no shared references.
+    resources:
+    - name: api-apiVersion-programId
+      path: /api/{apiVersion}/{programId}
+      operations:
+      - name: callm3apiget
+        method: GET
+        description: Call M3 MI program (GET)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: apiVersion
+          in: path
+          type: string
+          description: API version (e.g., "latest" or specific version number)
+          required: true
+        - name: programId
+          in: path
+          type: string
+          description: M3 MI program and transaction (e.g., "CRS610MI/GetBasicData")
+          required: true
+        - name: CUNO
+          in: query
+          type: string
+          description: Customer number (example M3 input field)
+        - name: maxrecs
+          in: query
+          type: integer
+          description: Maximum records to return
+        - name: returncols
+          in: query
+          type: string
+          description: Comma-separated column names to return
+      - name: callm3apipost
+        method: POST
+        description: Call M3 MI program (POST)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: apiVersion
+          in: path
+          type: string
+          required: true
+        - name: programId
+          in: path
+          type: string
+          description: M3 MI program and transaction (e.g., "CRS610MI/AddBasicData")
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.INFOR_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: ion-api-gateway-m3-api-rest
+    port: 8080
+    description: REST adapter for Infor ION API Gateway — M3 API. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/{apiversion}/{programid}
+      name: api-apiversion-programid
+      description: REST surface for api-apiVersion-programId.
+      operations:
+      - method: GET
+        name: callm3apiget
+        description: Call M3 MI program (GET)
+        call: ion-api-gateway-m3-api.callm3apiget
+        with:
+          apiVersion: rest.apiVersion
+          programId: rest.programId
+          CUNO: rest.CUNO
+          maxrecs: rest.maxrecs
+          returncols: rest.returncols
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: callm3apipost
+        description: Call M3 MI program (POST)
+        call: ion-api-gateway-m3-api.callm3apipost
+        with:
+          apiVersion: rest.apiVersion
+          programId: rest.programId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ion-api-gateway-m3-api-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Infor ION API Gateway — M3 API. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: call-m3-mi-program-get
+      description: Call M3 MI program (GET)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ion-api-gateway-m3-api.callm3apiget
+      with:
+        apiVersion: tools.apiVersion
+        programId: tools.programId
+        CUNO: tools.CUNO
+        maxrecs: tools.maxrecs
+        returncols: tools.returncols
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: call-m3-mi-program-post
+      description: Call M3 MI program (POST)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ion-api-gateway-m3-api.callm3apipost
+      with:
+        apiVersion: tools.apiVersion
+        programId: tools.programId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
