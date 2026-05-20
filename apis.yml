@@ -97,50 +97,50 @@ apis:
 common:
   - type: LinkedIn
     url: https://www.linkedin.com/company/infor
-  aid: infor
-  name: Infor
-  description: >-
-    Infor provides industry-specific cloud ERP platforms including CloudSuite Industrial
-    (M3), CloudSuite Financials, and Infor LN. The Infor ION API Gateway enables OAuth
-    2.0-based integration across Infor applications and third-party systems. SDKs
-    are available via the infor-cloud GitHub organization for Java, .NET, Go, and
-    HTML5 development.
-  image: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
-  tags:
-    - ERP
-    - Manufacturing
-    - Supply Chain
-    - Cloud
-    - Integration
-  properties:
-    - url: https://www.infor.com/
-      type: Portal
-    - url: https://www.infor.com/
-      type: Documentation
-    - url: https://github.com/infor-cloud/ion-api-sdk
-      type: GettingStarted
-    - url: https://github.com/infor-cloud/ion-api-sdk
-      type: Authentication
-    - url: https://www.infor.com/en/about/legal
-      type: TermsOfService
-    - url: https://www.infor.com/en/about/privacy
-      type: PrivacyPolicy
-    - url: https://www.infor.com/blog
-      type: Blog
-    - url: https://www.infor.com/
-      type: Website
-    - url: https://github.com/infor-cloud
-      type: GitHubOrganization
-    - url: https://github.com/infor-cloud/ion-api-sdk
-      type: SDKs
-    - url: openapi/infor-ion-api-gateway-openapi.yml
-      type: OpenAPI
-    - url: json-schema/infor-m3-customer-schema.json
-      type: JSONSchema
-    - url: json-ld/infor-context.jsonld
-      type: JSONLDContext
-    - url: asyncapi/infor-ion-events-asyncapi.yml
-      type: AsyncAPI
+aid: infor
+name: Infor
+description: >-
+  Infor provides industry-specific cloud ERP platforms including CloudSuite Industrial
+  (M3), CloudSuite Financials, and Infor LN. The Infor ION API Gateway enables OAuth
+  2.0-based integration across Infor applications and third-party systems. SDKs
+  are available via the infor-cloud GitHub organization for Java, .NET, Go, and
+  HTML5 development.
+image: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
+tags:
+  - ERP
+  - Manufacturing
+  - Supply Chain
+  - Cloud
+  - Integration
+properties:
+  - url: https://www.infor.com/
+    type: Portal
+  - url: https://www.infor.com/
+    type: Documentation
+  - url: https://github.com/infor-cloud/ion-api-sdk
+    type: GettingStarted
+  - url: https://github.com/infor-cloud/ion-api-sdk
+    type: Authentication
+  - url: https://www.infor.com/en/about/legal
+    type: TermsOfService
+  - url: https://www.infor.com/en/about/privacy
+    type: PrivacyPolicy
+  - url: https://www.infor.com/blog
+    type: Blog
+  - url: https://www.infor.com/
+    type: Website
+  - url: https://github.com/infor-cloud
+    type: GitHubOrganization
+  - url: https://github.com/infor-cloud/ion-api-sdk
+    type: SDKs
+  - url: openapi/infor-ion-api-gateway-openapi.yml
+    type: OpenAPI
+  - url: json-schema/infor-m3-customer-schema.json
+    type: JSONSchema
+  - url: json-ld/infor-context.jsonld
+    type: JSONLDContext
+  - url: asyncapi/infor-ion-events-asyncapi.yml
+    type: AsyncAPI
 maintainer:
   name: Kin Lane
   email: kin@apievangelist.com
