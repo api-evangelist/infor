@@ -1,0 +1,1146 @@
+{
+  "item": [
+    {
+      "id": "1a671e92-abd8-4b8d-8446-7c7ca655c6aa",
+      "name": "ION Documents",
+      "description": {
+        "content": "ION document routing and processing",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6bf861b3-a1ee-4c5c-9314-38dc861605b7",
+          "name": "List ION documents",
+          "request": {
+            "name": "List ION documents",
+            "description": {
+              "content": "Returns ION business document routing records including status, sender, receiver, and document type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ion-api",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "documentType",
+                  "value": "<string>",
+                  "description": "ION document type filter (e.g., \"SyncSalesOrder\")"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "25"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "ION API gateway hostname",
+                  "type": "any",
+                  "value": "{{os}}",
+                  "key": "os"
+                },
+                {
+                  "description": "Tenant ID",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Infor product code",
+                  "type": "any",
+                  "value": "{{product}}",
+                  "key": "product"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fd0dd6ce-1fd8-4134-b115-5e262b8c3b63",
+              "name": "Document list returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ion-api",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "documentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "ION API gateway hostname",
+                      "type": "any",
+                      "value": "{{os}}",
+                      "key": "os"
+                    },
+                    {
+                      "description": "Tenant ID",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Infor product code",
+                      "type": "any",
+                      "value": "{{product}}",
+                      "key": "product"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documents\": [\n    {\n      \"documentId\": \"string\",\n      \"documentType\": \"string\",\n      \"status\": \"Success\",\n      \"sender\": \"string\",\n      \"receiver\": \"string\",\n      \"createdAt\": \"1967-10-20T00:21:25.019Z\",\n      \"processedAt\": \"1955-04-01T10:49:48.727Z\",\n      \"payload\": {\n        \"key_0\": 2020.1657614675428,\n        \"key_1\": 1893.4813729601208,\n        \"key_2\": \"string\"\n      },\n      \"routingHistory\": [\n        {\n          \"timestamp\": \"1972-09-04T13:23:38.381Z\",\n          \"status\": \"string\",\n          \"message\": \"string\"\n        },\n        {\n          \"timestamp\": \"1974-04-13T18:53:00.686Z\",\n          \"status\": \"string\",\n          \"message\": \"string\"\n        }\n      ]\n    },\n    {\n      \"documentId\": \"string\",\n      \"documentType\": \"string\",\n      \"status\": \"Pending\",\n      \"sender\": \"string\",\n      \"receiver\": \"string\",\n      \"createdAt\": \"1974-06-21T15:57:00.999Z\",\n      \"processedAt\": \"1990-09-25T17:32:29.759Z\",\n      \"payload\": {\n        \"key_0\": 2671.3523715040387,\n        \"key_1\": 1276.6935875895213,\n        \"key_2\": 6916\n      },\n      \"routingHistory\": [\n        {\n          \"timestamp\": \"1965-06-30T13:06:38.471Z\",\n          \"status\": \"string\",\n          \"message\": \"string\"\n        },\n        {\n          \"timestamp\": \"1956-02-23T16:00:44.951Z\",\n          \"status\": \"string\",\n          \"message\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"total\": 3664,\n  \"pageSize\": 7438\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b1b05d0-6f82-4f74-82b0-4761968c2a1f",
+          "name": "Get ION document",
+          "request": {
+            "name": "Get ION document",
+            "description": {
+              "content": "Returns a specific ION document by its document ID including payload and routing history.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ion-api",
+                "documents",
+                ":documentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "ION API gateway hostname",
+                  "type": "any",
+                  "value": "{{os}}",
+                  "key": "os"
+                },
+                {
+                  "description": "Tenant ID",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Infor product code",
+                  "type": "any",
+                  "value": "{{product}}",
+                  "key": "product"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b380ccb-5a6e-413a-a30a-b7344b9ce948",
+              "name": "Document returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ion-api",
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "ION API gateway hostname",
+                      "type": "any",
+                      "value": "{{os}}",
+                      "key": "os"
+                    },
+                    {
+                      "description": "Tenant ID",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Infor product code",
+                      "type": "any",
+                      "value": "{{product}}",
+                      "key": "product"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentId\": \"string\",\n  \"documentType\": \"string\",\n  \"status\": \"Success\",\n  \"sender\": \"string\",\n  \"receiver\": \"string\",\n  \"createdAt\": \"2022-11-19T06:40:37.239Z\",\n  \"processedAt\": \"1976-03-03T11:59:41.842Z\",\n  \"payload\": {\n    \"key_0\": \"string\"\n  },\n  \"routingHistory\": [\n    {\n      \"timestamp\": \"1951-08-17T21:06:19.447Z\",\n      \"status\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"timestamp\": \"1998-06-25T20:51:05.215Z\",\n      \"status\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1164a93-258e-43ed-9597-d4ead365a224",
+              "name": "Document not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ion-api",
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "ION API gateway hostname",
+                      "type": "any",
+                      "value": "{{os}}",
+                      "key": "os"
+                    },
+                    {
+                      "description": "Tenant ID",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Infor product code",
+                      "type": "any",
+                      "value": "{{product}}",
+                      "key": "product"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "56878c2e-9ae5-42aa-b4f1-4b8e4d65c5aa",
+      "name": "M3 API",
+      "description": {
+        "content": "Infor M3 business API programs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e28f08af-2bf4-4bd8-947e-83e107b10c01",
+          "name": "Call M3 MI program (GET)",
+          "request": {
+            "name": "Call M3 MI program (GET)",
+            "description": {
+              "content": "Executes an Infor M3 MI (Management Interface) program transaction via the ION API Gateway. GET requests retrieve data from M3. The programId follows the pattern {ProgramName}/{TransactionName} (e.g., CRS610MI/GetBasicData).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":apiVersion",
+                ":programId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "CUNO",
+                  "value": "<string>",
+                  "description": "Customer number (example M3 input field)"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxrecs",
+                  "value": "10",
+                  "description": "Maximum records to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "returncols",
+                  "value": "<string>",
+                  "description": "Comma-separated column names to return"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "latest",
+                  "key": "apiVersion",
+                  "description": "(Required) API version (e.g., \"latest\" or specific version number)"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "programId",
+                  "description": "(Required) M3 MI program and transaction (e.g., \"CRS610MI/GetBasicData\")"
+                },
+                {
+                  "description": "ION API gateway hostname",
+                  "type": "any",
+                  "value": "{{os}}",
+                  "key": "os"
+                },
+                {
+                  "description": "Tenant ID",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Infor product code",
+                  "type": "any",
+                  "value": "{{product}}",
+                  "key": "product"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d03ff2e-51eb-4901-b83a-682273ebe03e",
+              "name": "M3 API response returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":apiVersion",
+                    ":programId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CUNO",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxrecs",
+                      "value": "10"
+                    },
+                    {
+                      "key": "returncols",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "latest",
+                      "key": "apiVersion",
+                      "description": "(Required) API version (e.g., \"latest\" or specific version number)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "programId",
+                      "description": "(Required) M3 MI program and transaction (e.g., \"CRS610MI/GetBasicData\")"
+                    },
+                    {
+                      "description": "ION API gateway hostname",
+                      "type": "any",
+                      "value": "{{os}}",
+                      "key": "os"
+                    },
+                    {
+                      "description": "Tenant ID",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Infor product code",
+                      "type": "any",
+                      "value": "{{product}}",
+                      "key": "product"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": {\n    \"id\": \"string\",\n    \"text\": \"string\",\n    \"type\": \"Info\",\n    \"field\": \"string\"\n  },\n  \"MIRecord\": [\n    {\n      \"NameValue\": [\n        {\n          \"Name\": \"string\",\n          \"Value\": \"string\"\n        },\n        {\n          \"Name\": \"string\",\n          \"Value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"NameValue\": [\n        {\n          \"Name\": \"string\",\n          \"Value\": \"string\"\n        },\n        {\n          \"Name\": \"string\",\n          \"Value\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"Program\": \"string\",\n  \"Transaction\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63586971-fbb4-49f2-b44c-8a2cc2c4db0c",
+              "name": "Invalid request or M3 error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":apiVersion",
+                    ":programId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CUNO",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxrecs",
+                      "value": "10"
+                    },
+                    {
+                      "key": "returncols",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "latest",
+                      "key": "apiVersion",
+                      "description": "(Required) API version (e.g., \"latest\" or specific version number)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "programId",
+                      "description": "(Required) M3 MI program and transaction (e.g., \"CRS610MI/GetBasicData\")"
+                    },
+                    {
+                      "description": "ION API gateway hostname",
+                      "type": "any",
+                      "value": "{{os}}",
+                      "key": "os"
+                    },
+                    {
+                      "description": "Tenant ID",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Infor product code",
+                      "type": "any",
+                      "value": "{{product}}",
+                      "key": "product"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\",\n  \"errorType\": \"string\",\n  \"program\": \"string\",\n  \"transaction\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ab3792c-022e-43bd-a1b1-f4afb5802b68",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":apiVersion",
+                    ":programId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CUNO",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxrecs",
+                      "value": "10"
+                    },
+                    {
+                      "key": "returncols",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "latest",
+                      "key": "apiVersion",
+                      "description": "(Required) API version (e.g., \"latest\" or specific version number)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "programId",
+                      "description": "(Required) M3 MI program and transaction (e.g., \"CRS610MI/GetBasicData\")"
+                    },
+                    {
+                      "description": "ION API gateway hostname",
+                      "type": "any",
+                      "value": "{{os}}",
+                      "key": "os"
+                    },
+                    {
+                      "description": "Tenant ID",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Infor product code",
+                      "type": "any",
+                      "value": "{{product}}",
+                      "key": "product"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f6639831-2bea-4f93-b83f-311bc6e94720",
+              "name": "M3 program not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":apiVersion",
+                    ":programId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "CUNO",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxrecs",
+                      "value": "10"
+                    },
+                    {
+                      "key": "returncols",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "latest",
+                      "key": "apiVersion",
+                      "description": "(Required) API version (e.g., \"latest\" or specific version number)"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "programId",
+                      "description": "(Required) M3 MI program and transaction (e.g., \"CRS610MI/GetBasicData\")"
+                    },
+                    {
+                      "description": "ION API gateway hostname",
+                      "type": "any",
+                      "value": "{{os}}",
+                      "key": "os"
+                    },
+                    {
+                      "description": "Tenant ID",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Infor product code",
+                      "type": "any",
+                      "value": "{{product}}",
+                      "key": "product"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d6829e2-d3ed-43fb-b948-66c1d9d46457",
+          "name": "Call M3 MI program (POST)",
+          "request": {
+            "name": "Call M3 MI program (POST)",
+            "description": {
+              "content": "Executes an Infor M3 MI program transaction via POST. Used for write operations (Add, Change, Delete transactions).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":apiVersion",
+                ":programId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "latest",
+                  "key": "apiVersion",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "programId",
+                  "description": "(Required) M3 MI program and transaction (e.g., \"CRS610MI/AddBasicData\")"
+                },
+                {
+                  "description": "ION API gateway hostname",
+                  "type": "any",
+                  "value": "{{os}}",
+                  "key": "os"
+                },
+                {
+                  "description": "Tenant ID",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Infor product code",
+                  "type": "any",
+                  "value": "{{product}}",
+                  "key": "product"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company\": \"<string>\",\n  \"record\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "18447b41-bfaf-4b1f-9d2e-99190191c280",
+              "name": "M3 API response returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":apiVersion",
+                    ":programId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "latest",
+                      "key": "apiVersion",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "programId",
+                      "description": "(Required) M3 MI program and transaction (e.g., \"CRS610MI/AddBasicData\")"
+                    },
+                    {
+                      "description": "ION API gateway hostname",
+                      "type": "any",
+                      "value": "{{os}}",
+                      "key": "os"
+                    },
+                    {
+                      "description": "Tenant ID",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Infor product code",
+                      "type": "any",
+                      "value": "{{product}}",
+                      "key": "product"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": \"<string>\",\n  \"record\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": {\n    \"id\": \"string\",\n    \"text\": \"string\",\n    \"type\": \"Info\",\n    \"field\": \"string\"\n  },\n  \"MIRecord\": [\n    {\n      \"NameValue\": [\n        {\n          \"Name\": \"string\",\n          \"Value\": \"string\"\n        },\n        {\n          \"Name\": \"string\",\n          \"Value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"NameValue\": [\n        {\n          \"Name\": \"string\",\n          \"Value\": \"string\"\n        },\n        {\n          \"Name\": \"string\",\n          \"Value\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"Program\": \"string\",\n  \"Transaction\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42274010-3c74-416d-a7ac-fe6607650a95",
+              "name": "M3 error or validation failure",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":apiVersion",
+                    ":programId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "latest",
+                      "key": "apiVersion",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "programId",
+                      "description": "(Required) M3 MI program and transaction (e.g., \"CRS610MI/AddBasicData\")"
+                    },
+                    {
+                      "description": "ION API gateway hostname",
+                      "type": "any",
+                      "value": "{{os}}",
+                      "key": "os"
+                    },
+                    {
+                      "description": "Tenant ID",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Infor product code",
+                      "type": "any",
+                      "value": "{{product}}",
+                      "key": "product"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company\": \"<string>\",\n  \"record\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "ION API gateway hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mingledev01-ionapi.mingle.infor.com",
+      "key": "os"
+    },
+    {
+      "description": {
+        "content": "Tenant ID",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "INFOR_DEV",
+      "key": "tenant"
+    },
+    {
+      "description": {
+        "content": "Infor product code",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "M3",
+      "key": "product"
+    },
+    {
+      "type": "string",
+      "value": "https://{{os}}/{{tenant}}/{{product}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://inforos.infor.com/INFOR_DEV/as/token.oauth2"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ac026baa-b5ad-4362-bed0-4c41a7e0f804",
+    "name": "Infor ION API Gateway",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Infor ION API Gateway provides a managed OAuth 2.0 API layer for integrating Infor CloudSuite applications (M3, LN, Baan, SunSystems, etc.) with third-party systems. The gateway exposes REST endpoints for ION Documents, ION Events, and ION API services with support for Authorization Code, Client Credentials, and SAML Bearer grant types.\n\nContact Support:\n Name: Infor Support",
+      "type": "text/plain"
+    }
+  }
+}

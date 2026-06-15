@@ -1,0 +1,165 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Infor ION API Gateway",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://inforos.infor.com/INFOR_DEV/as/token.oauth2",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "M3 API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Call M3 MI program (GET)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{os}/{tenant}/{product}/api/:apiVersion/:programId",
+            "params": [
+              {
+                "name": "apiVersion",
+                "value": "",
+                "type": "path",
+                "description": "API version (e.g., \"latest\" or specific version number)"
+              },
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path",
+                "description": "M3 MI program and transaction (e.g., \"CRS610MI/GetBasicData\")"
+              },
+              {
+                "name": "CUNO",
+                "value": "",
+                "type": "query",
+                "description": "Customer number (example M3 input field)"
+              },
+              {
+                "name": "maxrecs",
+                "value": "",
+                "type": "query",
+                "description": "Maximum records to return"
+              },
+              {
+                "name": "returncols",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated column names to return"
+              }
+            ]
+          },
+          "docs": "Executes an Infor M3 MI (Management Interface) program transaction via the ION API Gateway. GET requests retrieve data from M3. The programId follows the pattern {ProgramName}/{TransactionName} (e.g., CRS610MI/GetBasicData)."
+        },
+        {
+          "info": {
+            "name": "Call M3 MI program (POST)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{os}/{tenant}/{product}/api/:apiVersion/:programId",
+            "params": [
+              {
+                "name": "apiVersion",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path",
+                "description": "M3 MI program and transaction (e.g., \"CRS610MI/AddBasicData\")"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes an Infor M3 MI program transaction via POST. Used for write operations (Add, Change, Delete transactions)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ION Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List ION documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{os}/{tenant}/{product}/ion-api/documents",
+            "params": [
+              {
+                "name": "documentType",
+                "value": "",
+                "type": "query",
+                "description": "ION document type filter (e.g., \"SyncSalesOrder\")"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns ION business document routing records including status, sender, receiver, and document type."
+        },
+        {
+          "info": {
+            "name": "Get ION document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{os}/{tenant}/{product}/ion-api/documents/:documentId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a specific ION document by its document ID including payload and routing history."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
