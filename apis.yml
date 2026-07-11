@@ -95,6 +95,12 @@ apis:
     finance operations.
 
 common:
+- type: TrustCenter
+  url: security/infor-trust-center.yml
+- type: DomainSecurity
+  url: security/infor-domain-security.yml
+- type: Authentication
+  url: authentication/infor-authentication.yml
 - type: OAuthScopes
   url: scopes/infor-scopes.yml
 - type: LinkedIn

@@ -1,0 +1,29 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/infor-ion-api-gateway-openapi.yml
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+schemes:
+- name: OAuth2ClientCredentials
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://inforos.infor.com/INFOR_DEV/as/token.oauth2
+    scopes: 0
+  description: Infor ION API Client Credentials grant
+  sources:
+  - openapi/infor-ion-api-gateway-openapi.yml
+- name: OAuth2AuthorizationCode
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://inforos.infor.com/INFOR_DEV/as/authorization.oauth2
+    tokenUrl: https://inforos.infor.com/INFOR_DEV/as/token.oauth2
+    scopes: 0
+  description: Infor ION API Authorization Code grant
+  sources:
+  - openapi/infor-ion-api-gateway-openapi.yml
