@@ -1,0 +1,24 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/infor-ion-api-gateway-openapi.yml
+docs: https://docs.infor.com/inforos/2026.x/en-us/useradminlib_cloud/apigatewayag_cloud/vya1611685179822.html
+note: >-
+  Infor does not publish a fixed catalog of OAuth scope strings; ION API Gateway
+  scopes are defined and attached per authorized app or service account by tenant
+  administrators (see "Adding scopes for authorized apps or service accounts",
+  https://docs.infor.com/inforos/2026.x/en-us/useradminlib_cloud/apigatewayag_cloud/vya1611685179822.html).
+schemes:
+- name: OAuth2ClientCredentials
+  source: openapi/infor-ion-api-gateway-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://inforos.infor.com/INFOR_DEV/as/token.oauth2
+  description: Infor ION API Client Credentials grant
+- name: OAuth2AuthorizationCode
+  source: openapi/infor-ion-api-gateway-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://inforos.infor.com/INFOR_DEV/as/authorization.oauth2
+    tokenUrl: https://inforos.infor.com/INFOR_DEV/as/token.oauth2
+  description: Infor ION API Authorization Code grant
+scopes: []

@@ -95,6 +95,8 @@ apis:
     finance operations.
 
 common:
+- type: OAuthScopes
+  url: scopes/infor-scopes.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/infor
 name: Infor
