@@ -95,6 +95,8 @@ apis:
     finance operations.
 
 common:
+- type: AgenticAccess
+  url: agentic-access/infor-agentic-access.yml
 - type: TrustCenter
   url: security/infor-trust-center.yml
 - type: DomainSecurity
