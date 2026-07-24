@@ -1,0 +1,171 @@
+openapi: 3.1.0
+info:
+  title: Infor ION API Gateway ION Documents API
+  description: The Infor ION API Gateway provides a managed OAuth 2.0 API layer for integrating Infor CloudSuite applications (M3, LN, Baan, SunSystems, etc.) with third-party systems. The gateway exposes REST endpoints for ION Documents, ION Events, and ION API services with support for Authorization Code, Client Credentials, and SAML Bearer grant types.
+  version: 1.0.0
+  contact:
+    name: Infor Support
+    url: https://www.infor.com/support
+  license:
+    name: Infor License
+    url: https://www.infor.com/en/about/legal
+servers:
+- url: https://{os}/{tenant}/{product}
+  description: Infor ION API Gateway
+  variables:
+    os:
+      default: mingledev01-ionapi.mingle.infor.com
+      description: ION API gateway hostname
+    tenant:
+      default: INFOR_DEV
+      description: Tenant ID
+    product:
+      default: M3
+      description: Infor product code
+security:
+- OAuth2ClientCredentials: []
+- OAuth2AuthorizationCode: []
+tags:
+- name: ION Documents
+  description: ION document routing and processing
+paths:
+  /ion-api/documents:
+    get:
+      operationId: listIonDocuments
+      summary: List ION documents
+      description: Returns ION business document routing records including status, sender, receiver, and document type.
+      tags:
+      - ION Documents
+      parameters:
+      - name: documentType
+        in: query
+        schema:
+          type: string
+        description: ION document type filter (e.g., "SyncSalesOrder")
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - Success
+          - Error
+          - Pending
+          - Cancelled
+      - name: from
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: to
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          default: 25
+      responses:
+        '200':
+          description: Document list returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentList'
+  /ion-api/documents/{documentId}:
+    get:
+      operationId: getIonDocument
+      summary: Get ION document
+      description: Returns a specific ION document by its document ID including payload and routing history.
+      tags:
+      - ION Documents
+      parameters:
+      - name: documentId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Document returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '404':
+          description: Document not found
+components:
+  schemas:
+    Document:
+      type: object
+      properties:
+        documentId:
+          type: string
+        documentType:
+          type: string
+          description: ION document type (e.g., SyncCustomerPartyMaster)
+        status:
+          type: string
+          enum:
+          - Success
+          - Error
+          - Pending
+          - Cancelled
+        sender:
+          type: string
+          description: ION connection point identifier
+        receiver:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        processedAt:
+          type: string
+          format: date-time
+        payload:
+          type: object
+          description: Document body (BOD payload)
+          additionalProperties: true
+        routingHistory:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              status:
+                type: string
+              message:
+                type: string
+    DocumentList:
+      type: object
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        total:
+          type: integer
+        pageSize:
+          type: integer
+  securitySchemes:
+    OAuth2ClientCredentials:
+      type: oauth2
+      description: Infor ION API Client Credentials grant
+      flows:
+        clientCredentials:
+          tokenUrl: https://inforos.infor.com/INFOR_DEV/as/token.oauth2
+          scopes: {}
+    OAuth2AuthorizationCode:
+      type: oauth2
+      description: Infor ION API Authorization Code grant
+      flows:
+        authorizationCode:
+          authorizationUrl: https://inforos.infor.com/INFOR_DEV/as/authorization.oauth2
+          tokenUrl: https://inforos.infor.com/INFOR_DEV/as/token.oauth2
+          scopes: {}
+externalDocs:
+  description: Infor ION API SDK GitHub
+  url: https://github.com/infor-cloud/ion-api-sdk
