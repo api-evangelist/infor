@@ -1,36 +1,6 @@
 aid: infor
 url: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/apis.yml
 apis:
-- aid: infor:infor-ion-api-gateway
-  name: Infor ION API Gateway
-  tags:
-  - Cloud
-  - ERP
-  - Integration
-  - Middleware
-  - OAuth2
-  image: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
-  humanURL: https://www.infor.com/products/ion
-  baseURL: https://mingledev01-ionapi.mingle.infor.com
-  properties:
-  - url: https://www.infor.com/products/ion
-    type: Documentation
-  - url: https://github.com/infor-cloud/ion-api-sdk
-    type: SDKs
-  - url: https://github.com/infor-cloud/ion-api-sdk
-    type: GettingStarted
-  - url: https://github.com/infor-cloud/ion-api-sdk
-    type: Authentication
-  - url: openapi/infor-ion-api-gateway-openapi.yml
-    type: OpenAPI
-  - url: asyncapi/infor-ion-events-asyncapi.yml
-    type: AsyncAPI
-  description: >-
-    The Infor ION API Gateway provides a managed OAuth 2.0 API layer for integrating
-    Infor CloudSuite applications with third-party systems. The gateway supports
-    Authorization Code, Client Credentials, and SAML Bearer grant types with SDKs
-    available for Java, .NET, and Go.
-
 - aid: infor:infor-m3-api
   name: Infor M3 / LN CloudSuite Industrial API
   tags:
@@ -48,11 +18,9 @@ apis:
   - url: https://github.com/infor-cloud/m3-h5-sdk
     type: SDKs
   description: >-
-    The Infor M3 (CloudSuite Industrial) APIs provide access to production orders,
-    inventory management, supply chain planning, and financial data for discrete
-    and process manufacturing enterprises. The M3 H5 SDK enables HTML5-based application
-    development on the M3 platform.
-
+    The Infor M3 (CloudSuite Industrial) APIs provide access to production orders, inventory management,
+    supply chain planning, and financial data for discrete and process manufacturing enterprises. The
+    M3 H5 SDK enables HTML5-based application development on the M3 platform.
 - aid: infor:infor-xtendm3-api
   name: Infor XtendM3 API
   tags:
@@ -72,10 +40,8 @@ apis:
   - url: https://github.com/infor-cloud/xtendm3-extension-examples
     type: GettingStarted
   description: >-
-    Infor XtendM3 provides a Java SDK for extending and customizing Infor M3 (CloudSuite
-    Industrial) business logic without modifying core code. Extensions are deployed
-    and executed within the M3 runtime environment.
-
+    Infor XtendM3 provides a Java SDK for extending and customizing Infor M3 (CloudSuite Industrial) business
+    logic without modifying core code. Extensions are deployed and executed within the M3 runtime environment.
 - aid: infor:infor-cloudsuite-financials-api
   name: Infor CloudSuite Financials API
   tags:
@@ -90,10 +56,48 @@ apis:
   - url: https://www.infor.com/
     type: Documentation
   description: >-
-    Infor CloudSuite Financials APIs provide integration with general ledger, accounts
-    payable, accounts receivable, cash management, and financial reporting for enterprise
-    finance operations.
-
+    Infor CloudSuite Financials APIs provide integration with general ledger, accounts payable, accounts
+    receivable, cash management, and financial reporting for enterprise finance operations.
+- aid: infor:infor-ion-documents-api
+  name: Infor ION Documents API
+  description: ION document routing and processing
+  humanURL: https://www.infor.com/products/ion
+  baseURL: https://mingledev01-ionapi.mingle.infor.com
+  tags:
+  - ION Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/infor-ion-documents-api-openapi.yml
+  - type: Documentation
+    url: https://www.infor.com/products/ion
+  - type: SDKs
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: GettingStarted
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: Authentication
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: AsyncAPI
+    url: asyncapi/infor-ion-events-asyncapi.yml
+- aid: infor:infor-m3-api-api
+  name: Infor M3 API API
+  description: Infor M3 business API programs
+  humanURL: https://www.infor.com/products/ion
+  baseURL: https://mingledev01-ionapi.mingle.infor.com
+  tags:
+  - M3 API
+  properties:
+  - type: OpenAPI
+    url: openapi/infor-m3-api-api-openapi.yml
+  - type: Documentation
+    url: https://www.infor.com/products/ion
+  - type: SDKs
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: GettingStarted
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: Authentication
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: AsyncAPI
+    url: asyncapi/infor-ion-events-asyncapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/infor-agentic-access.yml
@@ -114,6 +118,19 @@ description: >-
   2.0-based integration across Infor applications and third-party systems. SDKs
   are available via the infor-cloud GitHub organization for Java, .NET, Go, and
   HTML5 development.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
 tags:
 - ERP
