@@ -1,0 +1,16 @@
+{
+  "provider": "infor",
+  "sources": [
+    "infor-ion-documents-api-openapi.yml",
+    "infor-m3-api-api-openapi.yml"
+  ],
+  "outputs": [
+    "infor-ion-documents-api-openapi.yml",
+    "infor-m3-api-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
