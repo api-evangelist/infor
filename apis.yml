@@ -1,5 +1,6 @@
 aid: infor
 url: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/apis.yml
+specificationVersion: '0.23'
 apis:
 - aid: infor:infor-m3-api
   name: Infor M3 / LN CloudSuite Industrial API
