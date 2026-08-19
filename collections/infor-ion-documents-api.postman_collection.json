@@ -1,0 +1,439 @@
+{
+  "item": [
+    {
+      "id": "082bb119-21c1-47a0-a1d2-a90bd02ce7ef",
+      "name": "ION Documents",
+      "description": {
+        "content": "ION document routing and processing",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0c64ac56-7472-4cf9-a000-94babdfb804e",
+          "name": "List ION documents",
+          "request": {
+            "name": "List ION documents",
+            "description": {
+              "content": "Returns ION business document routing records including status, sender, receiver, and document type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ion-api",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "documentType",
+                  "value": "<string>",
+                  "description": "ION document type filter (e.g., \"SyncSalesOrder\")"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "25"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "ION API gateway hostname",
+                  "type": "any",
+                  "value": "{{os}}",
+                  "key": "os"
+                },
+                {
+                  "description": "Tenant ID",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Infor product code",
+                  "type": "any",
+                  "value": "{{product}}",
+                  "key": "product"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ba89dc21-9cdd-4459-8b32-45596f9d6423",
+              "name": "Document list returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ion-api",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "documentType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "from",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "ION API gateway hostname",
+                      "type": "any",
+                      "value": "{{os}}",
+                      "key": "os"
+                    },
+                    {
+                      "description": "Tenant ID",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Infor product code",
+                      "type": "any",
+                      "value": "{{product}}",
+                      "key": "product"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documents\": [\n    {\n      \"documentId\": \"string\",\n      \"documentType\": \"string\",\n      \"status\": \"Pending\",\n      \"sender\": \"string\",\n      \"receiver\": \"string\",\n      \"createdAt\": \"2020-01-09T01:56:11.752Z\",\n      \"processedAt\": \"1951-07-06T14:39:53.980Z\",\n      \"payload\": {\n        \"key_0\": false\n      },\n      \"routingHistory\": [\n        {\n          \"timestamp\": \"1947-05-15T03:20:27.996Z\",\n          \"status\": \"string\",\n          \"message\": \"string\"\n        },\n        {\n          \"timestamp\": \"1949-09-04T19:15:06.451Z\",\n          \"status\": \"string\",\n          \"message\": \"string\"\n        }\n      ]\n    },\n    {\n      \"documentId\": \"string\",\n      \"documentType\": \"string\",\n      \"status\": \"Cancelled\",\n      \"sender\": \"string\",\n      \"receiver\": \"string\",\n      \"createdAt\": \"1976-07-10T14:55:06.041Z\",\n      \"processedAt\": \"1988-06-01T13:40:14.217Z\",\n      \"payload\": {\n        \"key_0\": 601,\n        \"key_1\": 9963.263563855313\n      },\n      \"routingHistory\": [\n        {\n          \"timestamp\": \"1962-07-26T17:08:54.418Z\",\n          \"status\": \"string\",\n          \"message\": \"string\"\n        },\n        {\n          \"timestamp\": \"1965-03-16T00:33:38.761Z\",\n          \"status\": \"string\",\n          \"message\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"total\": 1966,\n  \"pageSize\": 6358\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de9dbdae-aa8d-42d9-b25f-5e9a3b62ee0d",
+          "name": "Get ION document",
+          "request": {
+            "name": "Get ION document",
+            "description": {
+              "content": "Returns a specific ION document by its document ID including payload and routing history.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ion-api",
+                "documents",
+                ":documentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "documentId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "ION API gateway hostname",
+                  "type": "any",
+                  "value": "{{os}}",
+                  "key": "os"
+                },
+                {
+                  "description": "Tenant ID",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Infor product code",
+                  "type": "any",
+                  "value": "{{product}}",
+                  "key": "product"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd4f4d3d-0130-43f5-a41d-7e502618d517",
+              "name": "Document returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ion-api",
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "ION API gateway hostname",
+                      "type": "any",
+                      "value": "{{os}}",
+                      "key": "os"
+                    },
+                    {
+                      "description": "Tenant ID",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Infor product code",
+                      "type": "any",
+                      "value": "{{product}}",
+                      "key": "product"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documentId\": \"string\",\n  \"documentType\": \"string\",\n  \"status\": \"Success\",\n  \"sender\": \"string\",\n  \"receiver\": \"string\",\n  \"createdAt\": \"1981-05-27T03:55:19.002Z\",\n  \"processedAt\": \"1997-12-05T13:36:40.423Z\",\n  \"payload\": {\n    \"key_0\": 5483.58278186755,\n    \"key_1\": 2600.114396761507\n  },\n  \"routingHistory\": [\n    {\n      \"timestamp\": \"1959-02-05T16:46:29.677Z\",\n      \"status\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"timestamp\": \"1948-09-07T03:24:53.657Z\",\n      \"status\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c83c40f-7f19-4311-99f5-e4f052c03b53",
+              "name": "Document not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ion-api",
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "documentId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "ION API gateway hostname",
+                      "type": "any",
+                      "value": "{{os}}",
+                      "key": "os"
+                    },
+                    {
+                      "description": "Tenant ID",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Infor product code",
+                      "type": "any",
+                      "value": "{{product}}",
+                      "key": "product"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "ION API gateway hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "mingledev01-ionapi.mingle.infor.com",
+      "key": "os"
+    },
+    {
+      "description": {
+        "content": "Tenant ID",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "INFOR_DEV",
+      "key": "tenant"
+    },
+    {
+      "description": {
+        "content": "Infor product code",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "M3",
+      "key": "product"
+    },
+    {
+      "type": "string",
+      "value": "https://{{os}}/{{tenant}}/{{product}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://inforos.infor.com/INFOR_DEV/as/token.oauth2"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4d1a397e-2ea3-4262-a632-db610ddee22d",
+    "name": "Infor ION API Gateway ION Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Infor ION API Gateway provides a managed OAuth 2.0 API layer for integrating Infor CloudSuite applications (M3, LN, Baan, SunSystems, etc.) with third-party systems. The gateway exposes REST endpoints for ION Documents, ION Events, and ION API services with support for Authorization Code, Client Credentials, and SAML Bearer grant types.\n\nContact Support:\n Name: Infor Support",
+      "type": "text/plain"
+    }
+  }
+}
