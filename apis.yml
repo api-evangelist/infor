@@ -1,5 +1,16 @@
 aid: infor
 url: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/apis.yml
+deliveryModel:
+  model: library
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Library · distributed through package registries, no callable service
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 specificationVersion: '0.23'
 apis:
 - aid: infor:infor-m3-api
