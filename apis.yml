@@ -21,7 +21,6 @@ apis:
   - M3
   - Manufacturing
   - Supply Chain
-  image: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
   humanURL: https://www.infor.com/
   baseURL: https://api.infor.com
   properties:
@@ -41,7 +40,6 @@ apis:
   - Java
   - M3
   - Manufacturing
-  image: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
   humanURL: https://www.infor.com/
   baseURL: https://api.infor.com
   properties:
@@ -61,7 +59,6 @@ apis:
   - Cloud
   - ERP
   - Financials
-  image: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
   humanURL: https://www.infor.com/
   baseURL: https://api.infor.com
   properties:
@@ -143,7 +140,6 @@ accessModel:
   - authentication
   generated: '2026-07-22'
   method: derived
-image: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/image.png
 tags:
 - ERP
 - Manufacturing
