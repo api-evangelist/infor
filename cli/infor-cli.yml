@@ -1,0 +1,44 @@
+generated: '2026-09-13'
+method: searched
+source: https://www.npmjs.com/package/@infor-up/m3-odin-cli
+description: >-
+  Infor publishes one first-party command-line tool on a public registry: the
+  Odin CLI, shipped as @infor-up/m3-odin-cli and exposing the `odin` binary.
+  It scaffolds and builds Infor M3 H5 web applications against the M3 API; it
+  is a development/build tool, not a general client for the ION API Gateway.
+  There is no published first-party CLI for the ION API Gateway itself.
+clis:
+- name: Odin CLI
+  binary: odin
+  package: "@infor-up/m3-odin-cli"
+  registry: npm
+  version: 8.0.0
+  published: '2026-03-23'
+  install:
+  - npm install -g @infor-up/m3-odin-cli
+  source: https://github.com/infor-cloud/m3-h5-sdk
+  docs: https://github.com/infor-cloud/m3-h5-sdk
+  scope: >-
+    Project scaffolding, local development server and production build for
+    Infor M3 H5 (Odin) applications.
+  note: >-
+    The npm package declares bin { "odin": "dist/cli.js" }. The command surface
+    is documented in the M3 H5 SDK repository rather than in a published
+    reference page, so individual subcommands are not enumerated here — this
+    pipeline records only what the provider publishes.
+- name: XtendM3 Maven plugin
+  binary: mvn xtendm3
+  package: com.infor.m3:xtendm3-maven-plugin
+  registry: maven
+  version: 0.1.8
+  published: '2023-02-03'
+  install:
+  - "Add com.infor.m3:xtendm3-maven-plugin to the build plugins of an XtendM3 extension project"
+  source: https://github.com/infor-cloud/xtendm3-maven-plugin
+  scope: Build/package/deploy lifecycle for XtendM3 M3 extensions.
+  note: Invoked through Maven rather than as a standalone binary.
+gaps:
+- >-
+  No first-party CLI exists for calling the ION API Gateway. Infor documents
+  Postman and the .ionapi credentials file as the interactive call path
+  (https://developer.infor.com/tutorials/api-gateway/how-to-call-an-ion-api).

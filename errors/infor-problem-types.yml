@@ -1,0 +1,81 @@
+generated: '2026-09-13'
+method: derived
+source: >-
+  openapi/_original/infor-ion-api-gateway-openapi.yml (4xx responses), plus a
+  live observation of the production gateway error body at
+  https://mingle-ionapi.inforcloudsuite.com (2026-09-13).
+format: vendor
+rfc9457: false
+description: >-
+  Infor publishes no RFC 7807 / RFC 9457 problem+json error catalog for the ION
+  API Gateway. Errors are product-shaped: the M3 API surface returns an M3Error
+  object carrying M3Message entries, and the gateway itself returns a minimal
+  {"error": "..."} envelope for routing failures. The entries below are derived
+  from the response codes actually declared in the contract — they are not a
+  published error reference, because Infor does not publish one for this surface.
+envelope:
+  media_type: application/json
+  schema: M3Error
+  fields:
+  - name: errorMessage
+    description: Human-readable failure text returned by the M3 business API program.
+  - name: messages
+    description: Array of M3Message entries carrying per-field or per-record detail.
+  gateway_envelope:
+    example: '{"error":"Bad Request"}'
+    observed: '2026-09-13'
+    observed_at: https://mingle-ionapi.inforcloudsuite.com/openapi.json
+    http_status: 400
+    note: >-
+      Observed verbatim from the live production gateway when a request carries
+      no tenant path segment. Recorded as evidence of the envelope shape, not as
+      a documented contract.
+problem_types:
+- status: 400
+  title: Bad Request
+  operations:
+  - callM3ApiGet
+  - callM3ApiPost
+  detail: >-
+    Malformed request to an M3 business API program — unknown programId,
+    missing required program field, or a request the gateway could not route.
+  remediation: >-
+    Verify the apiVersion and programId path segments and the program's own
+    required fields against the M3 API program reference for the tenant's
+    CloudSuite release.
+  source: openapi/_original/infor-ion-api-gateway-openapi.yml
+- status: 401
+  title: Unauthorized
+  operations:
+  - callM3ApiGet
+  detail: >-
+    Missing, expired or invalid OAuth 2.0 bearer token, or a token issued for a
+    different tenant than the one in the request path.
+  remediation: >-
+    Re-acquire a token from the tenant's Infor OS authorization server using the
+    credentials in the tenant .ionapi file; confirm the calling identity holds
+    the IONAPI-User role.
+  source: openapi/_original/infor-ion-api-gateway-openapi.yml
+- status: 404
+  title: Not Found
+  operations:
+  - callM3ApiGet
+  - getIonDocument
+  detail: >-
+    The M3 program or the ION document id does not exist, or is not exposed to
+    the authorized application on this tenant.
+  remediation: >-
+    Confirm the document id, and confirm the API suite endpoint is published to
+    the authorized app in the ION API Gateway administration UI.
+  source: openapi/_original/infor-ion-api-gateway-openapi.yml
+gaps:
+- >-
+  No 429 response is declared anywhere in the contract, even though the gateway
+  implements Quota and Throttling policies. An agent cannot learn from the
+  contract what exhaustion looks like.
+- >-
+  No 5xx responses are declared on any operation.
+- >-
+  There is no published Infor error-code registry for the ION API Gateway —
+  no numeric error class list of the kind the M3 product documentation carries
+  internally.

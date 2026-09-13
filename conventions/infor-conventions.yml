@@ -1,0 +1,157 @@
+generated: '2026-09-13'
+method: searched
+source: >-
+  https://developer.infor.com/tutorials/api-gateway,
+  https://developer.infor.com/tutorials/api-gateway/how-to-call-an-ion-api,
+  https://docs.infor.com/inforos/2024.x/en-us/useradminlib_cloud/apigatewaybaasdg/lcs1730257685556.html
+  (API Gateway Endpoint Policies), and openapi/_original/infor-ion-api-gateway-openapi.yml
+description: >-
+  Cross-cutting request/response semantics for the Infor ION API Gateway — the
+  single front door for every Infor CloudSuite API (M3, LN, IDM, IONSERVICES,
+  Data Fabric). Infor documents these as gateway behaviour and administrator
+  policy rather than as a developer-facing API convention page, which is why
+  several fields below are recorded as "not published" instead of being filled
+  in from inference.
+
+base_url: https://mingle-ionapi.inforcloudsuite.com/{tenant}/{suite}
+base_url_note: >-
+  Tenant- and region-scoped. Regional gateways take the form
+  mingle-ionapi.{region}.inforcloudsuite.com (e.g. se2, cqa). The suite segment
+  selects the backing product — M3, IONSERVICES, IDM, OSPORTAL. The concrete
+  host for a tenant is delivered in that tenant's downloaded .ionapi file, so no
+  single hard-coded base URL is correct for every customer.
+api_style: REST over HTTPS, JSON request/response (XML on some IDM operations)
+
+authentication:
+  scheme: OAuth 2.0 Bearer token (Authorization header)
+  grants:
+  - authorization_code
+  - client_credentials
+  - saml_bearer
+  - password
+  credentials_distribution: >-
+    Per-tenant .ionapi JSON file downloaded from the Infor OS API Gateway admin
+    UI, carrying the tenant id, gateway host, client id/secret and the
+    authorization/token endpoints.
+  roles:
+  - IONAPI-Administrator
+  - IONAPI-User
+  docs: https://developer.infor.com/tutorials/api-gateway/how-to-call-an-ion-api
+  detail: authentication/infor-authentication.yml
+
+idempotency:
+  supported: false
+  coverage: none
+  mechanism: null
+  scope: null
+  detail: >-
+    Infor documents no replay-protection mechanism for the ION API Gateway.
+    There is no Idempotency-Key header, no client-supplied request token, and no
+    documented dedupe window on any mutating operation. Retrying a POST against
+    an M3 business API program re-executes it. The only adjacent construct is
+    ION document flow processing, which is queued and asynchronous but is not a
+    documented idempotency guarantee for synchronous API callers.
+  docs: null
+
+reversibility:
+  grade: none
+  applies: true
+  detail: >-
+    The gateway's mutating surface is a pass-through to the backing product's
+    own business logic. Infor publishes no gateway-level reversal operation
+    (no cancel/void/undo/restore endpoint) and no stated reversal window for
+    any operation in the contract this repo holds. Where a reversal exists it
+    is an M3/LN business API program in its own right (a cancel or reverse
+    transaction program), invoked through the same callM3ApiPost operation with
+    a different programId — which means the reversal path is not discoverable
+    from the API contract at all.
+  operations:
+  - write_operation: callM3ApiPost
+    reversal_operation: null
+    reversal_window: null
+    note: >-
+      No reversal operation and no window are published. NOT asserting one:
+      an invented window here would be an invented commitment about live ERP
+      transactions.
+  docs: null
+
+dry_run_mode:
+  supported: false
+  detail: No documented dry-run, preview, simulate or validate-only mode on the ION API Gateway.
+
+pagination:
+  style: not-published
+  request_params: []
+  response_fields: []
+  detail: >-
+    The gateway defines no uniform pagination contract. Paging is a property of
+    the backing product API — M3 business API programs take program-specific
+    record-count parameters (e.g. maxrecs) — and Infor publishes no gateway-wide
+    cursor or offset convention.
+
+field_expansion:
+  supported: false
+  detail: Not published.
+
+metadata:
+  supported: false
+  detail: Not published.
+
+request_tracing:
+  request_id_header: not-published
+  detail: >-
+    No documented correlation/request-id response header. The gateway's policy
+    engine can add or log headers per endpoint policy, but that is administrator
+    configuration on a tenant, not a published contract.
+
+versioning:
+  scheme: path segment
+  mechanism: >-
+    The API version is a path segment on the operation
+    (/api/{apiVersion}/{programId}, e.g. /M3/m3api-rest/v2/execute). Suite
+    documentation is versioned by Infor OS release train (2022.x, 2023.x,
+    2024.x, 2026.x) on docs.infor.com.
+  detail: lifecycle/infor-lifecycle.yml
+  docs: https://docs.infor.com/
+
+error_envelope:
+  media_type: application/json
+  format: vendor
+  rfc9457: false
+  shape: >-
+    Product-specific. The M3 API surface returns an M3Error object carrying
+    M3Message entries; the gateway itself returns {"error": "<reason>"} on
+    malformed routing (observed: HTTP 400 {"error":"Bad Request"} from
+    mingle-ionapi.inforcloudsuite.com on any path lacking a tenant segment).
+    Infor publishes no RFC 7807 / RFC 9457 problem+json envelope.
+  detail: errors/infor-problem-types.yml
+
+rate_limit_signaling:
+  headers: []
+  status_on_exhaustion: not-published
+  detail: >-
+    Rate limiting is configured per API-suite endpoint by the tenant
+    administrator through gateway policies, not published as fixed numbers.
+    Infor documents two policy types — Quota (userLevel, interval, timeUnit,
+    allow) and Throttling (timePeriodInMilliseconds,
+    rateSmoothing.delayAfterCount, rateSmoothing.delayFactorInMilliseconds,
+    spikeArrest.maxRequestsPerPeriod). The documentation does NOT state the
+    status code or the response headers returned on exhaustion, so no header
+    contract is recorded here.
+  detail_artifact: rate-limits/infor-rate-limits.yml
+  docs: https://docs.infor.com/inforos/2024.x/en-us/useradminlib_cloud/apigatewaybaasdg/lcs1730257685556.html
+
+webhooks_events:
+  supported: true
+  detail: >-
+    Event delivery is handled by ION, not by the API Gateway — the ION Event Hub
+    publishes business events from the CloudSuite applications. See
+    asyncapi/infor-ion-events-asyncapi.yml.
+
+cross_links:
+  authentication: authentication/infor-authentication.yml
+  scopes: scopes/infor-scopes.yml
+  errors: errors/infor-problem-types.yml
+  lifecycle: lifecycle/infor-lifecycle.yml
+  rate_limits: rate-limits/infor-rate-limits.yml
+  data_model: data-model/infor-data-model.yml

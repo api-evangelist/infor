@@ -1,0 +1,438 @@
+generated: '2026-09-13'
+method: probed
+source: live HTTPS probes of the closed /.well-known/ path list plus /apis.json and /apis.yml, run 2026-09-13
+  with a browser User-Agent and redirects followed
+description: 'Infor serves NO /.well-known/ discovery document on any host this record knows. Eight hosts
+  were probed across fourteen named paths. The two 200-heavy hosts (developer.infor.com, docs.infor.com)
+  are catch-all single-page applications: both answered 200 with an identical HTML shell for the negative-control
+  path that cannot exist, so every 200 on those hosts is a soft-404 and none is a document. No WellKnown
+  and no SecurityTxt pointer is emitted — this file records a measured absence, not a surface.'
+hosts:
+- host: https://www.infor.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/apis.json
+    status: 404
+    file: null
+  - path: /apis.json
+    status: 200
+    file: null
+  - path: /apis.yml
+    status: 403
+    file: null
+  - path: /.well-known/aauth-resource.json
+    status: 404
+    file: null
+  - path: /.well-known/ucp.json
+    status: 404
+    file: null
+  - path: /.well-known/acp.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+  hit_count: 0
+  soft_404_control:
+    path: /.well-known/infor-negative-control-7f3ab91c.json
+    status: 404
+    bytes: 375773
+  path_echo_control: passed
+  note: Marketing site. Every /.well-known/ path returns a real 404 (the 404 body is the site chrome,
+    ~375KB). /apis.json returns 200 but is the site's own 404/search HTML shell, not an APIs.json index
+    — rejected on content.
+- host: https://infor.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/apis.json
+    status: 404
+    file: null
+  - path: /apis.json
+    status: 200
+    file: null
+  - path: /apis.yml
+    status: 403
+    file: null
+  - path: /.well-known/aauth-resource.json
+    status: 404
+    file: null
+  - path: /.well-known/ucp.json
+    status: 404
+    file: null
+  - path: /.well-known/acp.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+  hit_count: 0
+  soft_404_control:
+    path: /.well-known/infor-negative-control-7f3ab91c.json
+    status: 404
+    bytes: 375773
+  path_echo_control: passed
+  note: Apex domain, same origin behaviour as www. No documents served.
+- host: https://developer.infor.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: null
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+  - path: /.well-known/apis.json
+    status: 200
+    file: null
+  - path: /apis.json
+    status: 200
+    file: null
+  - path: /apis.yml
+    status: 200
+    file: null
+  - path: /.well-known/aauth-resource.json
+    status: 200
+    file: null
+  - path: /.well-known/ucp.json
+    status: 200
+    file: null
+  - path: /.well-known/acp.json
+    status: 200
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+  hit_count: 0
+  soft_404_control:
+    path: /.well-known/infor-negative-control-7f3ab91c.json
+    status: 200
+    bytes: 3860
+  path_echo_control: failed
+  note: 'Infor Developer Portal, hosted on Theneo (custom.theneo.io). Catch-all SPA: EVERY path under
+    /.well-known/ returns 200 with the same ~3.8KB Next.js shell, including the negative control. No document
+    is served.'
+- host: https://docs.infor.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: null
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+  - path: /.well-known/apis.json
+    status: 200
+    file: null
+  - path: /apis.json
+    status: 200
+    file: null
+  - path: /apis.yml
+    status: 200
+    file: null
+  - path: /.well-known/aauth-resource.json
+    status: 200
+    file: null
+  - path: /.well-known/ucp.json
+    status: 200
+    file: null
+  - path: /.well-known/acp.json
+    status: 200
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+  hit_count: 0
+  soft_404_control:
+    path: /.well-known/infor-negative-control-7f3ab91c.json
+    status: 200
+    bytes: 2510
+  path_echo_control: failed
+  note: 'Infor Documentation Central. Catch-all SPA: every path returns the identical 2,510-byte HTML
+    shell, negative control included. No document is served.'
+- host: https://mingle-ionapi.inforcloudsuite.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 400
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 400
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 400
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 400
+    file: null
+  - path: /.well-known/api-catalog
+    status: 400
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 400
+    file: null
+  - path: /.well-known/apis.json
+    status: 400
+    file: null
+  - path: /apis.json
+    status: 400
+    file: null
+  - path: /apis.yml
+    status: 400
+    file: null
+  - path: /.well-known/aauth-resource.json
+    status: 400
+    file: null
+  - path: /.well-known/ucp.json
+    status: 400
+    file: null
+  - path: /.well-known/acp.json
+    status: 400
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 400
+    file: null
+  - path: /.well-known/agent.json
+    status: 400
+    file: null
+  hit_count: 0
+  soft_404_control:
+    path: /.well-known/infor-negative-control-7f3ab91c.json
+    status: 400
+    bytes: 23
+  path_echo_control: passed
+  note: Production ION API Gateway host. Answers every unrouted path with HTTP 400 {"error":"Bad Request"}
+    — the gateway requires a tenant path segment. No discovery documents are exposed anonymously.
+- host: https://mingledev01-ionapi.mingle.infor.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 0
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 0
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 0
+    file: null
+  - path: /.well-known/api-catalog
+    status: 0
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 0
+    file: null
+  - path: /.well-known/apis.json
+    status: 0
+    file: null
+  - path: /apis.json
+    status: 0
+    file: null
+  - path: /apis.yml
+    status: 0
+    file: null
+  - path: /.well-known/aauth-resource.json
+    status: 0
+    file: null
+  - path: /.well-known/ucp.json
+    status: 0
+    file: null
+  - path: /.well-known/acp.json
+    status: 0
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 0
+    file: null
+  - path: /.well-known/agent.json
+    status: 0
+    file: null
+  hit_count: 0
+  soft_404_control:
+    path: /.well-known/infor-negative-control-7f3ab91c.json
+    status: 0
+    bytes: 0
+  path_echo_control: passed
+  note: Host does not resolve (NXDOMAIN). It is the documentation example hostname carried in the OpenAPI
+    servers[] `os` variable default, not a live host.
+- host: https://inforos.infor.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 0
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 0
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 0
+    file: null
+  - path: /.well-known/api-catalog
+    status: 0
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 0
+    file: null
+  - path: /.well-known/apis.json
+    status: 0
+    file: null
+  - path: /apis.json
+    status: 0
+    file: null
+  - path: /apis.yml
+    status: 0
+    file: null
+  - path: /.well-known/aauth-resource.json
+    status: 0
+    file: null
+  - path: /.well-known/ucp.json
+    status: 0
+    file: null
+  - path: /.well-known/acp.json
+    status: 0
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 0
+    file: null
+  - path: /.well-known/agent.json
+    status: 0
+    file: null
+  hit_count: 0
+  soft_404_control:
+    path: /.well-known/infor-negative-control-7f3ab91c.json
+    status: 0
+    bytes: 0
+  path_echo_control: passed
+  note: Host does not resolve (NXDOMAIN). It is the OAuth authorization/token host named in the OpenAPI
+    securitySchemes; the real Infor OS OAuth endpoints are tenant-scoped under mingle-sso.<region>.inforcloudsuite.com.
+- host: https://trust.infor.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 403
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 403
+    file: null
+  - path: /.well-known/api-catalog
+    status: 403
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 403
+    file: null
+  - path: /.well-known/apis.json
+    status: 403
+    file: null
+  - path: /apis.json
+    status: 403
+    file: null
+  - path: /apis.yml
+    status: 403
+    file: null
+  - path: /.well-known/aauth-resource.json
+    status: 403
+    file: null
+  - path: /.well-known/ucp.json
+    status: 403
+    file: null
+  - path: /.well-known/acp.json
+    status: 403
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 403
+    file: null
+  - path: /.well-known/agent.json
+    status: 403
+    file: null
+  hit_count: 0
+  soft_404_control:
+    path: /.well-known/infor-negative-control-7f3ab91c.json
+    status: 403
+    bytes: 243
+  path_echo_control: passed
+  note: Infor Trust Center (SafeBase). Returns 403 application/xml for every path probed, including the
+    negative control — an edge deny, not a document.
+hit_count: 0
+pointers_emitted: []
+findings:
+- No /.well-known/security.txt on any Infor host — Infor has no RFC 9116 contact surface.
+- 'No OAuth 2.0 / OIDC discovery document is served anonymously, even though the ION API Gateway is entirely
+  OAuth 2.0 based: authorization server metadata is tenant-scoped and delivered inside the per-tenant
+  .ionapi credentials file instead.'
+- No /.well-known/api-catalog, no apis.json, no ai-plugin.json, no AAuth resource document, no UCP/ACP
+  document.
+- mingledev01-ionapi.mingle.infor.com and inforos.infor.com — both carried in the repo's OpenAPI — do
+  not resolve at all.

@@ -6,11 +6,12 @@
       "feed_url": "https://www.infor.com/blog",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "none",
+      "error": "parse_failed"
     }
   ],
   "post_count": 5,
-  "fetched": "2026-09-06T19:17:18Z",
+  "fetched": "2026-09-13T12:41:53Z",
   "agent_pulled": "2026-07-04",
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",

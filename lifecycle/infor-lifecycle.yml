@@ -1,0 +1,74 @@
+generated: '2026-09-13'
+method: searched
+source: >-
+  https://docs.infor.com/ (Infor Documentation Central, release-train versioned),
+  https://status.infor.com (Infor CloudSuite status portal),
+  https://github.com/infor-cloud/m3-h5-sdk/releases,
+  and openapi/_original/infor-ion-api-gateway-openapi.yml
+description: >-
+  How Infor versions, deprecates and reports on the availability of its
+  CloudSuite APIs. Infor runs on an enterprise release-train model rather than a
+  dated API changelog: documentation, product and API surface all move together
+  by Infor OS / CloudSuite release (2022.x, 2023.x, 2024.x, 2026.x), and
+  end-of-life is communicated to contracted customers through the support portal
+  rather than on a public deprecation page.
+
+versioning:
+  scheme: release-train + path segment
+  detail: >-
+    API operations carry a version path segment (e.g. /M3/m3api-rest/v2/execute);
+    the documentation set is versioned by Infor OS release train on
+    docs.infor.com. There is no Accept-header or date-pinned version scheme.
+  current: Infor OS 2026.x
+  docs: https://docs.infor.com/
+
+deprecation_policy:
+  published: false
+  sunset_header: false
+  deprecation_header: false
+  detail: >-
+    No public API deprecation policy, no RFC 8594 Sunset or Deprecation response
+    headers, and no public end-of-life calendar for API surfaces. Infor
+    communicates product and release end-of-life to contracted customers through
+    Infor Concierge / the support portal. Recorded as an honest absence.
+  docs: null
+
+deprecated_operations: []
+deprecated_operations_note: >-
+  Zero operations in openapi/_original/infor-ion-api-gateway-openapi.yml carry
+  `deprecated: true`.
+
+status_page:
+  url: https://status.infor.com
+  vendor: Infor (self-hosted, status.csp.inforcloudsuite.com)
+  public: false
+  auth: Infor OS single sign-on (WS-Federation via mingle-sso.<region>.inforcloudsuite.com)
+  probed: '2026-09-13'
+  http_status: 200
+  detail: >-
+    status.infor.com resolves and is operated by Infor, but it is a
+    CUSTOMER-ONLY status portal: an anonymous request 302s into the Infor OS
+    WS-Federation sign-in flow. Incident history and current component state are
+    not readable without a tenant login. Recorded with the gate stated rather
+    than presented as a public status page.
+
+sla:
+  published: false
+  detail: >-
+    Availability commitments are contractual, negotiated per CloudSuite
+    subscription. Infor publishes no public SLA percentage for the ION API
+    Gateway.
+
+support:
+  portal: https://www.infor.com/customer-success/support
+  community: https://community.infor.com/categories/developer
+  concierge: https://concierge.infor.com
+
+release_notes:
+  api: null
+  api_note: >-
+    Infor publishes no dated public changelog for the ION API Gateway itself.
+  sdk: https://github.com/infor-cloud/m3-h5-sdk/releases
+  sdk_note: >-
+    The M3 H5 SDK (Odin) does carry dated, tagged releases. Captured in
+    changelog/infor-changelog.yml.

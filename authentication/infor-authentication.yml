@@ -1,6 +1,6 @@
-generated: '2026-07-11'
+generated: '2026-09-13'
 method: derived
-source: openapi/infor-ion-api-gateway-openapi.yml
+source: openapi/infor-ion-documents-api-openapi.yml, openapi/infor-m3-api-api-openapi.yml
 summary:
   types:
   - oauth2
@@ -16,7 +16,8 @@ schemes:
     scopes: 0
   description: Infor ION API Client Credentials grant
   sources:
-  - openapi/infor-ion-api-gateway-openapi.yml
+  - openapi/infor-ion-documents-api-openapi.yml
+  - openapi/infor-m3-api-api-openapi.yml
 - name: OAuth2AuthorizationCode
   type: oauth2
   flows:
@@ -26,4 +27,5 @@ schemes:
     scopes: 0
   description: Infor ION API Authorization Code grant
   sources:
-  - openapi/infor-ion-api-gateway-openapi.yml
+  - openapi/infor-ion-documents-api-openapi.yml
+  - openapi/infor-m3-api-api-openapi.yml

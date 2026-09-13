@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Infor ION API Gateway ION Documents M3 API API
+  title: Infor ION API Gateway ION Documents M3 API
   description: The Infor ION API Gateway provides a managed OAuth 2.0 API layer for integrating Infor CloudSuite applications (M3, LN, Baan, SunSystems, etc.) with third-party systems. The gateway exposes REST endpoints for ION Documents, ION Events, and ION API services with support for Authorization Code, Client Credentials, and SAML Bearer grant types.
   version: 1.0.0
   contact:
@@ -133,6 +133,42 @@ components:
           type: string
         Transaction:
           type: string
+    M3ApiRequest:
+      type: object
+      description: Request payload for an M3 MI program transaction
+      properties:
+        company:
+          type: string
+          description: M3 company (division) number
+        record:
+          type: object
+          description: Input field key-value pairs for the M3 transaction
+          additionalProperties:
+            type: string
+    M3Record:
+      type: object
+      description: A single data record returned from an M3 MI transaction
+      properties:
+        NameValue:
+          type: array
+          items:
+            type: object
+            properties:
+              Name:
+                type: string
+              Value:
+                type: string
+    M3Error:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        errorType:
+          type: string
+        program:
+          type: string
+        transaction:
+          type: string
     M3Message:
       type: object
       properties:
@@ -149,42 +185,6 @@ components:
         field:
           type: string
           description: Field name in error, if applicable
-    M3ApiRequest:
-      type: object
-      description: Request payload for an M3 MI program transaction
-      properties:
-        company:
-          type: string
-          description: M3 company (division) number
-        record:
-          type: object
-          description: Input field key-value pairs for the M3 transaction
-          additionalProperties:
-            type: string
-    M3Error:
-      type: object
-      properties:
-        errorMessage:
-          type: string
-        errorType:
-          type: string
-        program:
-          type: string
-        transaction:
-          type: string
-    M3Record:
-      type: object
-      description: A single data record returned from an M3 MI transaction
-      properties:
-        NameValue:
-          type: array
-          items:
-            type: object
-            properties:
-              Name:
-                type: string
-              Value:
-                type: string
   securitySchemes:
     OAuth2ClientCredentials:
       type: oauth2

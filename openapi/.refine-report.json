@@ -11,6 +11,10 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "infor-ion-documents-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "infor-m3-api-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

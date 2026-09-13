@@ -1,0 +1,65 @@
+generated: '2026-09-13'
+method: derived
+source: >-
+  mcp/infor-mcp.yml (candidate tools) bound to
+  openapi/_original/infor-ion-api-gateway-openapi.yml operationIds.
+description: >-
+  Binding between the candidate MCP tool surface and the REST operations that
+  back it. Every tool here maps 1:1 to a real operationId in the ION API Gateway
+  OpenAPI, so each tool inherits that operation's parameters and requestBody as
+  its input schema. No hosted MCP server exists (see mcp/infor-mcp.yml), and no
+  GraphQL surface exists, so there is no live tool list to reconcile against —
+  confidence is high only because the mapping is mechanical.
+surfaces:
+  openapi: openapi/_original/infor-ion-api-gateway-openapi.yml
+  graphql: null
+  mcp: null
+  gated:
+  - >-
+    The REST surface itself is gated: every ION API Gateway call requires an
+    OAuth 2.0 token issued against a tenant-scoped Infor OS authorization server
+    and a tenant path segment, so no operation is anonymously callable.
+crosswalk:
+- tool: call_m3_api_get
+  category: erp-m3
+  rest:
+  - callM3ApiGet
+  binding: one-to-one
+  confidence: high
+- tool: call_m3_api_post
+  category: erp-m3
+  rest:
+  - callM3ApiPost
+  binding: one-to-one
+  confidence: high
+- tool: list_ion_documents
+  category: ion-documents
+  rest:
+  - listIonDocuments
+  binding: one-to-one
+  confidence: high
+- tool: get_ion_document
+  category: ion-documents
+  rest:
+  - getIonDocument
+  binding: one-to-one
+  confidence: high
+mcp_only: []
+rest_only: []
+coverage:
+  tools: 4
+  rest_operations: 4
+  mapped: 4
+  mcp_only: 0
+  rest_only: 0
+unmapped_documented_surface:
+  note: >-
+    The Infor Developer Portal publishes an additional REST reference at
+    https://developer.infor.com/api — the Infor Document Management (IDM) API,
+    94 operations across business-context, items, templates, datamodel,
+    document-output, content-migration, email, signature and connection groups.
+    No downloadable OpenAPI document is exposed for it, so it is NOT represented
+    in this crosswalk and NOT counted in coverage. Recorded here so the gap is
+    visible rather than silent.
+  reference: https://developer.infor.com/api
+  operation_count_documented: 94

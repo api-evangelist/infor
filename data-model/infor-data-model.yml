@@ -1,0 +1,85 @@
+generated: '2026-09-13'
+method: derived
+source: openapi/_original/infor-ion-api-gateway-openapi.yml
+description: >-
+  Entity graph derived from the components.schemas and $ref structure of the ION
+  API Gateway contract. Two disconnected clusters: the M3 business-API
+  request/response envelope, and the ION document envelope. There is no shared
+  identifier linking them in the contract — a real property of this API, not a
+  gap in the derivation: the gateway is a router in front of two different
+  products.
+entities:
+- name: M3ApiRequest
+  description: Request envelope submitted to an M3 business API program.
+  source_schema: M3ApiRequest
+  relationships: []
+- name: M3ApiResponse
+  description: Response envelope returned by an M3 business API program.
+  source_schema: M3ApiResponse
+  relationships:
+  - type: has_many
+    target: M3Record
+    via: results
+  - type: has_one
+    target: M3Error
+    via: error
+- name: M3Record
+  description: A single record row returned by an M3 program, as name/value fields.
+  source_schema: M3Record
+  relationships: []
+- name: M3Error
+  description: Error object returned when an M3 program call fails.
+  source_schema: M3Error
+  relationships:
+  - type: has_many
+    target: M3Message
+    via: messages
+- name: M3Message
+  description: Individual diagnostic message inside an M3Error.
+  source_schema: M3Message
+  relationships: []
+- name: DocumentList
+  description: Collection envelope for ION documents.
+  source_schema: DocumentList
+  relationships:
+  - type: has_many
+    target: Document
+    via: documents
+- name: Document
+  description: >-
+    An ION document — the REST projection of the OAGIS-derived Business Object
+    Document that ION routes between CloudSuite applications.
+  source_schema: Document
+  relationships: []
+identifiers:
+- entity: Document
+  field: documentId
+  used_by:
+  - getIonDocument
+  note: Path parameter on /ion-api/documents/{documentId}.
+- entity: M3ApiRequest
+  field: programId
+  used_by:
+  - callM3ApiGet
+  - callM3ApiPost
+  note: >-
+    Path parameter naming the M3 business API program to execute. It is an
+    identifier for a PROGRAM, not for a record — which is why the M3 cluster has
+    no record-level primary key in this contract.
+clusters:
+- name: M3 business API
+  entities: [M3ApiRequest, M3ApiResponse, M3Record, M3Error, M3Message]
+- name: ION documents
+  entities: [DocumentList, Document]
+gaps:
+- >-
+  The two clusters share no field. The contract expresses no link between an M3
+  transaction and the ION document it produces, even though ION's whole purpose
+  is to carry documents between applications.
+- >-
+  The 94-operation Infor Document Management (IDM) API published at
+  https://developer.infor.com/api (items, business context, templates,
+  datamodel, document-output, signature) is NOT represented — Infor exposes no
+  downloadable OpenAPI for it, so its entity graph could not be derived without
+  authoring one.
+render: null

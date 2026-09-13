@@ -1,0 +1,152 @@
+generated: '2026-09-13'
+method: searched
+source: >-
+  npm registry metadata (registry.npmjs.org), Maven Central (search.maven.org)
+  and the infor-cloud / infor-design GitHub organizations. Versions and
+  publish dates read from the registry metadata endpoints on 2026-09-13.
+description: >-
+  First-party Infor client libraries. Infor does not ship a generic REST SDK for
+  the ION API Gateway on a public package registry: the ION API SDK is a Java
+  source repository (github.com/infor-cloud/ion-api-sdk) distributed as source,
+  not as a Maven Central artifact. The published packages are the M3 H5 "Odin"
+  SDK for building M3 web applications, the XtendM3 Java SDK + Maven plugin for
+  writing M3 extensions, and the Infor Design System (IDS) front-end libraries.
+packages:
+- language: javascript
+  registry: npm
+  name: "@infor-up/m3-odin"
+  url: https://www.npmjs.com/package/@infor-up/m3-odin
+  install: npm install @infor-up/m3-odin
+  official: true
+  version: 8.0.0
+  published: '2026-03-23'
+  repository: https://github.com/infor-cloud/m3-h5-sdk
+  note: Core Odin library for Infor M3 web application development (M3 H5 SDK).
+- language: javascript
+  registry: npm
+  name: "@infor-up/m3-odin-angular"
+  url: https://www.npmjs.com/package/@infor-up/m3-odin-angular
+  install: npm install @infor-up/m3-odin-angular
+  official: true
+  version: 8.0.0
+  published: '2026-03-23'
+  repository: https://github.com/infor-cloud/m3-h5-sdk
+  note: Angular bindings for Odin.
+- language: javascript
+  registry: npm
+  name: "@infor-up/m3-odin-cli"
+  url: https://www.npmjs.com/package/@infor-up/m3-odin-cli
+  install: npm install -g @infor-up/m3-odin-cli
+  official: true
+  version: 8.0.0
+  published: '2026-03-23'
+  repository: https://github.com/infor-cloud/m3-h5-sdk
+  binary: odin
+  note: The `odin` command-line tool. Detailed in cli/infor-cli.yml.
+- language: java
+  registry: maven
+  name: com.infor.m3:xtendm3-sdk
+  url: https://central.sonatype.com/artifact/com.infor.m3/xtendm3-sdk
+  install: "implementation 'com.infor.m3:xtendm3-sdk:0.18.3'"
+  official: true
+  version: 0.18.3
+  published: '2023-11-07'
+  repository: https://github.com/infor-cloud/xtendm3-sdk-java
+  note: >-
+    XtendM3 Java SDK for authoring M3 (CloudSuite Industrial) extensions.
+    Latest Maven Central release is from 2023 — the GitHub repo was last
+    pushed 2024-10-17, so the published artifact trails the source.
+- language: java
+  registry: maven
+  name: com.infor.m3:xtendm3-maven-plugin
+  url: https://central.sonatype.com/artifact/com.infor.m3/xtendm3-maven-plugin
+  install: "<plugin><groupId>com.infor.m3</groupId><artifactId>xtendm3-maven-plugin</artifactId><version>0.1.8</version></plugin>"
+  official: true
+  version: 0.1.8
+  published: '2023-02-03'
+  repository: https://github.com/infor-cloud/xtendm3-maven-plugin
+  note: Maven build plugin for XtendM3 extension projects.
+- language: javascript
+  registry: npm
+  name: ids-enterprise
+  url: https://www.npmjs.com/package/ids-enterprise
+  install: npm install ids-enterprise
+  official: true
+  version: 4.111.1
+  published: '2026-09-10'
+  repository: https://github.com/infor-design/enterprise
+  note: Infor Design System (IDS) Enterprise component library. UI, not an API client — see components/infor-components.yml.
+- language: javascript
+  registry: npm
+  name: ids-enterprise-wc
+  url: https://www.npmjs.com/package/ids-enterprise-wc
+  install: npm install ids-enterprise-wc
+  official: true
+  version: 1.17.1
+  published: '2026-09-01'
+  repository: https://github.com/infor-design/enterprise-wc
+  note: Web Component build of the IDS Enterprise library.
+- language: javascript
+  registry: npm
+  name: ids-foundation
+  url: https://www.npmjs.com/package/ids-foundation
+  install: npm install ids-foundation
+  official: true
+  version: 2.3.2
+  published: '2026-09-11'
+  note: Base design tokens, fonts and foundational assets for IDS.
+- language: javascript
+  registry: npm
+  name: ids-identity
+  url: https://www.npmjs.com/package/ids-identity
+  install: npm install ids-identity
+  official: true
+  version: 4.18.0
+  published: '2024-09-16'
+  repository: https://github.com/infor-design/design-system
+  note: IDS design assets. Last published 2024-09-16; superseded by ids-foundation.
+- language: javascript
+  registry: npm
+  name: ids-css
+  url: https://www.npmjs.com/package/ids-css
+  install: npm install ids-css
+  official: true
+  version: 1.5.0
+  published: '2019-07-23'
+  repository: https://github.com/infor-design/css
+  note: Abandoned — last published 2019-07-23. Recorded as a decay signal, not a recommendation.
+source_only:
+- name: ion-api-sdk
+  language: java
+  url: https://github.com/infor-cloud/ion-api-sdk
+  registry: null
+  version: null
+  published: null
+  official: true
+  note: >-
+    Infor ION API Gateway SDK. Published as a GitHub source repository only —
+    no Maven Central / npm coordinate exists, so there is no registry metadata
+    endpoint to read a version or publish date from. Repo last pushed 2023-05-31.
+- name: infor-mobile-sdk
+  language: multiple
+  url: https://github.com/infor-cloud/infor-mobile-sdk
+  registry: null
+  version: null
+  published: null
+  official: true
+  note: Source-only distribution; repo last pushed 2023-03-01. No registry coordinate.
+- name: infor-eam
+  language: java
+  url: https://github.com/infor-cloud/infor-eam
+  registry: null
+  version: null
+  published: null
+  official: true
+  note: "Infor EAM redistributable artifacts; source-only, repo last pushed 2019-11-04."
+not_found:
+  pypi: No first-party Infor package published on PyPI (searched 2026-09-13).
+  nuget: No first-party Infor package published on NuGet (searched 2026-09-13).
+  rubygems: No first-party Infor package found.
+  crates: No first-party Infor package found.
+  packagist: No first-party Infor package found.
+  go: No first-party Infor module found on pkg.go.dev.

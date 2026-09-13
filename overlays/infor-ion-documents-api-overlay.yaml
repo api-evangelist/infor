@@ -1,0 +1,52 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — Infor ION Documents API
+  version: 1.0.0
+extends: ../openapi/infor-ion-documents-api-openapi.yml
+x-provenance:
+  generated: '2026-09-13'
+  method: generated
+  source: >-
+    Derived from artifacts in this repo (conventions/, errors/, lifecycle/,
+    authentication/, well-known/) plus live probes run 2026-09-13. Never
+    mutates the underlying OpenAPI.
+actions:
+- target: $.info
+  description: Record the real production gateway host and the discovery gaps measured on 2026-09-13.
+  update:
+    x-production-host: mingle-ionapi.inforcloudsuite.com
+    x-host-note: >-
+      The servers[] `os` variable defaults to mingledev01-ionapi.mingle.infor.com,
+      a documentation example host that does not resolve (NXDOMAIN, probed
+      2026-09-13). The production ION API Gateway is
+      https://mingle-ionapi.inforcloudsuite.com/{tenant}/{suite}, regionally as
+      mingle-ionapi.{region}.inforcloudsuite.com.
+    x-idempotency: none
+    x-reversibility: none
+    x-error-format: vendor
+    x-well-known: none
+    x-deprecation-policy: none
+- target: $.paths['/ion-api/documents'].get
+  description: Document the missing exhaustion and server-failure responses.
+  update:
+    x-undeclared-responses:
+    - status: 429
+      note: >-
+        The gateway implements Quota and Throttling policies per API-suite
+        endpoint, but no 429 is declared in the contract and the documentation
+        states neither the status code nor the headers returned on exhaustion.
+    - status: 500
+      note: No 5xx response is declared on this operation.
+    x-pagination: >-
+      No pagination parameters are declared and Infor publishes no gateway-wide
+      paging convention. A client cannot tell from this contract whether the
+      collection is complete.
+- target: $.paths['/ion-api/documents/{documentId}'].get
+  description: Note the identifier semantics carried in data-model/infor-data-model.yml.
+  update:
+    x-identifier:
+      entity: Document
+      field: documentId
+    x-agentic-access:
+      action-class: connected
+      consequence: read

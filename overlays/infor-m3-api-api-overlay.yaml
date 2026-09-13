@@ -1,0 +1,62 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — Infor M3 API
+  version: 1.0.0
+extends: ../openapi/infor-m3-api-api-openapi.yml
+x-provenance:
+  generated: '2026-09-13'
+  method: generated
+  source: >-
+    Derived from artifacts in this repo (conventions/, errors/, lifecycle/,
+    agentic-access/) plus live probes run 2026-09-13. Never mutates the
+    underlying OpenAPI.
+actions:
+- target: $.info
+  description: Record the real production gateway host and the runtime-semantics gaps.
+  update:
+    x-production-host: mingle-ionapi.inforcloudsuite.com
+    x-host-note: >-
+      Production form is
+      https://mingle-ionapi.inforcloudsuite.com/{tenant}/M3/m3api-rest/v2/execute;
+      the servers[] default host mingledev01-ionapi.mingle.infor.com does not
+      resolve (probed 2026-09-13).
+    x-idempotency: none
+    x-reversibility: none
+    x-error-format: vendor
+    x-error-schema: M3Error
+- target: $.paths['/api/{apiVersion}/{programId}'].post
+  description: >-
+    Flag the write operation an agent must treat as irreversible, and the
+    responses the contract omits.
+  update:
+    x-agentic-access:
+      action-class: acting
+      consequence: write
+      subject: required
+      escalation:
+        human-in-the-loop: conditional
+    x-reversibility:
+      grade: none
+      reversal_operation: null
+      reversal_window: null
+      note: >-
+        Reversal, where it exists, is a separate M3 business API program invoked
+        through this same operation with a different programId. It is not
+        discoverable from this contract, and no window is published. Retrying
+        this call re-executes the transaction — there is no idempotency key.
+    x-undeclared-responses:
+    - status: 401
+      note: Declared on the GET but not on the POST, although both carry the same security requirement.
+    - status: 429
+      note: Not declared; gateway Quota/Throttling policies can reject.
+    - status: 500
+      note: Not declared.
+- target: $.paths['/api/{apiVersion}/{programId}'].get
+  description: Record the program-identifier semantics.
+  update:
+    x-identifier:
+      entity: M3 business API program
+      field: programId
+      note: >-
+        programId names a PROGRAM, not a record. The per-record fields are
+        program-specific and are not expressed in this contract.

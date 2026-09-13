@@ -1,0 +1,33 @@
+generated: '2026-09-13'
+method: generated
+source: >-
+  Grounded in openapi/_original/infor-ion-api-gateway-openapi.yml — every
+  operationId referenced in these skills was verified to exist in that spec —
+  plus conventions/, errors/, data-model/ and lifecycle/ in this repo. Infor
+  publishes no first-party Agent Skills or AGENTS.md (searched
+  developer.infor.com, docs.infor.com and the infor-cloud GitHub organization,
+  2026-09-13).
+skills:
+- name: infor-call-m3-business-api
+  file: infor-call-m3-business-api.md
+  api: Infor M3 API
+  operations:
+  - callM3ApiGet
+  - callM3ApiPost
+  consequence: read+write
+  description: >-
+    Execute an M3 business API program through the ION API Gateway, with the
+    no-idempotency and no-reversal warnings an agent needs before any write.
+- name: infor-read-ion-documents
+  file: infor-read-ion-documents.md
+  api: Infor ION Documents API
+  operations:
+  - listIonDocuments
+  - getIonDocument
+  consequence: read
+  description: >-
+    List and retrieve ION Business Object Documents, including the pagination
+    and 404 ambiguity the contract leaves open.
+coverage:
+  openapi_operations: 4
+  operations_covered: 4

@@ -1,0 +1,63 @@
+generated: '2026-09-13'
+method: searched
+source: >-
+  https://www.npmjs.com/package/ids-enterprise,
+  https://www.npmjs.com/package/ids-enterprise-wc,
+  https://github.com/infor-design
+description: >-
+  Infor ships a first-party client-side component system — the Infor Design
+  System (IDS) — used to build the UI of Infor CloudSuite applications and of
+  customer extensions (Mongoose, M3 H5 / Odin, Infor OS widgets). These are
+  embeddable UI libraries, distinct from the API client SDKs in
+  packages/infor-packages.yml. Infor publishes no hosted/embedded widget
+  (no embedded dashboard, no drop-in checkout-style surface); everything here
+  installs into the customer's own build.
+families:
+- name: IDS Enterprise
+  description: >-
+    The core Infor Design System Enterprise component library for the web —
+    the classic jQuery/vanilla build used across Infor CloudSuite front ends.
+  package: ids-enterprise
+  registry: npm
+  version: 4.111.1
+  published: '2026-09-10'
+  repository: https://github.com/infor-design/enterprise
+  loader: npm/bundler (CSS + JS distributed in the package; no first-party CDN loader documented)
+  distribution: package
+- name: IDS Enterprise Web Components
+  description: >-
+    The Web Component (custom elements) rewrite of IDS Enterprise, the
+    forward-looking build for new Infor and partner applications.
+  package: ids-enterprise-wc
+  registry: npm
+  version: 1.17.1
+  published: '2026-09-01'
+  repository: https://github.com/infor-design/enterprise-wc
+  loader: npm/bundler; custom elements registered by importing the component module
+  distribution: package
+- name: IDS Foundation
+  description: Design tokens, typography and foundational assets consumed by both component builds.
+  package: ids-foundation
+  registry: npm
+  version: 2.3.2
+  published: '2026-09-11'
+  loader: npm/bundler
+  distribution: package
+- name: IDS Identity (legacy)
+  description: Earlier IDS design-asset distribution, superseded by ids-foundation.
+  package: ids-identity
+  registry: npm
+  version: 4.18.0
+  published: '2024-09-16'
+  repository: https://github.com/infor-design/design-system
+  distribution: package
+  status: superseded
+hosted_surfaces: []
+notes:
+- >-
+  No pinned first-party CDN distribution was found for any IDS package; the
+  documented install path is npm. Nothing in this artifact is unpinned-CDN
+  shaped, so `version: null` does not apply here.
+- >-
+  Infor Mongoose and Infor OS Portal widgets are configured inside a tenant
+  rather than distributed as public packages, and are therefore not listed.

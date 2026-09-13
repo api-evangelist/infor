@@ -6,8 +6,14 @@ providerId: infor
 created: '2026-05-04'
 # Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
 # bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
+# Upgraded generated -> searched on 2026-09-13: Infor DOES publish a rate-limit
+# policy model for the ION API Gateway (Quota and Throttling endpoint policies),
+# just not fixed numbers. The docs URL and the verbatim policy field names are
+# now recorded below.
+method: searched
+source: https://docs.infor.com/inforos/2024.x/en-us/useradminlib_cloud/apigatewaybaasdg/lcs1730257685556.html
+docs: https://docs.infor.com/inforos/2024.x/en-us/useradminlib_cloud/apigatewaybaasdg/lcs1730257685556.html
+modified: '2026-09-13'
 reconciled: false
 tags:
   - ERP
@@ -43,6 +49,44 @@ policies:
       with Infor Support rather than expecting automatic burst.
   - name: Fair Use
     description: Infor reserves the right to throttle traffic that materially impacts shared infrastructure.
+# --- Added 2026-09-13 from the Infor OS "API Gateway Endpoint Policies" documentation. ---
+# Infor does not publish a single global rate limit. It publishes a POLICY MODEL that a
+# tenant administrator configures per API-suite endpoint. The field names below are verbatim
+# from that page; no default values are stated anywhere in the documentation.
+policyModel:
+  source: https://docs.infor.com/inforos/2024.x/en-us/useradminlib_cloud/apigatewaybaasdg/lcs1730257685556.html
+  scope: per API suite endpoint, configured by an IONAPI-Administrator on the tenant
+  types:
+    - name: Quota
+      description: Hard cap — allows a request count per interval.
+      fields:
+        - userLevel
+        - interval
+        - timeUnit
+        - allow
+      defaults: not published
+    - name: Throttling
+      description: Shapes traffic through rate smoothing and spike arrest rather than rejecting outright.
+      fields:
+        - timePeriodInMilliseconds
+        - rateSmoothing.delayAfterCount
+        - rateSmoothing.delayFactorInMilliseconds
+        - spikeArrest.maxRequestsPerPeriod
+      defaults: not published
+signaling:
+  headers: []
+  status_on_exhaustion: not published
+  note: >-
+    The Infor documentation states neither the HTTP status code nor any response
+    headers returned when a Quota or Throttling policy rejects a request, and no
+    429 response is declared anywhere in openapi/_original/. An agent therefore
+    has NO runtime exhaustion signal it can rely on from the published contract.
+    The 429/503 codes recorded under responseCodes above are the generic HTTP
+    expectation, not an Infor-published value.
+limit_count: 0
+limit_count_note: >-
+  Zero published numeric limits. Infor publishes the mechanism, not the numbers —
+  every concrete value is tenant configuration. Recorded as an honest zero.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

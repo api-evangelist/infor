@@ -1,0 +1,72 @@
+generated: '2026-09-13'
+method: derived
+source: >-
+  openapi/_original/infor-ion-api-gateway-openapi.yml (candidate tools), plus a
+  2026-09-13 search of the Infor Developer Portal (developer.infor.com), the
+  infor-cloud GitHub organization, docs.infor.com and the npm registry for an
+  official Infor MCP server.
+status: candidate
+description: >-
+  Infor publishes NO first-party MCP server. There is no hosted/remote MCP
+  endpoint on any Infor host, no @infor* MCP package on npm, and no MCP entry in
+  the Infor Developer Portal or the infor-cloud GitHub organization. The tools
+  below are a CANDIDATE mapping derived from the ION API Gateway OpenAPI already
+  in this repo — a design starting point, not a server anybody can call.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: oauth
+  verified: searched
+  note: >-
+    `auth: oauth` records what an Infor MCP server WOULD have to use — every ION
+    API Gateway call is OAuth 2.0 (client credentials, authorization code, or
+    SAML bearer) against a tenant-scoped Infor OS authorization server, with the
+    credentials delivered in a per-tenant .ionapi file. It is not a claim that a
+    server exists.
+third_party:
+- name: infor-ion-mcp-lite
+  url: https://github.com/douglaslinsmeyer/infor-ion-mcp-lite
+  official: false
+  note: >-
+    Community MCP server for querying the Infor Data Lake through Data Fabric
+    SQL via the ION API. Not published by Infor; recorded for completeness and
+    deliberately NOT wired as an MCPServer pointer.
+- name: "@andrep1/infor-search-mcp"
+  url: https://www.npmjs.com/package/@andrep1/infor-search-mcp
+  official: false
+  version: 1.0.0
+  published: '2026-09-02'
+  note: >-
+    Community npm MCP server that searches docs.infor.com and the Infor
+    Developer Portal. Not published by Infor.
+tools:
+- name: call_m3_api_get
+  description: Execute an Infor M3 business API program (read) through the ION API Gateway.
+  rest: callM3ApiGet
+  method: GET
+  path: /api/{apiVersion}/{programId}
+  consequence: read
+- name: call_m3_api_post
+  description: Execute an Infor M3 business API program with a request body (write) through the ION API Gateway.
+  rest: callM3ApiPost
+  method: POST
+  path: /api/{apiVersion}/{programId}
+  consequence: write
+- name: list_ion_documents
+  description: List ION documents available to the tenant.
+  rest: listIonDocuments
+  method: GET
+  path: /ion-api/documents
+  consequence: read
+- name: get_ion_document
+  description: Retrieve a single ION document by id.
+  rest: getIonDocument
+  method: GET
+  path: /ion-api/documents/{documentId}
+  consequence: read
+coverage:
+  openapi_operations: 4
+  candidate_tools: 4
+  hosted_servers: 0

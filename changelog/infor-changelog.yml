@@ -1,0 +1,52 @@
+generated: '2026-09-13'
+method: searched
+source: https://github.com/infor-cloud/m3-h5-sdk/releases
+description: >-
+  Infor publishes no dated public changelog for the ION API Gateway or for any
+  CloudSuite API surface — API changes travel inside the Infor OS release train
+  and reach contracted customers through versioned documentation on
+  docs.infor.com and through the support portal. The one dated, public,
+  first-party release stream Infor does publish is the M3 H5 SDK (Odin) on
+  GitHub, captured here. SCOPE IS THE SDK, NOT THE API: do not read these
+  entries as API change notices.
+scope: sdk
+subject: M3 H5 SDK (Odin) — @infor-up/m3-odin, @infor-up/m3-odin-angular, @infor-up/m3-odin-cli
+scheme: semver, tagged GitHub releases
+current_version: 8.0.0
+current_released: '2026-03-23'
+changelog_file: https://github.com/infor-cloud/m3-h5-sdk/blob/master/CHANGELOG.md
+entries:
+- version: 8.0.0
+  date: '2026-03-23'
+  breaking: true
+  highlights:
+  - >-
+    M3 MI API requests now use the version 2 endpoints by default. Legacy
+    version 1 endpoints remain supported but require setting the version in
+    request options.
+  - API calls require an active subscription to execute.
+- version: 7.2.0
+  date: '2025-09-04'
+  breaking: false
+  highlights:
+  - Release notes deferred to CHANGELOG.md in the repository.
+- version: 7.1.1
+  date: '2024-11-25'
+  breaking: false
+  highlights:
+  - Release notes deferred to CHANGELOG.md in the repository.
+- version: 7.1.0
+  date: '2024-10-11'
+  breaking: false
+  highlights:
+  - Release notes deferred to CHANGELOG.md in the repository.
+- version: 7.0.0
+  date: '2024-09-18'
+  breaking: true
+  highlights:
+  - Major version; release notes deferred to CHANGELOG.md in the repository.
+gaps:
+- >-
+  No public dated changelog exists for the ION API Gateway, the M3 API surface,
+  the IDM API or ION Events. An integrator cannot learn from a public page when
+  an Infor API changed.
