@@ -99,7 +99,7 @@ apis:
     url: overlays/infor-ion-documents-api-overlay.yaml
   image: https://www.infor.com/logo-infor.png
 - aid: infor:infor-m3-api-api
-  name: Infor M3 API API
+  name: Infor M3 API
   description: Infor M3 business API programs
   humanURL: https://www.infor.com/platform/ipaas/ion-middleware
   baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}/M3
@@ -134,6 +134,12 @@ apis:
   baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}/IDM/api
   image: https://www.infor.com/logo-infor.png
   tags:
+  - Document-Management
+  - Content Repository
+  - IDM
+  - ION
+  - Digital Signature
+  tags_raw:
   - Document Management
   - Content Repository
   - IDM
@@ -277,7 +283,7 @@ tags:
 - Supply Chain
 - Cloud
 - Integration
-modified: '2026-09-13'
+modified: '2026-09-16'
 integrations:
 - name: Meet the 2025 award winners
 - name: Infor + AWS Partnership
