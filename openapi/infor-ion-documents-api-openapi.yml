@@ -97,6 +97,17 @@ paths:
           description: Document not found
 components:
   schemas:
+    DocumentList:
+      type: object
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        total:
+          type: integer
+        pageSize:
+          type: integer
     Document:
       type: object
       properties:
@@ -139,17 +150,6 @@ components:
                 type: string
               message:
                 type: string
-    DocumentList:
-      type: object
-      properties:
-        documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/Document'
-        total:
-          type: integer
-        pageSize:
-          type: integer
   securitySchemes:
     OAuth2ClientCredentials:
       type: oauth2

@@ -1,8 +1,7 @@
 {
   "provider": "infor",
   "sources": [
-    "infor-ion-documents-api-openapi.yml",
-    "infor-m3-api-api-openapi.yml"
+    "_original/infor-ion-api-gateway-openapi.yml"
   ],
   "outputs": [
     "infor-ion-documents-api-openapi.yml",
@@ -12,9 +11,12 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "infor-ion-documents-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "infor-m3-api-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "infor-ion-api-gateway-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "infor-ion-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "infor-m3-api-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

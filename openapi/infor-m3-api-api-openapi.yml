@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Infor ION API Gateway ION Documents M3 API
+  title: Infor ION API Gateway M3 API
   description: The Infor ION API Gateway provides a managed OAuth 2.0 API layer for integrating Infor CloudSuite applications (M3, LN, Baan, SunSystems, etc.) with third-party systems. The gateway exposes REST endpoints for ION Documents, ION Events, and ION API services with support for Authorization Code, Client Credentials, and SAML Bearer grant types.
   version: 1.0.0
   contact:
@@ -145,6 +145,22 @@ components:
           description: Input field key-value pairs for the M3 transaction
           additionalProperties:
             type: string
+    M3Message:
+      type: object
+      properties:
+        id:
+          type: string
+        text:
+          type: string
+        type:
+          type: string
+          enum:
+          - Info
+          - Warning
+          - Error
+        field:
+          type: string
+          description: Field name in error, if applicable
     M3Record:
       type: object
       description: A single data record returned from an M3 MI transaction
@@ -169,22 +185,6 @@ components:
           type: string
         transaction:
           type: string
-    M3Message:
-      type: object
-      properties:
-        id:
-          type: string
-        text:
-          type: string
-        type:
-          type: string
-          enum:
-          - Info
-          - Warning
-          - Error
-        field:
-          type: string
-          description: Field name in error, if applicable
   securitySchemes:
     OAuth2ClientCredentials:
       type: oauth2
