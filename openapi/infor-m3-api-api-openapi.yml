@@ -119,6 +119,18 @@ paths:
           description: M3 error or validation failure
 components:
   schemas:
+    M3ApiRequest:
+      type: object
+      description: Request payload for an M3 MI program transaction
+      properties:
+        company:
+          type: string
+          description: M3 company (division) number
+        record:
+          type: object
+          description: Input field key-value pairs for the M3 transaction
+          additionalProperties:
+            type: string
     M3ApiResponse:
       type: object
       description: Response from an M3 MI program transaction
@@ -133,18 +145,6 @@ components:
           type: string
         Transaction:
           type: string
-    M3ApiRequest:
-      type: object
-      description: Request payload for an M3 MI program transaction
-      properties:
-        company:
-          type: string
-          description: M3 company (division) number
-        record:
-          type: object
-          description: Input field key-value pairs for the M3 transaction
-          additionalProperties:
-            type: string
     M3Message:
       type: object
       properties:

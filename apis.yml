@@ -2,22 +2,20 @@ aid: infor
 url: https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/apis.yml
 deliveryModel:
   model: saas
-  open_source: false
+  license_evidence:
+    not_product:
+    - infor-cloud/ion-api-sdk
+  open_source: unknown
   commercial: true
-  callable_host: true
-  label: SaaS · tenant-scoped callable API gateway, sold with the CloudSuite subscription
-  confidence: high
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: low
   source:
   - openapi
-  - conventions
-  - probe
-  generated: '2026-09-13'
-  method: probed
-  note: Corrected 2026-09-13. The previous "library / no callable service" verdict was derived when the
-    only baseURL in this record was api.infor.com, which does not resolve. The Infor ION API Gateway is
-    a live callable host — https://mingle-ionapi.inforcloudsuite.com — confirmed resolving and answering
-    on 2026-09-13. It is tenant-scoped (a tenant path segment is required; the gateway returns HTTP 400
-    {"error":"Bad Request"} without one), which is why it is not anonymously callable.
+  - pricing
+  - repository-not-product
+  generated: '2026-09-25'
+  method: derived
 specificationVersion: '0.23'
 apis:
 - aid: infor:infor-m3-api
@@ -66,12 +64,13 @@ apis:
   - Accounting
   - Cloud
   - ERP
-  - Financial
+  - Finance
   tags_raw:
   - Accounting
   - Cloud
   - ERP
   - Financials
+  - Financial
   humanURL: https://www.infor.com/
   baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}
   properties:
@@ -139,7 +138,7 @@ apis:
   baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}/IDM/api
   image: https://www.infor.com/logo-infor.png
   tags:
-  - Document-Management
+  - Document Management
   - Content Repository
   - IDM
   - ION
@@ -150,6 +149,7 @@ apis:
   - IDM
   - ION
   - Digital Signature
+  - Document-Management
   properties:
   - type: APIReference
     url: https://developer.infor.com/api
