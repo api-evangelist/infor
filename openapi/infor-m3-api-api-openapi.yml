@@ -145,6 +145,17 @@ components:
           type: string
         Transaction:
           type: string
+    M3Error:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        errorType:
+          type: string
+        program:
+          type: string
+        transaction:
+          type: string
     M3Message:
       type: object
       properties:
@@ -174,17 +185,6 @@ components:
                 type: string
               Value:
                 type: string
-    M3Error:
-      type: object
-      properties:
-        errorMessage:
-          type: string
-        errorType:
-          type: string
-        program:
-          type: string
-        transaction:
-          type: string
   securitySchemes:
     OAuth2ClientCredentials:
       type: oauth2
