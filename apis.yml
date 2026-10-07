@@ -160,6 +160,8 @@ apis:
   - type: Authentication
     url: authentication/infor-authentication.yml
 common:
+- type: Pricing
+  url: https://www.infor.com/products
 - type: AgenticAccess
   url: agentic-access/infor-agentic-access.yml
 - type: TrustCenter
