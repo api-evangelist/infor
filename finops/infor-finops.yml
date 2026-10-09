@@ -116,10 +116,8 @@ apis:
 unitEconomics:
   - name: Cost per Named User
     metric: billed_cost / named_users
-    target: TBD
   - name: Cost per Active Environment
     metric: billed_cost / environments
-    target: TBD
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
