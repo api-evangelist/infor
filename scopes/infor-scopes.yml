@@ -1,5 +1,5 @@
-generated: '2026-09-13'
-method: derived
+generated: '2026-10-14'
+method: none
 source: openapi/infor-ion-documents-api-openapi.yml, openapi/infor-m3-api-api-openapi.yml
 schemes:
 - name: OAuth2ClientCredentials
@@ -29,3 +29,5 @@ schemes:
     tokenUrl: https://inforos.infor.com/INFOR_DEV/as/token.oauth2
   description: Infor ION API Authorization Code grant
 scopes: []
+note: The OAuth2 security scheme(s) in the OpenAPI declare no scopes, and no security requirement
+  references one.
