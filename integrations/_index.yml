@@ -107,3 +107,110 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: infor-maven-central
+  label: Maven Central
+  partner: maven-central
+  partner_name: Maven Central
+  category: official SDK (Java/JVM)
+  type: register
+  channel: package-registry
+  evidence: https://central.sonatype.com/artifact/com.infor.m3/xtendm3-maven-plugin
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: Maven Central (public registry JSON)
+    spec_file: null
+    language: Java/JVM
+    packages:
+    - name: com.infor.m3:xtendm3-maven-plugin
+      version: 0.1.8
+      released: '2023-02-03'
+      released_field: lastUpdated
+      lapsed: true
+      page: https://central.sonatype.com/artifact/com.infor.m3/xtendm3-maven-plugin
+      repo_leg: github-org:infor-cloud
+      publisher_leg: groupId:infor.com
+      matched_by: domain+name-among-holders
+    - name: com.infor.m3:xtendm3-sdk
+      version: 0.18.3
+      released: '2023-11-07'
+      released_field: lastUpdated
+      lapsed: true
+      page: https://central.sonatype.com/artifact/com.infor.m3/xtendm3-sdk
+      repo_leg: github-org:infor-cloud
+      publisher_leg: groupId:infor.com
+      matched_by: domain+name-among-holders
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: infor-npm-registry
+  label: npm registry
+  partner: npm
+  partner_name: npm registry
+  category: official SDK (JavaScript/TypeScript)
+  type: register
+  channel: package-registry
+  evidence: https://www.npmjs.com/package/@infor-up/m3-odin
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@infor-up/m3-odin'
+      version: 8.2.0
+      released: '2026-10-16'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@infor-up/m3-odin
+      repo_leg: github-org:infor-cloud
+      publisher_leg: email:infor.com
+      matched_by: domain+name-among-holders
+    - name: '@infor-up/m3-odin-angular'
+      version: 8.2.0
+      released: '2026-10-16'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@infor-up/m3-odin-angular
+      repo_leg: github-org:infor-cloud
+      publisher_leg: email:infor.com
+      matched_by: domain+name-among-holders
+    - name: '@infor-up/m3-odin-cli'
+      version: 8.2.0
+      released: '2026-10-16'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@infor-up/m3-odin-cli
+      repo_leg: github-org:infor-cloud
+      publisher_leg: email:infor.com
+      matched_by: domain+name-among-holders
+    - name: ids-enterprise
+      version: 4.111.2
+      released: '2026-10-12'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/ids-enterprise
+      repo_leg: domain:infor.com
+      publisher_leg: email:infor.com
+      matched_by: domain+name-among-holders
+    - name: ids-enterprise-wc
+      version: 1.17.2
+      released: '2026-10-14'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/ids-enterprise-wc
+      repo_leg: domain:infor.com
+      publisher_leg: email:infor.com
+      matched_by: domain+name-among-holders
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
