@@ -1,0 +1,79 @@
+openapi: 3.2.0
+info:
+  title: Infor Docs Languages API
+  version: 2.0.0
+  description: Infor Documentation API.
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Languages
+paths:
+  /languages:
+    get:
+      tags:
+      - Languages
+      description: Returns language details
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: languageId
+        schema:
+          type: string
+        description: language id
+      responses:
+        '200':
+          description: An array of all languages or to get lanugage by providing language-id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Language'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '404':
+          description: No Language
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get languages
+      x-summary-source: derived
+      operationId: getLanguages
+      x-operation-id-source: derived
+components:
+  schemas:
+    UnauthorizedError:
+      type: object
+      description: API key is missing or invalid
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+    Language:
+      type: object
+      properties:
+        language:
+          type: string
+        two_character_code:
+          type: string
+        english_name:
+          type: string
+        native_name:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

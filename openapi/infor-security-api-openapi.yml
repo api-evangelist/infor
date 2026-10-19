@@ -1,0 +1,176 @@
+openapi: 3.2.0
+info:
+  title: Infor Docs Security API
+  version: 2.0.0
+  description: Infor Documentation API.
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Security
+paths:
+  /get_token:
+    post:
+      tags:
+      - Security
+      description: Returns token
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                client_id:
+                  type: string
+                client_secret:
+                  type: string
+                grant_type:
+                  type: string
+      responses:
+        '200':
+          description: Token and Token Details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Security'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Create get token
+      x-summary-source: derived
+      operationId: postGetToken
+      x-operation-id-source: derived
+  /getConciergeToken:
+    post:
+      tags:
+      - Security
+      description: Returns concierge token
+      requestBody:
+        required: false
+        content:
+          application/x-www-form-urlencoded: null
+      responses:
+        '200':
+          description: Token and Token Details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Security'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Create get concierge token
+      x-summary-source: derived
+      operationId: postGetConciergeToken
+      x-operation-id-source: derived
+  /getSearchToken:
+    post:
+      tags:
+      - Security
+      description: Returns Search API token
+      requestBody:
+        required: false
+        content:
+          application/x-www-form-urlencoded: null
+      responses:
+        '200':
+          description: Token and Token Details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Security'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Create get search token
+      x-summary-source: derived
+      operationId: postGetSearchToken
+      x-operation-id-source: derived
+  /getConciergeV2Token:
+    post:
+      tags:
+      - Security
+      description: Returns a GenAI bearer token for service-to-service v2/chat calls. Pass the returned access_token as the x-infor-genai-bearer-token header (no Bearer prefix).
+      requestBody:
+        required: false
+        content:
+          application/x-www-form-urlencoded: null
+      responses:
+        '200':
+          description: Token and Token Details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Security'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Create get concierge v2token
+      x-summary-source: derived
+      operationId: postGetConciergeV2Token
+      x-operation-id-source: derived
+components:
+  schemas:
+    Security:
+      type: object
+      properties:
+        access_token:
+          type: string
+        token_type:
+          type: string
+        expires_in:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

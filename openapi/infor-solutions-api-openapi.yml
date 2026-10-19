@@ -1,0 +1,123 @@
+openapi: 3.2.0
+info:
+  title: Infor Docs Solutions API
+  version: 2.0.0
+  description: Infor Documentation API.
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Solutions
+paths:
+  /solutions:
+    get:
+      tags:
+      - Solutions
+      description: Returns all solutions
+      responses:
+        '200':
+          description: An array of solutions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Solution'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get solutions
+      x-summary-source: derived
+      operationId: getSolutions
+      x-operation-id-source: derived
+  /solutions/search/findByActiveTrueOrderByPositionAsc:
+    get:
+      tags:
+      - Solutions
+      description: Returns solutions which are active and the position is in ascending order
+      responses:
+        '200':
+          description: An array of solutions(active and position is ascending)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Solution'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get solutions search find by active true order by position asc
+      x-summary-source: derived
+      operationId: getSolutionsSearchFindByActiveTrueOrderByPositionAsc
+      x-operation-id-source: derived
+  /solutionLanguages:
+    get:
+      tags:
+      - Solutions
+      description: Returns all solution Languages
+      responses:
+        '200':
+          description: An array of solution languages
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Solution'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get solution languages
+      x-summary-source: derived
+      operationId: getSolutionLanguages
+      x-operation-id-source: derived
+components:
+  schemas:
+    Solution:
+      type: object
+      properties:
+        solution_id:
+          type: integer
+        acronym:
+          type: string
+        icon:
+          type: string
+        position:
+          type: integer
+        body:
+          type: boolean
+        menu:
+          type: boolean
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

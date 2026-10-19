@@ -1,0 +1,163 @@
+openapi: 3.2.0
+info:
+  title: Infor Docs Recent Topics API
+  version: 2.0.0
+  description: Infor Documentation API.
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: RecentTopics
+paths:
+  /recentTopics/record:
+    post:
+      tags:
+      - RecentTopics
+      description: Records a topic visit for the authenticated user. If the href already exists for this user, it is moved to the most recent position and its title is updated. If it is a new href, it is inserted at position 0 (most recent). A maximum of 5 entries is enforced — the oldest entry is discarded if the limit is exceeded.
+      parameters:
+      - in: cookie
+        name: SessionIndex
+        required: true
+        schema:
+          type: string
+        description: Concierge session cookie used to resolve the authenticated user's email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - productCode
+              - href
+              - title
+              properties:
+                productCode:
+                  type: string
+                  description: Product code
+                  example: ln
+                href:
+                  type: string
+                  description: URL path of the topic
+                  example: /webhelp9/topic/abc.html
+                title:
+                  type: string
+                  description: Display title of the topic
+                  example: Getting Started with LN
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Topic recorded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Topic recorded successfully.
+                  topics:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RecentTopic'
+        '400':
+          description: Bad request — missing required fields (productCode, href, or title)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error: Invalid request. productCode, href and title are required.
+        '401':
+          description: Unauthorized — missing or invalid session / bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '500':
+          description: Internal server error — infrastructure or DynamoDB failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Create recent topics record
+      x-summary-source: derived
+      operationId: postRecentTopicsRecord
+      x-operation-id-source: derived
+  /recentTopics/getAll:
+    get:
+      tags:
+      - RecentTopics
+      description: Returns all recent topics for the authenticated user, ordered most-recently-visited first. Maximum 5 entries. Returns an empty array if no topics have been recorded for this user.
+      parameters:
+      - in: cookie
+        name: SessionIndex
+        required: true
+        schema:
+          type: string
+        description: Concierge session cookie used to resolve the authenticated user's email
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: An array of recent topics for the authenticated user. Returns an empty array if none exist.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecentTopic'
+        '401':
+          description: Unauthorized — missing or invalid session / bearer token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '500':
+          description: Internal server error — infrastructure or DynamoDB failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get recent topics get all
+      x-summary-source: derived
+      operationId: getRecentTopicsGetAll
+      x-operation-id-source: derived
+components:
+  schemas:
+    RecentTopic:
+      type: object
+      properties:
+        productCode:
+          type: string
+          example: ln
+        href:
+          type: string
+          example: /webhelp9/topic/abc.html
+        title:
+          type: string
+          example: Getting Started with LN
+        visitedAt:
+          type: string
+          format: date-time
+          example: '2026-08-17T10:00:00.000Z'
+    UnauthorizedError:
+      type: object
+      description: API key is missing or invalid
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

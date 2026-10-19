@@ -1,0 +1,527 @@
+openapi: 3.2.0
+info:
+  title: Infor Docs Search API
+  version: 2.0.0
+  description: Infor Documentation API.
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Search
+paths:
+  /search/save:
+    post:
+      tags:
+      - Search
+      description: Save search data
+      parameters:
+      - in: cookie
+        name: SessionIndex
+        required: true
+        schema:
+          type: string
+        description: Concierge session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - searchtext
+              properties:
+                name:
+                  type: string
+                  description: Name of the search
+                  example: Product Name
+                searchtext:
+                  type: string
+                  description: Search text or query entered by the user
+                  example: Search Text
+                description:
+                  type: string
+                  description: Additional description of the search
+                  example: Description
+                featuretoggle:
+                  type: boolean
+                  description: Whether a certain feature is enabled or not
+                  example: false
+                searchby:
+                  type: string
+                  description: The criteria by which the search is filtered
+                  example: allcontents or titles
+                sortingby:
+                  type: string
+                  description: Sorting method used for the search results
+                  example: relevance or recentlyadded
+                filters:
+                  type: object
+                  description: Filters applied to the search
+                  properties:
+                    product:
+                      type: array
+                      description: Array of product filters
+                      items:
+                        type: string
+                        example: product name
+                    version:
+                      type: array
+                      description: Array of version filters
+                      items:
+                        type: string
+                        example: version 0.1
+                    language:
+                      type: array
+                      description: Array of language filters
+                      items:
+                        type: string
+                        example: en-us
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Successfully saved search data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Search'
+        '400':
+          description: Failure response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '404':
+          description: No Saved Search found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Create search save
+      x-summary-source: derived
+      operationId: postSearchSave
+      x-operation-id-source: derived
+  /search:
+    get:
+      tags:
+      - Search
+      description: Returns all saved search based on email id for logged in user
+      parameters:
+      - in: cookie
+        name: SessionIndex
+        required: true
+        schema:
+          type: string
+        description: Concierge session
+      responses:
+        '200':
+          description: An array of saves search for logged in user email id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Search'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: Failure response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get search
+      x-summary-source: derived
+      operationId: getSearch
+      x-operation-id-source: derived
+  /search/deleteById/{id}:
+    delete:
+      tags:
+      - Search
+      description: delete saved search by id
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: search id
+      responses:
+        '200':
+          description: Saved search is deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Search'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: Failure response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Delete search delete by id by id
+      x-summary-source: derived
+      operationId: deleteSearchDeleteByIdById
+      x-operation-id-source: derived
+  /searchDocs:
+    post:
+      tags:
+      - Search
+      description: Returns Search Documents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Token and Token Details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Search'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Create search docs
+      x-summary-source: derived
+      operationId: postSearchDocs
+      x-operation-id-source: derived
+  /search/updateOrder:
+    put:
+      tags:
+      - Search
+      description: Update positions of saved searches (array of items with id and position)
+      parameters:
+      - in: cookie
+        name: SessionIndex
+        required: true
+        schema:
+          type: string
+        description: Concierge session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                required:
+                - id
+                - position
+                properties:
+                  id:
+                    type: integer
+                    description: Search id to update
+                  position:
+                    type: integer
+                    description: New position value
+      responses:
+        '200':
+          description: Positions updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Positions updated successfully
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: Failure response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Replace search update order
+      x-summary-source: derived
+      operationId: putSearchUpdateOrder
+      x-operation-id-source: derived
+  /getCacheStatus:
+    get:
+      tags:
+      - Search
+      description: Returns cache status of API token
+      responses:
+        '200':
+          description: Cache status information of Search Token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  containerId:
+                    type: string
+                    example: ecs-task-123
+                  timestamp:
+                    type: string
+                    format: date-time
+                  hasCachedToken:
+                    type: boolean
+                  tokenHash:
+                    type: string
+                    example: eyJhbGci...MepT1nje
+                  expiresAt:
+                    type: string
+                    format: date-time
+                  expiresAtRaw:
+                    type: number
+                  isValid:
+                    type: boolean
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get get cache status
+      x-summary-source: derived
+      operationId: getGetCacheStatus
+      x-operation-id-source: derived
+components:
+  schemas:
+    UnauthorizedError:
+      type: object
+      description: API key is missing or invalid
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    Search:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        name:
+          type: string
+        searchText:
+          type: string
+        featuretoggle:
+          type: boolean
+        searchby:
+          type: string
+        sortingby:
+          type: string
+        description:
+          type: string
+        position:
+          type: integer
+        filters:
+          type: object
+          properties:
+            products:
+              type: array
+              items:
+                type: string
+              versions:
+                type: array
+                items:
+                  type: string
+              languages:
+                type: array
+                items:
+                  type: string
+    SearchRequest:
+      type: object
+      properties:
+        AccessToken:
+          type: string
+          example: '10'
+        PageStart:
+          type: integer
+          example: 1
+        PageSize:
+          type: string
+          example: '10'
+        Phrases:
+          type: array
+          items:
+            type: object
+            properties:
+              Text:
+                type: string
+                example: infor ln
+              Fields:
+                type: array
+                items:
+                  type: string
+              MatchPattern:
+                type: boolean
+              OtherFields:
+                type: boolean
+              Operator:
+                type: string
+                enum:
+                - and
+                - or
+              ExcludeFields:
+                type: array
+                items:
+                  type: string
+        Filters:
+          type: array
+          items:
+            type: object
+            properties:
+              Field:
+                type: string
+              Arguments:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Field:
+                      type: string
+                    Terms:
+                      type: array
+                      items:
+                        type: string
+        ResultFields:
+          type: array
+          items:
+            type: string
+        Highlights:
+          type: object
+          properties:
+            Fields:
+              type: array
+              items:
+                type: string
+            PreTag:
+              type: string
+            PostTag:
+              type: string
+            FragSize:
+              type: integer
+            FragCount:
+              type: integer
+        Type:
+          type: integer
+        Aliases:
+          type: array
+          items:
+            type: string
+        SortFields:
+          type: array
+          items:
+            type: string
+        Facets:
+          type: array
+          items:
+            type: object
+            properties:
+              Field:
+                type: string
+              DisplayCount:
+                type: boolean
+              Type:
+                type: integer
+              Order:
+                type: integer
+        EventInfo:
+          type: object
+          properties:
+            EventType:
+              type: string
+            EventSubtype:
+              type: string
+            EventOrder:
+              type: integer
+            Application:
+              type: string
+            UserId:
+              type: integer
+            UserName:
+              type: string
+            UserType:
+              type: string
+            CompanyId:
+              type: integer
+            CompanyName:
+              type: string
+            SessionId:
+              type: string
+            SearchFrom:
+              type: string
+            SearchCategories:
+              type: string
+            ProductLineIds:
+              type: string
+            ProductLineNames:
+              type: string
+            ViewedId:
+              type: integer
+            ViewedType:
+              type: string
+            ViewedTitle:
+              type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

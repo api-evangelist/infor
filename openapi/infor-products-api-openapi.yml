@@ -1,0 +1,831 @@
+openapi: 3.2.0
+info:
+  title: Infor Docs Products API
+  version: 2.0.0
+  description: Infor Documentation API.
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Products
+paths:
+  /products:
+    get:
+      tags:
+      - Products
+      description: Returns all products
+      responses:
+        '200':
+          description: An array of products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get products
+      x-summary-source: derived
+      operationId: getProducts
+      x-operation-id-source: derived
+  /redirectUrl:
+    get:
+      tags:
+      - Products
+      description: Returns redirect url
+      parameters:
+      - in: query
+        name: product_code
+        schema:
+          type: string
+        required: true
+        description: product code
+      - in: query
+        name: version
+        schema:
+          type: string
+        required: true
+        description: document version
+      - in: query
+        name: lang
+        schema:
+          type: string
+        required: true
+        description: language
+      - in: query
+        name: docId
+        schema:
+          type: string
+        required: true
+        description: document id
+      responses:
+        '200':
+          description: Redirect url mapping
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedirectUrl'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get redirect url
+      x-summary-source: derived
+      operationId: getRedirectUrl
+      x-operation-id-source: derived
+  /redirectUrlmapping:
+    get:
+      tags:
+      - Products
+      description: Returns all redirect url mapping
+      responses:
+        '200':
+          description: Redirect url mapping
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedirectUrl'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get redirect urlmapping
+      x-summary-source: derived
+      operationId: getRedirectUrlmapping
+      x-operation-id-source: derived
+  /productDeploymentTypes:
+    get:
+      tags:
+      - Products
+      description: Returns all product deployment types
+      responses:
+        '200':
+          description: An array of deployment types
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentType'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get product deployment types
+      x-summary-source: derived
+      operationId: getProductDeploymentTypes
+      x-operation-id-source: derived
+  /productLanguages:
+    get:
+      tags:
+      - Products
+      description: Returns all product languages
+      responses:
+        '200':
+          description: An array of product languages
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get product languages
+      x-summary-source: derived
+      operationId: getProductLanguages
+      x-operation-id-source: derived
+  /productLanguages/search/findByLanguage/{language}:
+    get:
+      tags:
+      - Products
+      description: Returns the product languages searched by a language
+      parameters:
+      - in: path
+        name: language
+        schema:
+          type: string
+        required: true
+        description: Language ID
+      responses:
+        '200':
+          description: An array of product languages searched by a language
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get product languages search find by language by language
+      x-summary-source: derived
+      operationId: getProductLanguagesSearchFindByLanguageByLanguage
+      x-operation-id-source: derived
+  /productSolutions:
+    get:
+      tags:
+      - Products
+      description: Returns all product solutions
+      responses:
+        '200':
+          description: An array of product solutions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get product solutions
+      x-summary-source: derived
+      operationId: getProductSolutions
+      x-operation-id-source: derived
+  /productSolutions/search/findBySolutionId/{solutionId}:
+    get:
+      tags:
+      - Products
+      description: Returns the product solutions searched by solution Id
+      parameters:
+      - in: path
+        name: solutionId
+        schema:
+          type: integer
+        required: true
+        description: Solution ID
+      responses:
+        '200':
+          description: An array of product solutions searched by solution
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get product solutions search find by solution id by solution id
+      x-summary-source: derived
+      operationId: getProductSolutionsSearchFindBySolutionIdBySolutionId
+      x-operation-id-source: derived
+  /productVersions:
+    get:
+      tags:
+      - Products
+      description: Returns all product Versions
+      responses:
+        '200':
+          description: An array of product Versions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get product versions
+      x-summary-source: derived
+      operationId: getProductVersions
+      x-operation-id-source: derived
+  /productVersions/search/findByProductCode/{productCode}:
+    get:
+      tags:
+      - Products
+      description: Returns a single product
+      parameters:
+      - in: path
+        name: productCode
+        schema:
+          type: string
+        required: true
+        description: Product Code
+      responses:
+        '200':
+          description: An array of product versions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get product versions search find by product code by product code
+      x-summary-source: derived
+      operationId: getProductVersionsSearchFindByProductCodeByProductCode
+      x-operation-id-source: derived
+  /productVersions/search/findByProductCodeAndActiveTrueOrderByPositionAsc/{productCode}:
+    get:
+      tags:
+      - Products
+      description: Returns the product versions information searched by product code ,active and position in ascending order
+      parameters:
+      - in: path
+        name: productCode
+        schema:
+          type: string
+        required: true
+        description: Product Code
+      responses:
+        '200':
+          description: An array of product versions information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get product versions search find by product code and active true order by…
+      x-summary-source: derived
+      operationId: getProductVersionsSearchFindByProductCodeAndActiveTrueOrderByPositionAscByProductCode
+      x-operation-id-source: derived
+  /productVersions/search/findByProductCodeOrderByPositionAsc/{productCode}:
+    get:
+      tags:
+      - Products
+      description: Returns all product versions (active and inactive) searched by product code ordered by position in ascending order
+      parameters:
+      - in: path
+        name: productCode
+        schema:
+          type: string
+        required: true
+        description: Product Code
+      responses:
+        '200':
+          description: An array of product versions information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get product versions search find by product code order by position asc by…
+      x-summary-source: derived
+      operationId: getProductVersionsSearchFindByProductCodeOrderByPositionAscByProductCode
+      x-operation-id-source: derived
+  /productVersions/search/findByProductCodeWithTranslatedContent/{productCode}:
+    get:
+      tags:
+      - Products
+      summary: Retrieve versions for a translated site language
+      description: Version dropdown list for a non en-us site language, ordered by position ascending. Active versions are always included; inactive versions only when they hold active, non-archived translated content. Empty array when none qualify. For en-us use findByProductCodeAndActiveTrueOrderByPositionAsc.
+      parameters:
+      - in: path
+        name: productCode
+        schema:
+          type: string
+        required: true
+        description: Product Code
+      responses:
+        '200':
+          description: An array of product versions, empty when no version qualifies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductVersion'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: getProductVersionsSearchFindByProductCodeWithTranslatedContentByProductCode
+      x-operation-id-source: derived
+  /productVersions/search/findByProductCodeAndArchiveTrueOrderByPositionAsc/{productCode}:
+    get:
+      tags:
+      - Products
+      description: Returns the product versions information searched by product code ,archive and position in ascending order
+      parameters:
+      - in: path
+        name: productCode
+        schema:
+          type: string
+        required: true
+        description: Product Code
+      responses:
+        '200':
+          description: An array of product versions information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get product versions search find by product code and archive true order by…
+      x-summary-source: derived
+      operationId: getProductVersionsSearchFindByProductCodeAndArchiveTrueOrderByPositionAscByProductCode
+      x-operation-id-source: derived
+  /productVersionLanguageContents:
+    get:
+      tags:
+      - Products
+      description: Returns all product Version Language Contents
+      responses:
+        '200':
+          description: An array of product Version Language Contents
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get product version language contents
+      x-summary-source: derived
+      operationId: getProductVersionLanguageContents
+      x-operation-id-source: derived
+  /productVersionLanguageContents/{productVersionLanguageId}:
+    get:
+      tags:
+      - Products
+      description: Returns the product versions language Contents by Product Version Language Id in ascending positions
+      parameters:
+      - in: path
+        name: productVersionLanguageId
+        schema:
+          type: string
+        required: true
+        description: product version language id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get product version language contents by product version language id
+      x-summary-source: derived
+      operationId: getProductVersionLanguageContentsByProductVersionLanguageId
+      x-operation-id-source: derived
+  /productVersionLanguageContents/{productVersionLanguageId}/contents:
+    get:
+      tags:
+      - Products
+      description: Returns the product versions language active contents with details by Product Version Language Id in ascending positions
+      parameters:
+      - in: path
+        name: productVersionLanguageId
+        schema:
+          type: string
+        required: true
+        description: product version language id
+      - in: query
+        name: deploymentType
+        schema:
+          type: string
+        required: false
+        description: Deployment type to filter contents (e.g. cloud, on-prem, IGS)
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get product version language contents by product version language id contents
+      x-summary-source: derived
+      operationId: getProductVersionLanguageContentsByProductVersionLanguageIdContents
+      x-operation-id-source: derived
+  /productVersionLanguageContents/archive/{productVersionLanguageId}/contents:
+    get:
+      tags:
+      - Products
+      description: Returns the product versions language archived contents with details by Product Version Language Id in ascending positions
+      parameters:
+      - in: path
+        name: productVersionLanguageId
+        schema:
+          type: string
+        required: true
+        description: product version language id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get product version language contents archive by product version language id…
+      x-summary-source: derived
+      operationId: getProductVersionLanguageContentsArchiveByProductVersionLanguageIdContents
+      x-operation-id-source: derived
+components:
+  schemas:
+    RedirectUrl:
+      type: object
+      properties:
+        url_redirect_mapping_id:
+          type: integer
+        product_code:
+          type: string
+        doc_version:
+          type: string
+        language:
+          type: string
+        doc_id:
+          type: string
+        page:
+          type: string
+        help_content:
+          type: string
+        topic:
+          type: string
+        redirect_product_code:
+          type: string
+        redirect_doc_version:
+          type: string
+        redirect_language:
+          type: string
+        redirect_doc_id:
+          type: string
+        redirect_page:
+          type: string
+        redirect_help_content:
+          type: string
+        redirect_topic:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+    DeploymentType:
+      type: object
+      properties:
+        id:
+          type: integer
+        deployment_type:
+          type: string
+    ProductVersion:
+      type: object
+      properties:
+        product_version_id:
+          type: string
+        product_code:
+          type: string
+        product_longname:
+          type: string
+        doc_version:
+          type: string
+        doc_version_name:
+          type: string
+        drm_release:
+          type: string
+        drm_version:
+          type: string
+        active:
+          type: boolean
+        position:
+          type: integer
+        archive:
+          type: boolean
+        archive_position:
+          type: integer
+        genai:
+          type: string
+        webhelp9:
+          type: boolean
+        search:
+          type: boolean
+          description: Determines whether the product version should be searchable and discoverable through indexing.
+        ga_plus_1:
+          type: boolean
+          description: Identifies versions that should be treated as generally available or later for indexing purposes.
+        old_names:
+          type: string
+          description: Comma-separated former product names, added at runtime by ProductVersionService; not a column on product_versions.
+    Product:
+      type: object
+      properties:
+        product_code:
+          type: string
+        product_shortname:
+          type: string
+        product_line:
+          type: string
+        active:
+          type: boolean
+        archive:
+          type: boolean
+        latest_redirect:
+          type: boolean
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

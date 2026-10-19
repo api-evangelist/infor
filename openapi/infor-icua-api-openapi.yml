@@ -1,0 +1,245 @@
+openapi: 3.2.0
+info:
+  title: Infor Docs ICUA API
+  version: 2.0.0
+  description: Infor Documentation API.
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: ICUA
+paths:
+  /icuaLanguageMappings:
+    get:
+      tags:
+      - ICUA
+      description: Returns all IcuaLanguages
+      responses:
+        '200':
+          description: An array of icua language s
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IcuaLanguage'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get icua language mappings
+      x-summary-source: derived
+      operationId: getIcuaLanguageMappings
+      x-operation-id-source: derived
+  /icuaLanguageMappings/search/findByIcuaLanguage/{icuaLanguage}:
+    get:
+      tags:
+      - ICUA
+      description: Returns all IcuaLanguages searched by ICUA Language
+      parameters:
+      - in: path
+        name: icuaLanguage
+        schema:
+          type: string
+        required: true
+        description: icua language
+      responses:
+        '200':
+          description: An array of icua language s searched by ICUA language
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IcuaLanguage'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get icua language mappings search find by icua language by icua language
+      x-summary-source: derived
+      operationId: getIcuaLanguageMappingsSearchFindByIcuaLanguageByIcuaLanguage
+      x-operation-id-source: derived
+  /icuaProductVersionMappings:
+    get:
+      tags:
+      - ICUA
+      description: Returns all icuaProductVersions
+      responses:
+        '200':
+          description: An array of icua Product Version s
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IcuaProductVersion'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get icua product version mappings
+      x-summary-source: derived
+      operationId: getIcuaProductVersionMappings
+      x-operation-id-source: derived
+  /icuaProductVersionMappings/search/findByIcuaProduct/{icuaProduct}:
+    get:
+      tags:
+      - ICUA
+      description: Returns all icuaProductVersions searched by icuaProduct
+      parameters:
+      - in: path
+        name: icuaProduct
+        schema:
+          type: string
+        required: true
+        description: icua product
+      responses:
+        '200':
+          description: An array of icua product version s searched by ICUA Product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IcuaProductVersion'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get icua product version mappings search find by icua product by icua product
+      x-summary-source: derived
+      operationId: getIcuaProductVersionMappingsSearchFindByIcuaProductByIcuaProduct
+      x-operation-id-source: derived
+  /icuaContent:
+    get:
+      tags:
+      - ICUA
+      description: Returns ICUA Content
+      parameters:
+      - in: query
+        name: product
+        schema:
+          type: string
+        description: icua product
+      - in: query
+        name: version
+        schema:
+          type: string
+        description: icua version
+      - in: query
+        name: language
+        schema:
+          type: string
+        description: language
+      - in: query
+        name: screenId
+        schema:
+          type: string
+        description: screen Id
+      responses:
+        '200':
+          description: An array of icua content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IcuaProductVersion'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get icua content
+      x-summary-source: derived
+      operationId: getIcuaContent
+      x-operation-id-source: derived
+components:
+  schemas:
+    IcuaLanguage:
+      type: object
+      properties:
+        country:
+          type: string
+        icua_language:
+          type: string
+        docs_response_language:
+          type: string
+        docs_fallback_language:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+    IcuaProductVersion:
+      type: object
+      properties:
+        icua_product_version_id:
+          type: string
+        icua_product:
+          type: string
+        icua_version:
+          type: string
+        docs_product_code:
+          type: string
+        docs_version:
+          type: string
+        archive:
+          type: boolean
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -33,9 +33,10 @@ apis:
     type: Documentation
   - url: https://github.com/infor-cloud/m3-h5-sdk
     type: SDKs
-  description: The Infor M3 (CloudSuite Industrial) APIs provide access to production orders, inventory
-    management, supply chain planning, and financial data for discrete and process manufacturing enterprises.
-    The M3 H5 SDK enables HTML5-based application development on the M3 platform.
+  description: >-
+    The Infor M3 (CloudSuite Industrial) APIs provide access to production orders, inventory management,
+    supply chain planning, and financial data for discrete and process manufacturing enterprises. The
+    M3 H5 SDK enables HTML5-based application development on the M3 platform.
   image: https://www.infor.com/logo-infor.png
 - aid: infor:infor-xtendm3-api
   name: Infor XtendM3 API
@@ -54,9 +55,9 @@ apis:
     type: SDKs
   - url: https://github.com/infor-cloud/xtendm3-extension-examples
     type: GettingStarted
-  description: Infor XtendM3 provides a Java SDK for extending and customizing Infor M3 (CloudSuite Industrial)
-    business logic without modifying core code. Extensions are deployed and executed within the M3 runtime
-    environment.
+  description: >-
+    Infor XtendM3 provides a Java SDK for extending and customizing Infor M3 (CloudSuite Industrial) business
+    logic without modifying core code. Extensions are deployed and executed within the M3 runtime environment.
   image: https://www.infor.com/logo-infor.png
 - aid: infor:infor-cloudsuite-financials-api
   name: Infor CloudSuite Financials API
@@ -76,58 +77,14 @@ apis:
   properties:
   - url: https://www.infor.com/
     type: Documentation
-  description: Infor CloudSuite Financials APIs provide integration with general ledger, accounts payable,
-    accounts receivable, cash management, and financial reporting for enterprise finance operations.
-  image: https://www.infor.com/logo-infor.png
-- aid: infor:infor-ion-documents-api
-  name: Infor ION Documents API
-  description: ION document routing and processing
-  humanURL: https://www.infor.com/platform/ipaas/ion-middleware
-  baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}/IONSERVICES
-  tags:
-  - ION Documents
-  properties:
-  - type: OpenAPI
-    url: openapi/infor-ion-documents-api-openapi.yml
-  - type: Documentation
-    url: https://www.infor.com/platform/ipaas/ion-middleware
-  - type: SDKs
-    url: https://github.com/infor-cloud/ion-api-sdk
-  - type: GettingStarted
-    url: https://github.com/infor-cloud/ion-api-sdk
-  - type: Authentication
-    url: https://github.com/infor-cloud/ion-api-sdk
-  - type: AsyncAPI
-    url: asyncapi/infor-ion-events-asyncapi.yml
-  - type: Overlay
-    url: overlays/infor-ion-documents-api-overlay.yaml
-  image: https://www.infor.com/logo-infor.png
-- aid: infor:infor-m3-api-api
-  name: Infor M3 API
-  description: Infor M3 business API programs
-  humanURL: https://www.infor.com/platform/ipaas/ion-middleware
-  baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}/M3
-  tags:
-  - M3 API
-  properties:
-  - type: OpenAPI
-    url: openapi/infor-m3-api-api-openapi.yml
-  - type: Documentation
-    url: https://www.infor.com/platform/ipaas/ion-middleware
-  - type: SDKs
-    url: https://github.com/infor-cloud/ion-api-sdk
-  - type: GettingStarted
-    url: https://github.com/infor-cloud/ion-api-sdk
-  - type: Authentication
-    url: https://github.com/infor-cloud/ion-api-sdk
-  - type: AsyncAPI
-    url: asyncapi/infor-ion-events-asyncapi.yml
-  - type: Overlay
-    url: overlays/infor-m3-api-api-overlay.yaml
+  description: >-
+    Infor CloudSuite Financials APIs provide integration with general ledger, accounts payable, accounts
+    receivable, cash management, and financial reporting for enterprise finance operations.
   image: https://www.infor.com/logo-infor.png
 - aid: infor:infor-idm-api
   name: Infor Document Management (IDM) API
-  description: The Infor Document Management REST API, published on the Infor Developer Portal at developer.infor.com/api
+  description: >-
+    The Infor Document Management REST API, published on the Infor Developer Portal at developer.infor.com/api
     and served through the ION API Gateway under the IDM suite path. It covers the content repository
     (items, resources, versions, check-in/check-out), business context models, document templates, the
     data model, document output, content migration, e-mail delivery, digital signature envelopes and user
@@ -159,7 +116,231 @@ apis:
     url: https://developer.infor.com/api/llms.txt
   - type: Authentication
     url: authentication/infor-authentication.yml
+- aid: infor:infor-contents-api
+  name: Infor Contents API
+  description: The Contents API from Infor — 7 operation(s) for contents.
+  humanURL: https://www.infor.com/
+  baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}/M3
+  tags:
+  - Contents
+  properties:
+  - type: OpenAPI
+    url: openapi/infor-contents-api-openapi.yml
+  - type: Documentation
+    url: https://www.infor.com/platform/ipaas/ion-middleware
+  - type: SDKs
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: GettingStarted
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: Authentication
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: AsyncAPI
+    url: asyncapi/infor-ion-events-asyncapi.yml
+- aid: infor:infor-icua-api
+  name: Infor ICUA API
+  description: The ICUA API from Infor — 5 operation(s) for icua.
+  humanURL: https://www.infor.com/
+  baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}/M3
+  tags:
+  - ICUA
+  properties:
+  - type: OpenAPI
+    url: openapi/infor-icua-api-openapi.yml
+  - type: Documentation
+    url: https://www.infor.com/platform/ipaas/ion-middleware
+  - type: SDKs
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: GettingStarted
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: Authentication
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: AsyncAPI
+    url: asyncapi/infor-ion-events-asyncapi.yml
+- aid: infor:infor-languages-api
+  name: Infor Languages API
+  description: The Languages API from Infor — 1 operation(s) for languages.
+  humanURL: https://www.infor.com/
+  baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}/M3
+  tags:
+  - Languages
+  properties:
+  - type: OpenAPI
+    url: openapi/infor-languages-api-openapi.yml
+  - type: Documentation
+    url: https://www.infor.com/platform/ipaas/ion-middleware
+  - type: SDKs
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: GettingStarted
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: Authentication
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: AsyncAPI
+    url: asyncapi/infor-ion-events-asyncapi.yml
+- aid: infor:infor-products-api
+  name: Infor Products API
+  description: The Products API from Infor — 18 operation(s) for products.
+  humanURL: https://www.infor.com/
+  baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}/M3
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/infor-products-api-openapi.yml
+  - type: Documentation
+    url: https://www.infor.com/platform/ipaas/ion-middleware
+  - type: SDKs
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: GettingStarted
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: Authentication
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: AsyncAPI
+    url: asyncapi/infor-ion-events-asyncapi.yml
+- aid: infor:infor-recenttopics-api
+  name: Infor Recent Topics API
+  description: The RecentTopics API from Infor — 2 operation(s) for recenttopics.
+  humanURL: https://www.infor.com/
+  baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}/M3
+  tags:
+  - RecentTopics
+  properties:
+  - type: OpenAPI
+    url: openapi/infor-recenttopics-api-openapi.yml
+  - type: Documentation
+    url: https://www.infor.com/platform/ipaas/ion-middleware
+  - type: SDKs
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: GettingStarted
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: Authentication
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: AsyncAPI
+    url: asyncapi/infor-ion-events-asyncapi.yml
+- aid: infor:infor-s3-docs-api
+  name: Infor S3 Docs API
+  description: The S3 Docs API from Infor — 1 operation(s) for s3 docs.
+  humanURL: https://www.infor.com/
+  baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}/M3
+  tags:
+  - S3 Docs
+  properties:
+  - type: OpenAPI
+    url: openapi/infor-s3-docs-api-openapi.yml
+  - type: Documentation
+    url: https://www.infor.com/platform/ipaas/ion-middleware
+  - type: SDKs
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: GettingStarted
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: Authentication
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: AsyncAPI
+    url: asyncapi/infor-ion-events-asyncapi.yml
+- aid: infor:infor-search-api
+  name: Infor Search API
+  description: The Search API from Infor — 6 operation(s) for search.
+  humanURL: https://www.infor.com/
+  baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}/M3
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/infor-search-api-openapi.yml
+  - type: Documentation
+    url: https://www.infor.com/platform/ipaas/ion-middleware
+  - type: SDKs
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: GettingStarted
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: Authentication
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: AsyncAPI
+    url: asyncapi/infor-ion-events-asyncapi.yml
+- aid: infor:infor-security-api
+  name: Infor Security API
+  description: The Security API from Infor — 4 operation(s) for security.
+  humanURL: https://www.infor.com/
+  baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}/M3
+  tags:
+  - Security
+  properties:
+  - type: OpenAPI
+    url: openapi/infor-security-api-openapi.yml
+  - type: Documentation
+    url: https://www.infor.com/platform/ipaas/ion-middleware
+  - type: SDKs
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: GettingStarted
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: Authentication
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: AsyncAPI
+    url: asyncapi/infor-ion-events-asyncapi.yml
+- aid: infor:infor-solutions-api
+  name: Infor Solutions API
+  description: The Solutions API from Infor — 3 operation(s) for solutions.
+  humanURL: https://www.infor.com/
+  baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}/M3
+  tags:
+  - Solutions
+  properties:
+  - type: OpenAPI
+    url: openapi/infor-solutions-api-openapi.yml
+  - type: Documentation
+    url: https://www.infor.com/platform/ipaas/ion-middleware
+  - type: SDKs
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: GettingStarted
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: Authentication
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: AsyncAPI
+    url: asyncapi/infor-ion-events-asyncapi.yml
+- aid: infor:infor-userfavorites-api
+  name: Infor User Favorites API
+  description: The UserFavorites API from Infor — 7 operation(s) for userfavorites.
+  humanURL: https://www.infor.com/
+  baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}/M3
+  tags:
+  - UserFavorites
+  properties:
+  - type: OpenAPI
+    url: openapi/infor-userfavorites-api-openapi.yml
+  - type: Documentation
+    url: https://www.infor.com/platform/ipaas/ion-middleware
+  - type: SDKs
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: GettingStarted
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: Authentication
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: AsyncAPI
+    url: asyncapi/infor-ion-events-asyncapi.yml
+- aid: infor:infor-web-api
+  name: Infor Web API
+  description: The Web API from Infor — 12 operation(s) for web.
+  humanURL: https://www.infor.com/
+  baseURL: https://mingle-ionapi.inforcloudsuite.com/{tenant}/M3
+  tags:
+  - Web
+  properties:
+  - type: OpenAPI
+    url: openapi/infor-web-api-openapi.yml
+  - type: Documentation
+    url: https://www.infor.com/platform/ipaas/ion-middleware
+  - type: SDKs
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: GettingStarted
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: Authentication
+    url: https://github.com/infor-cloud/ion-api-sdk
+  - type: AsyncAPI
+    url: asyncapi/infor-ion-events-asyncapi.yml
 common:
+- type: Overlay
+  url: overlays/infor-ion-documents-api-overlay.yaml
+- type: Overlay
+  url: overlays/infor-m3-api-api-overlay.yaml
 - type: Pricing
   url: https://www.infor.com/products
 - type: AgenticAccess

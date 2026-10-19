@@ -1,0 +1,398 @@
+openapi: 3.2.0
+info:
+  title: Infor Docs User Favorites API
+  version: 2.0.0
+  description: Infor Documentation API.
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: UserFavorites
+paths:
+  /userFavorites/saveFav:
+    post:
+      tags:
+      - UserFavorites
+      description: Save multiple user favorites
+      parameters:
+      - in: cookie
+        name: SessionIndex
+        required: true
+        schema:
+          type: string
+        description: Concierge session to get email id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                required:
+                - product_code
+                - language
+                - version
+                - pubtitle
+                - content_url
+                - position
+                properties:
+                  product_code:
+                    type: string
+                    description: Product Code
+                    example: ae
+                  language:
+                    type: string
+                    description: Language
+                    example: en-us
+                  version:
+                    type: string
+                    description: Version of the product
+                    example: 2024.x
+                  pubtitle:
+                    type: string
+                    description: Publish title
+                    example: Infor Automotive Exchange User Guide
+                  content_url:
+                    type: string
+                    description: URL of the content
+                    example: ae/2024.x/en-us/useradminlib/default.html
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Successfully saved user favorites data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserFavorites'
+        '400':
+          description: Failure response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized access
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '404':
+          description: No UserFavorites found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Create user favorites save fav
+      x-summary-source: derived
+      operationId: postUserFavoritesSaveFav
+      x-operation-id-source: derived
+  /userFavorites/updateOrder:
+    put:
+      tags:
+      - UserFavorites
+      description: Update the position of a user favorite based on email and ID
+      parameters:
+      - in: cookie
+        name: SessionIndex
+        required: true
+        schema:
+          type: string
+        description: Concierge session to get email id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - id
+              - position
+              properties:
+                id:
+                  type: integer
+                  description: ID of the favorite entry
+                  example: 101
+                position:
+                  type: integer
+                  description: New position value
+                  example: 3
+      responses:
+        '200':
+          description: Successfully updated position
+        '400':
+          description: Bad request or no matching record
+        '401':
+          description: Unauthorized
+      summary: Replace user favorites update order
+      x-summary-source: derived
+      operationId: putUserFavoritesUpdateOrder
+      x-operation-id-source: derived
+  /userFavorites/getAllFavs:
+    get:
+      tags:
+      - UserFavorites
+      description: Returns all UserFavorites
+      parameters:
+      - in: cookie
+        name: SessionIndex
+        required: true
+        schema:
+          type: string
+        description: Concierge session to get email id
+      responses:
+        '200':
+          description: An array of UserFavorites for email id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserFavorites'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: Failure response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get user favorites get all favs
+      x-summary-source: derived
+      operationId: getUserFavoritesGetAllFavs
+      x-operation-id-source: derived
+  /userFavorites/getFavs/{product_code}/{version}/{language}:
+    get:
+      tags:
+      - UserFavorites
+      description: Returns all UserFavorites
+      parameters:
+      - in: cookie
+        name: SessionIndex
+        required: true
+        schema:
+          type: string
+        description: Concierge session
+      - in: path
+        name: product_code
+        schema:
+          type: string
+        required: true
+        description: product_code
+      - in: path
+        name: version
+        schema:
+          type: string
+        required: true
+        description: version
+      - in: path
+        name: language
+        schema:
+          type: string
+        required: true
+        description: language
+      responses:
+        '200':
+          description: An array of UserFavorites for email id, product code, version and language
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserFavorites'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: Failure response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get user favorites get favs by product code by version by language
+      x-summary-source: derived
+      operationId: getUserFavoritesGetFavsByProductCodeByVersionByLanguage
+      x-operation-id-source: derived
+  /userFavorites/renameFav/{id}/{pubtitle}:
+    patch:
+      tags:
+      - UserFavorites
+      description: rename pubtitle by id
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: id
+      - in: path
+        name: pubtitle
+        schema:
+          type: string
+        required: true
+        description: new pubtitle
+      responses:
+        '200':
+          description: user favorites is deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserFavorites'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: Failure response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Update user favorites rename fav by id by pubtitle
+      x-summary-source: derived
+      operationId: patchUserFavoritesRenameFavByIdByPubtitle
+      x-operation-id-source: derived
+  /userFavorites/deleteFav/{id}:
+    delete:
+      tags:
+      - UserFavorites
+      description: delete user favorites by unique id
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: Unique identifier
+      responses:
+        '200':
+          description: user favorites is deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserFavorites'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: Failure response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Delete user favorites delete fav by id
+      x-summary-source: derived
+      operationId: deleteUserFavoritesDeleteFavById
+      x-operation-id-source: derived
+  /userFavorites/deleteAllFavs:
+    delete:
+      tags:
+      - UserFavorites
+      description: delete user favorites by email and content url
+      parameters:
+      - in: cookie
+        name: SessionIndex
+        required: true
+        schema:
+          type: string
+        description: Concierge session
+      responses:
+        '200':
+          description: user favorites is deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserFavorites'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: Failure response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Delete user favorites delete all favs
+      x-summary-source: derived
+      operationId: deleteUserFavoritesDeleteAllFavs
+      x-operation-id-source: derived
+components:
+  schemas:
+    UnauthorizedError:
+      type: object
+      description: API key is missing or invalid
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+    UserFavorites:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        product_code:
+          type: string
+        language:
+          type: string
+        version:
+          type: string
+        pubtitle:
+          type: string
+        content_url:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,382 @@
+openapi: 3.2.0
+info:
+  title: Infor Docs Contents API
+  version: 2.0.0
+  description: Infor Documentation API.
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Contents
+paths:
+  /contents:
+    get:
+      tags:
+      - Contents
+      description: Returns the Contents
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: An array of Contents
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Content'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+      summary: Get contents
+      x-summary-source: derived
+      operationId: getContents
+      x-operation-id-source: derived
+  /contents/search/findByContentId/{contentId}:
+    get:
+      tags:
+      - Contents
+      description: Returns the Content with a specific content id
+      parameters:
+      - in: path
+        name: contentId
+        schema:
+          type: string
+        required: true
+        description: content id
+      responses:
+        '200':
+          description: An piece of content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Content'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get contents search find by content id by content id
+      x-summary-source: derived
+      operationId: getContentsSearchFindByContentIdByContentId
+      x-operation-id-source: derived
+  /contentScreens:
+    get:
+      tags:
+      - Contents
+      description: Returns the Content Screens
+      parameters:
+      - in: query
+        name: limit
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 500
+        description: Limit (between 1 and 500)
+      - in: query
+        name: offset
+        schema:
+          type: integer
+        description: offset
+      responses:
+        '200':
+          description: An array of Content Screens
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Content'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get content screens
+      x-summary-source: derived
+      operationId: getContentScreens
+      x-operation-id-source: derived
+  /contents/latestDocVersion:
+    get:
+      tags:
+      - Contents
+      description: Returns the latest version
+      parameters:
+      - in: query
+        name: product
+        schema:
+          type: string
+        required: true
+        description: product
+      - in: query
+        name: language
+        schema:
+          type: string
+        required: true
+        description: language
+      - in: query
+        name: docId
+        schema:
+          type: string
+        required: true
+        description: docId
+      - in: query
+        name: isArchive
+        schema:
+          type: boolean
+        required: true
+        description: archive
+      responses:
+        '200':
+          description: An piece of content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Content'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get contents latest doc version
+      x-summary-source: derived
+      operationId: getContentsLatestDocVersion
+      x-operation-id-source: derived
+  /contents/latestDocVersionDetail:
+    get:
+      tags:
+      - Contents
+      description: Returns the latest version
+      parameters:
+      - in: query
+        name: language
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: productCode
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: An piece of content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Content'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get contents latest doc version detail
+      x-summary-source: derived
+      operationId: getContentsLatestDocVersionDetail
+      x-operation-id-source: derived
+  /contents/contentAudience:
+    get:
+      tags:
+      - Contents
+      description: Returns the Content with a specific content id
+      parameters:
+      - in: query
+        name: uri
+        schema:
+          type: string
+        required: true
+        description: uri to get content audience is /productShortName/docVersion/language/docId
+      responses:
+        '200':
+          description: An piece of content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Content'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get contents content audience
+      x-summary-source: derived
+      operationId: getContentsContentAudience
+      x-operation-id-source: derived
+  /contents/supportedLanguages:
+    get:
+      tags:
+      - Contents
+      summary: Retrieve supported languages for a content version
+      description: Languages with active content for the given productCode and docVersion. Optionally pass docId to narrow the result to a single document.
+      parameters:
+      - in: query
+        name: productCode
+        schema:
+          type: string
+        required: true
+        description: Product code
+      - in: query
+        name: docVersion
+        schema:
+          type: string
+        required: true
+        description: Document version
+      - in: query
+        name: docId
+        schema:
+          type: string
+        required: false
+        description: Document ID
+      responses:
+        '200':
+          description: An array of supported languages with native names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    language:
+                      type: string
+                      example: en-us
+                    native_name:
+                      type: string
+                      example: English
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request - Missing required query parameters
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      operationId: getContentsSupportedLanguages
+      x-operation-id-source: derived
+components:
+  schemas:
+    UnauthorizedError:
+      type: object
+      description: API key is missing or invalid
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+    Content:
+      type: object
+      properties:
+        content_id:
+          type: string
+        product_code:
+          type: string
+        doc_version:
+          type: string
+        language:
+          type: string
+        doc_id:
+          type: string
+        pubtitle:
+          type: string
+        shortdesc:
+          type: string
+        pubtype:
+          type: string
+        audience:
+          type: string
+        content_url:
+          type: string
+        uploaded_by:
+          type: string
+        active:
+          type: boolean
+        revision_counter:
+          type: integer
+        generation_date:
+          type: string
+        upload_date:
+          type: string
+        publish_date:
+          type: string
+        archive:
+          type: boolean
+        deployment_options:
+          type: string
+        map_publication_nav_title:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

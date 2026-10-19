@@ -1,0 +1,127 @@
+openapi: 3.2.0
+info:
+  title: Infor Docs S3 Docs API
+  version: 2.0.0
+  description: Infor Documentation API.
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: S3 Docs
+paths:
+  /contents/search/getDocsHeadings:
+    get:
+      tags:
+      - S3 Docs
+      description: Returns documentation headings (high level tabs)
+      parameters:
+      - in: query
+        name: productCode
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: version
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: language
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: docId
+        schema:
+          type: string
+        required: true
+        description: docId
+      - in: query
+        name: level
+        schema:
+          type: string
+        required: false
+        description: level
+      responses:
+        '200':
+          description: content from s3 bucket
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Content'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get contents search get docs headings
+      x-summary-source: derived
+      operationId: getContentsSearchGetDocsHeadings
+      x-operation-id-source: derived
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+    Content:
+      type: object
+      properties:
+        content_id:
+          type: string
+        product_code:
+          type: string
+        doc_version:
+          type: string
+        language:
+          type: string
+        doc_id:
+          type: string
+        pubtitle:
+          type: string
+        shortdesc:
+          type: string
+        pubtype:
+          type: string
+        audience:
+          type: string
+        content_url:
+          type: string
+        uploaded_by:
+          type: string
+        active:
+          type: boolean
+        revision_counter:
+          type: integer
+        generation_date:
+          type: string
+        upload_date:
+          type: string
+        publish_date:
+          type: string
+        archive:
+          type: boolean
+        deployment_options:
+          type: string
+        map_publication_nav_title:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

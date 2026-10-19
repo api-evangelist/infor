@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.infor.com/swagger.json",
+ "final": "https://docs.infor.com/swagger.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 60309,
+ "sha256": "28f53ae7a7f80190346321d0095ccf8e0b0ff2b04173a10386ab7b54ff64d7bf",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "re-archived: the provider's current document replaced a stale archive (roadmap#793); the old files are in openapi/_superseded/2026-10-19-stale"
+}

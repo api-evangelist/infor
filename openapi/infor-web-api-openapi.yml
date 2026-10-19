@@ -1,0 +1,487 @@
+openapi: 3.2.0
+info:
+  title: Infor Docs Web API
+  version: 2.0.0
+  description: Infor Documentation API.
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Web
+paths:
+  /web/options:
+    get:
+      tags:
+      - Web
+      description: Returns web features details
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: An array of all web features.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Options'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedError'
+        '404':
+          description: No Web Options
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get web options
+      x-summary-source: derived
+      operationId: getWebOptions
+      x-operation-id-source: derived
+  /web/activeProducts:
+    get:
+      tags:
+      - Web
+      description: Returns all active products
+      responses:
+        '200':
+          description: An array of active products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get web active products
+      x-summary-source: derived
+      operationId: getWebActiveProducts
+      x-operation-id-source: derived
+  /web/filterSearchData:
+    post:
+      tags:
+      - Web
+      description: Returns all filter search data
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                access_token:
+                  type: string
+      responses:
+        '200':
+          description: An array of filter search data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Create web filter search data
+      x-summary-source: derived
+      operationId: postWebFilterSearchData
+      x-operation-id-source: derived
+  /web/activeProductsAndSolutions:
+    get:
+      tags:
+      - Web
+      description: Returns all active products and solutions with translations of solution languages
+      parameters:
+      - in: query
+        name: languageId
+        schema:
+          type: string
+        description: translation language
+      responses:
+        '200':
+          description: An array of active products and solutions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get web active products and solutions
+      x-summary-source: derived
+      operationId: getWebActiveProductsAndSolutions
+      x-operation-id-source: derived
+  /web/archiveProducts:
+    get:
+      tags:
+      - Web
+      description: Returns all archived products
+      responses:
+        '200':
+          description: An array of archived products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get web archive products
+      x-summary-source: derived
+      operationId: getWebArchiveProducts
+      x-operation-id-source: derived
+  /web/archiveProductsAndSolutions:
+    get:
+      tags:
+      - Web
+      description: Returns all archive products and solutions with translations of solution languages
+      parameters:
+      - in: query
+        name: languageId
+        schema:
+          type: string
+        description: translation language
+      responses:
+        '200':
+          description: An array of archive products and solutions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get web archive products and solutions
+      x-summary-source: derived
+      operationId: getWebArchiveProductsAndSolutions
+      x-operation-id-source: derived
+  /web/productCodeFromProductShortname/{productShortname}:
+    get:
+      tags:
+      - Web
+      description: Returns the product code that belongs to the given product shortname
+      parameters:
+      - in: path
+        name: productShortname
+        schema:
+          type: string
+        required: true
+        description: product shortname
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get web product code from product shortname by product shortname
+      x-summary-source: derived
+      operationId: getWebProductCodeFromProductShortnameByProductShortname
+      x-operation-id-source: derived
+  /web/productCodesByProductShortnames:
+    get:
+      tags:
+      - Web
+      description: Returns the product_shortname:product_code combinations
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get web product codes by product shortnames
+      x-summary-source: derived
+      operationId: getWebProductCodesByProductShortnames
+      x-operation-id-source: derived
+  /web/productCodeFromProductLongname/{productLongname}:
+    get:
+      tags:
+      - Web
+      description: Returns the product code that belongs to the given product Longname
+      parameters:
+      - in: path
+        name: productLongname
+        schema:
+          type: string
+        required: true
+        description: product longname
+      responses:
+        '200':
+          description: A single Product Code
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get web product code from product longname by product longname
+      x-summary-source: derived
+      operationId: getWebProductCodeFromProductLongnameByProductLongname
+      x-operation-id-source: derived
+  /web/productLongname/{productCode}:
+    get:
+      tags:
+      - Web
+      description: Returns productLongname belonging to productCode
+      parameters:
+      - in: path
+        name: productCode
+        schema:
+          type: string
+        required: true
+        description: productCode
+      - in: query
+        name: archive
+        required: false
+        schema:
+          type: boolean
+        description: select true for archive position
+      responses:
+        '200':
+          description: productLongname
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: Get web product longname by product code
+      x-summary-source: derived
+      operationId: getWebProductLongnameByProductCode
+      x-operation-id-source: derived
+  /web/logicalIdPrefix/{productCode}:
+    get:
+      tags:
+      - Web
+      description: Returns logical_id_prefix for a given product code
+      parameters:
+      - in: path
+        name: productCode
+        schema:
+          type: string
+        required: true
+        description: product code
+      responses:
+        '200':
+          description: Logical ID Prefix
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: Product Not Found
+        '500':
+          description: Internal Server Error
+      summary: Get web logical id prefix by product code
+      x-summary-source: derived
+      operationId: getWebLogicalIdPrefixByProductCode
+      x-operation-id-source: derived
+  /web/compassProductContent:
+    post:
+      tags:
+      - Web
+      summary: Retrieve Compass product HTML content
+      description: Fetches product documentation content from S3 using the provided product parameters and returns the HTML as plain text inside a JSON response.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - product_code
+              - doc_version
+              - language
+              - doc_id
+              properties:
+                product_code:
+                  type: string
+                  example: ln
+                doc_version:
+                  type: string
+                  example: 2025.x
+                language:
+                  type: string
+                  example: en-us
+                doc_id:
+                  type: string
+                  example: lnperformancelib_op
+      responses:
+        '200':
+          description: HTML content retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  html:
+                    type: string
+                    description: Raw HTML content as plain text
+                    example: <!DOCTYPE html><html><body><h1>Sample</h1></body></html>
+        '400':
+          description: Bad Request - Missing or invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Content not found in S3
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: postWebCompassProductContent
+      x-operation-id-source: derived
+components:
+  schemas:
+    Options:
+      type: object
+      properties:
+        id:
+          type: integer
+        feature:
+          type: string
+        enabled:
+          type: boolean
+        updated_date:
+          type: string
+        gen_ai_feature:
+          type: string
+    Product:
+      type: object
+      properties:
+        product_code:
+          type: string
+        product_shortname:
+          type: string
+        product_line:
+          type: string
+        active:
+          type: boolean
+        archive:
+          type: boolean
+        latest_redirect:
+          type: boolean
+    UnauthorizedError:
+      type: object
+      description: API key is missing or invalid
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

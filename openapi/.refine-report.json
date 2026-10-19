@@ -1,22 +1,39 @@
 {
   "provider": "infor",
   "sources": [
-    "_original/infor-ion-api-gateway-openapi.yml"
+    "_original/infor-openapi.json"
   ],
   "outputs": [
-    "infor-ion-documents-api-openapi.yml",
-    "infor-m3-api-api-openapi.yml"
+    "infor-contents-api-openapi.yml",
+    "infor-icua-api-openapi.yml",
+    "infor-languages-api-openapi.yml",
+    "infor-products-api-openapi.yml",
+    "infor-recenttopics-api-openapi.yml",
+    "infor-s3-docs-api-openapi.yml",
+    "infor-search-api-openapi.yml",
+    "infor-security-api-openapi.yml",
+    "infor-solutions-api-openapi.yml",
+    "infor-userfavorites-api-openapi.yml",
+    "infor-web-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
-    "infor-ion-api-gateway-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "infor-openapi.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "infor-openapi.json: declared missing tag: Contents",
+    "infor-openapi.json: declared missing tag: ICUA",
+    "infor-openapi.json: declared missing tag: Languages",
+    "infor-openapi.json: declared missing tag: Products",
+    "infor-openapi.json: declared missing tag: RecentTopics",
+    "infor-openapi.json: declared missing tag: S3 Docs",
+    "infor-openapi.json: declared missing tag: Search",
+    "infor-openapi.json: declared missing tag: Security",
+    "infor-openapi.json: declared missing tag: Solutions",
+    "infor-openapi.json: declared missing tag: UserFavorites",
+    "infor-openapi.json: declared missing tag: Web",
+    "apis.yml register: written (+11 apis, 15 total)"
   ],
-  "skipped": [
-    "infor-ion-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "infor-m3-api-api-openapi.yml: previously refined output, superseded by openapi/_original/"
-  ]
+  "skipped": []
 }
