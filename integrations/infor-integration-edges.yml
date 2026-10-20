@@ -2,7 +2,9 @@ generated: '2026-10-14'
 method: searched
 checked:
 - https://api.nuget.org/v3
+- https://cloudsecurityalliance.org/star/registry
 - https://crates.io/api/v1
+- https://eucoc.cloud/en/public-register/list-of-adherent-services
 - https://govramp.org/program-participants
 - https://integrations-api.siteminder.com/public/partners/all?lang=en
 - https://proxy.golang.org
@@ -16,20 +18,6 @@ checked:
 - microsoft-teams/integrations/microsoft-teams-integration-edges.yml
 source: https://integrations-api.siteminder.com/public/partners/all?lang=en
 edges:
-- partner_name: SiteMinder
-  partner: siteminder
-  partner_match: aggregator
-  type: coverage
-  channel: partner-built
-  relationship: system-coverage
-  direction: partner-built
-  evidence: https://integrations-api.siteminder.com/public/partners/all?lang=en
-  listed_as: Infor EzRMS
-  detected_by: sweep-hospitality.py
-  detected: '2026-10-14'
-  categories:
-  - pms
-  - rms
 - partner_name: Mews (own)
   partner: mews-com
   partner_match: mirror
@@ -46,74 +34,6 @@ edges:
   listing_count: 1
   detected: '2026-10-14'
   detected_by: mirror-platform-listings.py
-- partner_name: FedRAMP
-  partner: null
-  partner_match: register
-  type: contract
-  channel: regulator-register
-  relationship: standard-participant
-  direction: partner-built
-  evidence: https://marketplace.fedramp.gov/products/FR1710033970
-  category: FedRAMP authorization
-  contract_reference:
-    register: FedRAMP Marketplace data (github.com/18F/fedramp-data data/data.json @4b73d9247f)
-    standard: FedRAMP
-    spec_file: null
-    role: fedramp-authorized
-    registered_name: Infor
-    register_id: FR1710033970
-    matched_domain: infor.com
-    matched_by: domain+name-among-holders
-    domain_source: website
-    designations:
-    - Compliant
-    packages:
-    - Infor Government Solutions (IGS) Software as a Service
-    service_models:
-    - SaaS
-    paths:
-    - JAB
-    signal_note: certified_products = one entry per AUTHORIZED impact level, never per package; packages, service
-      models, paths and leveraging agencies are context, never counted. The register lists current designations
-      only (revoked / expired are removed), so lapsed is always false
-    detected_by: sweep-gov-cloud.py
-    detected: '2026-10-15'
-    certified_products:
-    - product: FedRAMP Moderate
-      impact_level: Moderate
-      lapsed: false
-      latest_authorization: '2018-07-10'
-  detected_by: sweep-gov-cloud.py
-  first_seen: '2026-10-15'
-- partner_name: GovRAMP
-  partner: null
-  partner_match: register
-  type: register
-  channel: standard-directory
-  relationship: standard-participant
-  direction: partner-built
-  evidence: https://govramp.org/program-participants
-  category: GovRAMP participation
-  contract_reference:
-    register: GovRAMP Program Participants (govramp.org/program-participants)
-    standard: GovRAMP
-    spec_file: null
-    role: govramp-participant
-    registered_name: Infor
-    register_id: SR24055
-    matched_domain: infor.com
-    matched_by: domain+name-among-holders
-    domain_source: contact-email
-    statuses:
-    - Pending
-    offerings:
-    - Infor Government Solutions - GovCloud
-    signal_note: certified_products = one entry per AUTHORIZED impact level (Authorized / Provisionally Authorized),
-      never per offering; Progressing / Pending / Ready / Core are participation only
-    detected_by: sweep-gov-cloud.py
-    detected: '2026-10-15'
-  detected_by: sweep-gov-cloud.py
-  first_seen: '2026-10-15'
 - partner_name: Microsoft Teams (own)
   partner: microsoft-teams
   partner_match: mirror
@@ -238,3 +158,115 @@ edges:
     detected: '2026-10-18'
   detected_by: sweep-official-sdks.py
   first_seen: '2026-10-18'
+- partner_name: FedRAMP
+  partner: null
+  partner_match: register
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://marketplace.fedramp.gov/products/FR1710033970
+  category: FedRAMP authorization
+  contract_reference:
+    register: FedRAMP Marketplace data (github.com/18F/fedramp-data data/data.json @4b73d9247f)
+    standard: FedRAMP
+    spec_file: null
+    role: fedramp-authorized
+    registered_name: Infor
+    register_id: FR1710033970
+    matched_domain: infor.com
+    matched_by: domain+name-among-holders
+    domain_source: website
+    designations:
+    - Compliant
+    packages:
+    - Infor Government Solutions (IGS) Software as a Service
+    service_models:
+    - SaaS
+    paths:
+    - JAB
+    signal_note: certified_products = one entry per AUTHORIZED impact level, never per package; packages, service
+      models, paths and leveraging agencies are context, never counted. The register lists current designations
+      only (revoked / expired are removed), so lapsed is always false
+    detected_by: sweep-gov-cloud.py
+    detected: '2026-10-15'
+    certified_products:
+    - product: FedRAMP Moderate
+      impact_level: Moderate
+      lapsed: false
+      latest_authorization: '2018-07-10'
+  detected_by: sweep-gov-cloud.py
+  first_seen: '2026-10-15'
+- partner_name: GovRAMP
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://govramp.org/program-participants
+  category: GovRAMP participation
+  contract_reference:
+    register: GovRAMP Program Participants (govramp.org/program-participants)
+    standard: GovRAMP
+    spec_file: null
+    role: govramp-participant
+    registered_name: Infor
+    register_id: SR24055
+    matched_domain: infor.com
+    matched_by: domain+name-among-holders
+    domain_source: contact-email
+    statuses:
+    - Pending
+    offerings:
+    - Infor Government Solutions - GovCloud
+    signal_note: certified_products = one entry per AUTHORIZED impact level (Authorized / Provisionally Authorized),
+      never per offering; Progressing / Pending / Ready / Core are participation only
+    detected_by: sweep-gov-cloud.py
+    detected: '2026-10-15'
+  detected_by: sweep-gov-cloud.py
+  first_seen: '2026-10-15'
+- partner_name: Cloud Security Alliance STAR Registry
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://cloudsecurityalliance.org/star/registry/infor-saas/services/infor-saas
+  category: Cloud security assurance
+  contract_reference:
+    register: CSA STAR Registry (cloudsecurityalliance.org/star/registry)
+    spec_file: null
+    standard: CSA STAR
+    role: star-level-1
+    registered_name: Infor SaaS
+    registry_id: infor-saas
+    service_url: http://www.infor.com/
+    matched_domain: infor.com
+    matched_by: domain+name-among-holders
+    identity_source: the service URL the organisation filed on its STAR listing (no lookup)
+    levels:
+    - STAR Level 1
+    certified_products: []
+    signal_note: STAR Level 1 (CAIQ self-assessment) = participation; certified_products = one entry per STAR Level
+      2 / STAR for AI Level 2 assessment TYPE (third-party certification, attestation, C-STAR, ValidAIted); lapsed
+      = every instance marked (Deprecated) by the registry; service counts never recorded
+    detected_by: sweep-compliance-assurance.py
+    detected: '2026-10-20'
+  detected_by: sweep-compliance-assurance.py
+  first_seen: '2026-10-20'
+- partner_name: SiteMinder
+  partner: siteminder
+  partner_match: aggregator
+  type: coverage
+  channel: partner-built
+  relationship: system-coverage
+  direction: partner-built
+  evidence: https://integrations-api.siteminder.com/public/partners/all?lang=en
+  listed_as: Infor EzRMS
+  detected_by: sweep-hospitality.py
+  detected: '2026-10-14'
+  categories:
+  - pms
+  - rms
