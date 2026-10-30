@@ -1,4 +1,4 @@
-# Infor (infor)
+# Infor
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,113 +66,188 @@
 
 Infor provides industry-specific cloud ERP platforms including CloudSuite Industrial (M3), CloudSuite Financials, and Infor LN. The Infor ION API Gateway enables OAuth 2.0-based integration across Infor applications and third-party systems. SDKs are available via the infor-cloud GitHub organization for Java, .NET, Go, and HTML5 development.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/infor/refs/heads/main/apis.yml)
+**Areas:** ERP · Manufacturing · Supply Chain · Cloud · Integration
 
-## Tags
+## Infor on APIs.io
 
-- ERP
-- Manufacturing
-- Supply Chain
-- Cloud
-- Integration
+Everything profiled for Infor is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/infor/](https://apis.io/providers/infor/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (6)
 
-- **Modified:** 2026-04-28
+- [Infor M3 / LN CloudSuite Industrial API](https://apis.io/apis/infor/infor-m3-api/) — The Infor M3 (CloudSuite Industrial) APIs provide access to production orders, inventory management, supply chain planning, and financial data for discrete…
+- [Infor XtendM3 API](https://apis.io/apis/infor/infor-xtendm3-api/) — Infor XtendM3 provides a Java SDK for extending and customizing Infor M3 (CloudSuite Industrial) business logic without modifying core code. Extensions are…
+- [Infor CloudSuite Financials API](https://apis.io/apis/infor/infor-cloudsuite-financials-api/) — Infor CloudSuite Financials APIs provide integration with general ledger, accounts payable, accounts receivable, cash management, and financial reporting…
+- [Infor ION Documents API](https://apis.io/apis/infor/infor-ion-documents-api/) — ION document routing and processing
+- [Infor M3 API](https://apis.io/apis/infor/infor-m3-api-api/) — Infor M3 business API programs
+- [Infor Document Management (IDM) API](https://apis.io/apis/infor/infor-idm-api/) — The Infor Document Management REST API, published on the Infor Developer Portal at developer.infor.com/api and served through the ION API Gateway under the…
 
-## APIs
+### Published properties
 
-### Infor ION API Gateway
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-The Infor ION API Gateway provides a managed OAuth 2.0 API layer for integrating Infor CloudSuite applications with third-party systems. The gateway supports Authorization Code, Client Credentials, and SAML Bearer grant types with SDKs available for Java, .NET, and Go.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://www.infor.com/products/ion](https://www.infor.com/products/ion)
-- **Base URL:** `https://mingledev01-ionapi.mingle.infor.com`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Infor ION Events](https://apis.io/asyncapis/infor/infor-ion-events-asyncapi/)
 
-- Cloud
-- ERP
-- Integration
-- Middleware
-- OAuth2
+#### Event channels (5)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
-- [Documentation](https://www.infor.com/products/ion)
-- [S D Ks](https://github.com/infor-cloud/ion-api-sdk)
-- [Getting Started](https://github.com/infor-cloud/ion-api-sdk)
-- [Authentication](https://github.com/infor-cloud/ion-api-sdk)
-- [OpenAPI](openapi/infor-ion-api-gateway-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/infor-ion-api-gateway.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/infor-ion-api-gateway.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [AsyncAPI](asyncapi/infor-ion-events-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
+- [customer/deleted](https://apis.io/channels/infor/customer-deleted/)
+- [customer/synced](https://apis.io/channels/infor/customer-synced/)
+- [inventory/synced](https://apis.io/channels/infor/inventory-synced/)
+- [invoice/synced](https://apis.io/channels/infor/invoice-synced/)
+- [order/synced](https://apis.io/channels/infor/order-synced/)
 
-### Infor M3 / LN CloudSuite Industrial API
+#### MCP servers (1)
 
-The Infor M3 (CloudSuite Industrial) APIs provide access to production orders, inventory management, supply chain planning, and financial data for discrete and process manufacturing enterprises. The M3 H5 SDK enables HTML5-based application development on the M3 platform.
+Model Context Protocol servers that expose the API to agents.
 
-- **Human URL:** [https://www.infor.com/](https://www.infor.com/)
-- **Base URL:** `https://api.infor.com`
+- [infor-mcp.yml](https://apis.io/servers/infor/infor-mcp-yml/)
 
-#### Tags
+#### Agentic access (1)
 
-- Cloud
-- ERP
-- M3
-- Manufacturing
-- Supply Chain
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Properties
+- [Infor Agentic Access](https://apis.io/agentic-access/infor/infor-agentic-access/)
 
-- [Documentation](https://www.infor.com/)
-- [S D Ks](https://github.com/infor-cloud/m3-h5-sdk)
-- [Postman Collection](collections/infor-ion-api-gateway.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/infor-ion-api-gateway.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### JSON Schema (1)
 
-### Infor XtendM3 API
+The data models the API reads and writes.
 
-Infor XtendM3 provides a Java SDK for extending and customizing Infor M3 (CloudSuite Industrial) business logic without modifying core code. Extensions are deployed and executed within the M3 runtime environment.
+- [Infor M3 Customer](https://apis.io/schemas/infor/infor-m3-customer/)
 
-- **Human URL:** [https://www.infor.com/](https://www.infor.com/)
-- **Base URL:** `https://api.infor.com`
+#### JSON-LD (1)
 
-#### Tags
+Linked-data contexts for the provider's vocabulary.
 
-- ERP
-- Extension
-- Java
-- M3
-- Manufacturing
+- [Infor Context](https://apis.io/jsonld/infor/infor-context/)
 
-#### Properties
+#### Collections (3)
 
-- [Documentation](https://www.infor.com/)
-- [S D Ks](https://github.com/infor-cloud/xtendm3-sdk-java)
-- [Getting Started](https://github.com/infor-cloud/xtendm3-extension-examples)
-- [Postman Collection](collections/infor-ion-api-gateway.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/infor-ion-api-gateway.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Postman and Open Collection request collections.
 
-### Infor CloudSuite Financials API
+- [Infor ION API Gateway](https://apis.io/collections/infor/open-infor-ion-api-gateway/)
+- [Infor ION API Gateway ION Documents API](https://apis.io/collections/infor/open-infor-ion-documents-api/)
+- [Infor ION API Gateway ION Documents M3 API API](https://apis.io/collections/infor/open-infor-m3-api-api/)
 
-Infor CloudSuite Financials APIs provide integration with general ledger, accounts payable, accounts receivable, cash management, and financial reporting for enterprise finance operations.
+#### Overlays (4)
 
-- **Human URL:** [https://www.infor.com/](https://www.infor.com/)
-- **Base URL:** `https://api.infor.com`
+OpenAPI overlays, including conversational phrasing for each operation.
 
-#### Tags
+- [Infor Ion Documents Api Overlay](https://apis.io/overlays/infor/infor-ion-documents-api-overlay/)
+- [Infor Ion Documents Api Phrasing Overlay](https://apis.io/overlays/infor/infor-ion-documents-api-phrasing-overlay/)
+- [Infor M3 Api Api Overlay](https://apis.io/overlays/infor/infor-m3-api-api-overlay/)
+- [Infor M3 Api Api Phrasing Overlay](https://apis.io/overlays/infor/infor-m3-api-api-phrasing-overlay/)
 
-- Accounting
-- Cloud
-- ERP
-- Financials
+#### Governance rules (2)
 
-#### Properties
+Spectral rulesets for the provider's contracts.
 
-- [Documentation](https://www.infor.com/)
-- [Postman Collection](collections/infor-ion-api-gateway.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/infor-ion-api-gateway.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Infor — asyncapi rules](https://apis.io/rules/infor/infor-asyncapi-spectral-rules/)
+- [Infor — jsonschema rules](https://apis.io/rules/infor/infor-jsonschema-spectral-rules/)
 
-## Common Properties
+#### Security (3)
 
-- [LinkedIn](https://www.linkedin.com/company/infor)
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Infor Authentication](https://apis.io/security/infor/infor-authentication/)
+- [Infor Domain Security](https://apis.io/security/infor/infor-domain-security/)
+- [Infor Trust Center](https://apis.io/security/infor/infor-trust-center/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Infor Scopes](https://apis.io/scopes/infor/infor-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Infor Plans Pricing](https://apis.io/plans/infor/infor-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Infor Rate Limits](https://apis.io/rate-limits/infor/infor-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Infor Finops](https://apis.io/finops/infor/infor-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.infor.com/)
+- [Documentation](https://docs.infor.com/)
+- [Getting started](https://developer.infor.com/tutorials)
+- [API reference](https://developer.infor.com/api)
+- [Pricing](https://www.infor.com/products)
+- [Support](https://www.infor.com/customer-success/support)
+- [Blog](https://www.infor.com/blog)
+- [Trust centre](https://trust.infor.com/)
+- [Terms of service](https://www.infor.com/en/about/legal)
+- [Privacy policy](https://www.infor.com/en/about/privacy)
+- [GitHub](https://github.com/infor-cloud)
+
+## API Evangelist rating
+
+**Kin Score 68.3** — exemplar · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 58.0 |
+| Contract governance | 31.8 |
+| Operational transparency | 63.2 |
+| Developer ergonomics | 82.7 |
+| Access clarity | 75.0 |
+
+**Agent readiness 33.2** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 39.2** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/infor/](https://apis.io/providers/infor/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Infor: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/infor/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
