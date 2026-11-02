@@ -1,0 +1,90 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Infor
+providerId: infor
+created: '2026-05-04'
+# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
+# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
+# Upgraded generated -> searched on 2026-09-13 after probing the pricing surface directly.
+method: searched
+source: https://www.infor.com/products
+modified: '2026-09-13'
+reconciled: false
+plan_count: 0
+plan_count_note: >-
+  Infor publishes NO plans, tiers or prices. https://www.infor.com/pricing returns
+  HTTP 404 (probed 2026-09-13) and no pricing page exists anywhere on infor.com;
+  every CloudSuite is sold through a contact-sales motion, and the APIs (ION,
+  M3, LN, IDM) are bundled with the licensed product rather than sold or metered
+  separately. The single entry below is a SHAPE describing that commercial model,
+  not a published tier — hence plan_count: 0.
+probes:
+  - url: https://www.infor.com/pricing
+    status: 404
+    checked: '2026-09-13'
+  - url: https://www.infor.com/products
+    status: 200
+    checked: '2026-09-13'
+  - url: https://www.infor.com/about/contact
+    status: 200
+    checked: '2026-09-13'
+tags:
+  - ERP
+  - CloudSuite
+  - Industry Cloud
+  - Enterprise Software
+description: Infor sells industry-specific CloudSuite ERP, SCM, HCM, and PLM products through a contact-sales
+  motion. Pricing is not published; quotes are negotiated per customer based on industry, modules, named
+  users, environment count, and term. APIs (Infor ION, M3, LN, CloudSuite Industrial APIs) are bundled
+  with the licensed product rather than offered as a separately metered API service.
+notes: All Infor pricing is contact-sales. Reconcile against an Infor sales quote.
+sources:
+  - https://www.infor.com/products
+  - https://www.infor.com/contact-us
+plans:
+  - id: infor-cloudsuite
+    name: Infor CloudSuite
+    published: false
+    type: enterprise
+    description: Industry-specific cloud ERP suite (Manufacturing, Distribution, Healthcare, Public Sector,
+      etc.) with bundled APIs via Infor OS / ION. Pricing per customer.
+    entries:
+      - label: Subscription
+        description: Negotiated annual subscription covering modules and user count
+        name: subscription
+        type: subscription
+        metric: contract
+        limit: -1
+        timeFrame: year
+        geo: global
+        domains:
+          - https://mingle-ionapi.{region}.inforcloudsuite.com
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: Industry-specific data models
+      - name: Infor ION integration platform
+      - name: Infor OS
+      - name: APIs bundled with license
+      - name: Customer Success Manager
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - negotiated
+  plans:
+  - name: Infor CloudSuite
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - year
